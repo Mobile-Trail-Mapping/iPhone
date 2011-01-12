@@ -18,6 +18,11 @@
          </BuildableProductReference>
 />
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            isEnabled = "NO">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
