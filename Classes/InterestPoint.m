@@ -2,24 +2,21 @@
 
 @implementation InterestPoint
 
-@synthesize id = _id;
+@synthesize pointID = _pointID;
 @synthesize location = _location;
 @synthesize category = _category;
 @synthesize title = _title;
-@synthesize summary = _summary;
 @synthesize color = _color;
 @synthesize categoryID = _categoryID;
 
--(id) initWithParams:(NSInteger)id 
-    location:(CGPoint)p category:(NSString *)c title:(NSString *)t summary:(NSString *)s {
+-(id) initWithParams:(NSInteger)pointID location:(CGPoint)p category:(NSString *)c title:(NSString *)t {
         
 	self = [super init];
 	if (self != nil) {
-        _id = id;
+        _pointID = pointID;
         _location = p;
         _category = c;
         _title = t;
-        _summary = s;
         _categoryID = -1;
         _color = [UIColor redColor];
 	}
@@ -30,9 +27,26 @@
     
     [_category release];
     [_title release];
-    [_summary release];
     [_color release];
 	[super dealloc];
+}
+
+#pragma mark -
+#pragma mark MKAnnotation methods
+
+- (CLLocationCoordinate2D)coordinate {
+    return CLLocationCoordinate2DMake(self.location.x, self.location.y);
+}
+- (void)setCoordinate:(CLLocationCoordinate2D)newCoordinate {
+    self.location = CGPointMake(newCoordinate.latitude, newCoordinate.longitude);
+}
+- (NSString *)subtitle {
+    // TODO
+    return @"subtitle";
+}
+- (NSString *)title {
+    // TODO
+    return @"title";
 }
 
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22C07D6212E6896500381FE5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22C07D6112E6896500381FE5 /* CoreLocation.framework */; };
 		A71079DD12DD2C5C00B19EBC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71079DC12DD2C5C00B19EBC /* MapKit.framework */; };
 		A7107A2612DD2D0500B19EBC /* CXMLDocument_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7107A0D12DD2D0500B19EBC /* CXMLDocument_CreationExtensions.m */; };
 		A7107A2712DD2D0500B19EBC /* CXMLNode_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7107A0F12DD2D0500B19EBC /* CXMLNode_CreationExtensions.m */; };
@@ -38,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		22C07D6112E6896500381FE5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A71079DC12DD2C5C00B19EBC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Libs/MapKit.framework; sourceTree = "<group>"; };
 		A7107A0C12DD2D0500B19EBC /* CXMLDocument_CreationExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLDocument_CreationExtensions.h; sourceTree = "<group>"; };
 		A7107A0D12DD2D0500B19EBC /* CXMLDocument_CreationExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMLDocument_CreationExtensions.m; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22C07D6212E6896500381FE5 /* CoreLocation.framework in Frameworks */,
 				A71079DD12DD2C5C00B19EBC /* MapKit.framework in Frameworks */,
 				A7D94A4F12ADC542003BDB1C /* UIKit.framework in Frameworks */,
 				A7D94A5112ADC542003BDB1C /* Foundation.framework in Frameworks */,
@@ -106,6 +109,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		22C07D6412E6933900381FE5 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				A752C9A412B6EFCB008D2B62 /* MapView.h */,
+				A752C9A512B6EFCB008D2B62 /* MapView.m */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
 		A7107A0A12DD2D0500B19EBC /* TouchXML */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +185,7 @@
 		A7D94A3C12ADC542003BDB1C = {
 			isa = PBXGroup;
 			children = (
+				22C07D6112E6896500381FE5 /* CoreLocation.framework */,
 				A7D94A4312ADC542003BDB1C /* Classes */,
 				A7D94A4412ADC542003BDB1C /* Other Sources */,
 				A7D94A4512ADC542003BDB1C /* Resources */,
@@ -184,9 +197,8 @@
 		A7D94A4312ADC542003BDB1C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				22C07D6412E6933900381FE5 /* Map */,
 				A792BDE312C71BCB005EFAC6 /* Objects */,
-				A752C9A412B6EFCB008D2B62 /* MapView.h */,
-				A752C9A512B6EFCB008D2B62 /* MapView.m */,
 				A7D94A5B12ADC542003BDB1C /* iPhoneAppDelegate.h */,
 				A7D94A5C12ADC542003BDB1C /* iPhoneAppDelegate.m */,
 				A7D94A6112ADC542003BDB1C /* iPhoneViewController.h */,

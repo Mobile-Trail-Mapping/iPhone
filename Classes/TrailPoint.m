@@ -5,15 +5,33 @@
 @synthesize trail = _trail;
 @synthesize connections = _connections;
 @synthesize unresolvableLinks = _unresolvableLinks;
+@synthesize hasUnresolvedLinks = _hasUnresolvedLinks;
 
--(id) initWithParams:(NSInteger)id 
-location:(CGPoint)p category:(NSString *)c summary:(NSString *)s title:(NSString *)t connections:(NSMutableSet *)connections {
+-(id) initWithID:(NSInteger)pointID location:(CGPoint)p category:(NSString *)c title:(NSString *)t connections:(NSMutableSet *)connections {
     
-	self = [super initWithParams:id location:p category:c title:t summary:s];
+	self = [super initWithParams:pointID location:p category:c title:t];
 	if (self != nil) {
         _connections = connections;
 	}
 	return self;
+}
+
+- (void)resolveLinksWithinTrail:(Trail *)trail {
+    if(!(self.hasUnresolvedLinks)) {
+        return;
+    }
+    
+    NSMutableArray * removed = [[[NSMutableArray alloc] initWithCapacity:[_unresolvableLinks count]] autorelease];
+    for(NSNumber * n in self.unresolvableLinks) {
+        for(TrailPoint * point in trail.trailPoints) {
+            if(point.pointID == [n intValue]) {
+                [self.connections addObject:point];
+                break;
+            }
+        }
+        [removed addObject:n];
+    }
+    [self.unresolvableLinks removeObjectsInArray:removed];
 }
 
 - (void) dealloc {

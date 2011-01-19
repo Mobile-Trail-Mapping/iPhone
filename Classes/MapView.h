@@ -4,8 +4,12 @@
 #import "LocationMarker.h"
 
 @interface MapView : UIView<MKMapViewDelegate> {
-	MKMapView *mapView;
+	MKMapView * mapView;
+    
+    NSMutableArray * _trails;
 }
+
+@property (nonatomic, retain) NSMutableArray * trails;
 
 -(void) parseXMLData:(NSString *)xmlAddress;
 -(void) parseXML;

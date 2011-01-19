@@ -8,19 +8,16 @@
 @synthesize trailPaint = _trailPaint;
 
 -(id) initWithName:(NSString *)name {
-    
-	self = [super init];
-	if (self != nil) {
+	if ((self = [super init])) {
         _name = name;
-        _trailPoints = [NSMutableArray init];
-        _trailHeads = [NSMutableArray init];
+        _trailPoints = [[NSMutableArray alloc] init];
+        _trailHeads = [[NSMutableArray alloc] init];
         _trailPaint = [UIColor yellowColor];
 	}
 	return self;
 }
 
 - (void) dealloc {
-    
     [_name release];
     [_trailPoints release];
     [_trailHeads release];

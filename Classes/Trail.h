@@ -14,4 +14,6 @@
 @property (nonatomic, retain) NSMutableArray *trailHeads;
 @property (nonatomic, retain) UIColor *trailPaint;
 
+- (id)initWithName:(NSString *)name;
+
 @end
