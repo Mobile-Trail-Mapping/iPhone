@@ -5,7 +5,7 @@
 
 // TODO are there issues in converting back and forth from CGPoint to CLLocationCoordinate2D?
 
-@interface InterestPoint : NSObject <MKAnnotation> {
+@interface InterestPoint : NSObject {
 
     NSInteger _pointID;
     CGPoint _location;

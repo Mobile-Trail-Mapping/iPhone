@@ -1,10 +1,18 @@
 #import "MapView.h"
-#import "TouchXML.h" 
+#import "TouchXML.h"
+#import "ConnectionAnnotation.h"
+#import "ConnectionAnnotationView.h"
 
 @interface MapView(Logging)
 
 - (void)debugXMLDoc:(CXMLDocument *)doc;
 - (void)debugXMLElement:(CXMLElement *)elem nestingDepth:(NSInteger)depth;
+
+@end
+
+@interface MapView(Testing)
+
+- (void)refreshMap;
 
 @end
 
@@ -90,7 +98,8 @@
                 [point resolveLinksWithinTrail:trail];
             }
             for(TrailPoint * target in point.connections) {
-                // TODO
+                ConnectionAnnotation * annotation = [[[ConnectionAnnotation alloc] initWithStartPoint:point endPoint:target] autorelease];
+                ConnectionAnnotationView * annotationView = [[[ConnectionAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:nil] autorelease];
             }
         }
     }

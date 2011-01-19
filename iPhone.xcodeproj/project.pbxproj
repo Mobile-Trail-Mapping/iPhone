@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		22C07D6212E6896500381FE5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22C07D6112E6896500381FE5 /* CoreLocation.framework */; };
+		22C07D6A12E6940200381FE5 /* ConnectionAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C07D6912E6940200381FE5 /* ConnectionAnnotationView.m */; };
+		22C07D6D12E6986800381FE5 /* ConnectionAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C07D6C12E6986800381FE5 /* ConnectionAnnotation.m */; };
 		A71079DD12DD2C5C00B19EBC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71079DC12DD2C5C00B19EBC /* MapKit.framework */; };
 		A7107A2612DD2D0500B19EBC /* CXMLDocument_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7107A0D12DD2D0500B19EBC /* CXMLDocument_CreationExtensions.m */; };
 		A7107A2712DD2D0500B19EBC /* CXMLNode_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7107A0F12DD2D0500B19EBC /* CXMLNode_CreationExtensions.m */; };
@@ -40,6 +42,10 @@
 
 /* Begin PBXFileReference section */
 		22C07D6112E6896500381FE5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		22C07D6812E6940200381FE5 /* ConnectionAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionAnnotationView.h; sourceTree = "<group>"; };
+		22C07D6912E6940200381FE5 /* ConnectionAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionAnnotationView.m; sourceTree = "<group>"; };
+		22C07D6B12E6986800381FE5 /* ConnectionAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectionAnnotation.h; sourceTree = "<group>"; };
+		22C07D6C12E6986800381FE5 /* ConnectionAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectionAnnotation.m; sourceTree = "<group>"; };
 		A71079DC12DD2C5C00B19EBC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Libs/MapKit.framework; sourceTree = "<group>"; };
 		A7107A0C12DD2D0500B19EBC /* CXMLDocument_CreationExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLDocument_CreationExtensions.h; sourceTree = "<group>"; };
 		A7107A0D12DD2D0500B19EBC /* CXMLDocument_CreationExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMLDocument_CreationExtensions.m; sourceTree = "<group>"; };
@@ -112,6 +118,10 @@
 		22C07D6412E6933900381FE5 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				22C07D6B12E6986800381FE5 /* ConnectionAnnotation.h */,
+				22C07D6C12E6986800381FE5 /* ConnectionAnnotation.m */,
+				22C07D6812E6940200381FE5 /* ConnectionAnnotationView.h */,
+				22C07D6912E6940200381FE5 /* ConnectionAnnotationView.m */,
 				A752C9A412B6EFCB008D2B62 /* MapView.h */,
 				A752C9A512B6EFCB008D2B62 /* MapView.m */,
 			);
@@ -329,6 +339,8 @@
 				A7107A2F12DD2D0500B19EBC /* CXMLNode_PrivateExtensions.m in Sources */,
 				A7107A3012DD2D0500B19EBC /* CXMLNode_XPathExtensions.m in Sources */,
 				A7107A3112DD2D0500B19EBC /* CTidy.m in Sources */,
+				22C07D6A12E6940200381FE5 /* ConnectionAnnotationView.m in Sources */,
+				22C07D6D12E6986800381FE5 /* ConnectionAnnotation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

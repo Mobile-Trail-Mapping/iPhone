@@ -1,13 +1,12 @@
 #import <MapKit/MapKit.h>
 
 @class TrailPoint;
+@class ConnectionAnnotation;
 
 @interface ConnectionAnnotationView : MKAnnotationView {
-    TrailPoint * startPoint;
-    TrailPoint * endPoint;
-    id <MKAnnotation> annotation;
+    ConnectionAnnotation * annotation;
 }
 
-- (id)initWithAnnotation:(id<MKAnnotation>)an reuseIdentifier:(NSString *)reuseIdentifier startPoint:(TrailPoint *)sp endPoint:(TrailPoint *)ep;
+- (id)initWithAnnotation:(ConnectionAnnotation *)an reuseIdentifier:(NSString *)reuseIdentifier;
 
 @end
