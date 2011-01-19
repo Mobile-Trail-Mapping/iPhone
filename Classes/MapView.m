@@ -1,8 +1,14 @@
 #import "MapView.h"
 #import "TouchXML.h" 
 
+@interface MapView(Logging)
+
+- (void)debugXMLDoc:(CXMLDocument *)doc;
+- (void)debugXMLElement:(CXMLElement *)elem nestingDepth:(NSInteger)depth;
+
+@end
+
 @implementation MapView
-@synthesize xmlPoints = _xmlPoints;
 
 - (id) initWithFrame:(CGRect) frame {
 	self = [super initWithFrame:frame];
@@ -18,54 +24,54 @@
 }
 
 - (void) parseXML {
-    if([_xmlPoints count] == 0) {
-        [self parseXMLData:@"http://brousalis.com/sample.xml"];
-        NSLog(@"%@", _xmlPoints);
-        //[map reloadData];
-    }
+    [self parseXMLData:@"http://mtmserver.heroku.com/point/get"];
+    //[map reloadData];
 }
 
 -(void) parseXMLData:(NSString *)xmlAddress {
     
-    _xmlPoints = [[NSMutableArray alloc] init];	
     
-    NSURL *url = [NSURL URLWithString: xmlAddress];
+    NSURL *url = [NSURL URLWithString:xmlAddress];
     
     CXMLDocument *doc = [[[CXMLDocument alloc] initWithContentsOfURL:url options:0 error:nil] autorelease];
+    [self debugXMLDoc:doc]; //logging
     
-    NSMutableDictionary *item = [[NSMutableDictionary alloc] init];
-
-    for (CXMLElement *trails in data) {
-
-        NSArray *trails = [doc nodesForXPath:@"//trails/trail" error:nil];
-
-        for (CXMLElement *trail in trails) {
-            [item setObject:[[trail attributeForName:@"id"] stringValue] forKey:@"trail_id"];
-        }
+    NSArray *trailElements = [doc nodesForXPath:@"//trails/trail" error:nil];
+    
+    for(CXMLElement * trailElement in trailElements) {
+        NSInteger trailID = [[[trailElement attributeForName:@"id"] stringValue] intValue];
+        NSArray * pointElements = [doc nodesForXPath:[NSString stringWithFormat:@"//trails/trail[@id='%d']/points/point", trailID] error:nil];
         
-        NSArray *nodes = [doc nodesForXPath:@"//trail/points/point" error:nil];
-        
-        for (CXMLElement *node in nodes) {
-
-            int counter;
-            for(counter = 0; counter < [node childCount]; counter++) {
-            
-                [item setObject:[[node childAtIndex:counter] stringValue] forKey:[[node childAtIndex:counter] name]];
-            }
-            [item setObject:[[node attributeForName:@"id"] stringValue] forKey:@"point_id"];
+        for(CXMLElement * pointElement in pointElements) {
+            NSInteger pointID = [[[pointElement attributeForName:@"id"] stringValue] intValue];
+            NSLog(@"Found point %d in trail %d", pointID, trailID);
         }
-
     }
     
-    [_xmlPoints addObject:[item copy]];
-    [item release];
+}
+
+- (void)debugXMLDoc:(CXMLDocument *)doc {
+    NSLog(@"=== XML ===");
+    [self debugXMLElement:[doc rootElement] nestingDepth:1];
+    NSLog(@"=== XML ===");
+}
+- (void)debugXMLElement:(CXMLElement *)elem nestingDepth:(NSInteger)depth {
+    NSMutableString * str = [[[NSMutableString alloc] initWithString:@""] autorelease];
+    for(int i = 0; i < depth - 1; i++) {
+        [str appendString:@"| "];
+    }
+    [str appendString:@"|-"];
+    [str appendString:[elem name]];
+    NSLog(@"%@", str);
+    for(CXMLElement * e in [elem children]) {
+        [self debugXMLElement:e nestingDepth:depth+1];
+    }
 }
 
 #pragma mark -
 #pragma mark - Dealloc
 
 - (void)dealloc {
-    [_xmlPoints release];
 	[mapView release];
     [super dealloc];
 }
