@@ -7,7 +7,7 @@
 @synthesize unresolvableLinks = _unresolvableLinks;
 @synthesize hasUnresolvedLinks = _hasUnresolvedLinks;
 
--(id) initWithID:(NSInteger)pointID location:(CGPoint)p category:(NSString *)c title:(NSString *)t connections:(NSMutableSet *)connections {
+-(id) initWithID:(NSInteger)pointID location:(CLLocationCoordinate2D)p category:(NSString *)c title:(NSString *)t connections:(NSMutableSet *)connections {
     
 	self = [super initWithParams:pointID location:p category:c title:t];
 	if (self != nil) {

@@ -8,7 +8,7 @@
 @interface InterestPoint : NSObject {
 
     NSInteger _pointID;
-    CGPoint _location;
+    CLLocationCoordinate2D _location;
 	NSString* _category;
 	NSString* _title;
     UIColor* _color;
@@ -16,12 +16,12 @@
 }
 
 @property (nonatomic) NSInteger pointID;
-@property (nonatomic) CGPoint location;
+@property (nonatomic) CLLocationCoordinate2D location;
 @property (nonatomic, retain) NSString* category;
 @property (nonatomic, retain) NSString* title;
 @property (nonatomic, retain) UIColor* color;
 @property (nonatomic) NSInteger categoryID;
 
--(id) initWithParams:(NSInteger)id location:(CGPoint)p category:(NSString *)c title:(NSString *)t;
+-(id) initWithParams:(NSInteger)id location:(CLLocationCoordinate2D)p category:(NSString *)c title:(NSString *)t;
 
 @end

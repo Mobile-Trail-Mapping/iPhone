@@ -76,7 +76,7 @@
                 }
             }
             
-            CGPoint pointLoc = CGPointMake([[pointProperties valueForKey:@"latitude"] doubleValue], [[pointProperties valueForKey:@"longitude"] doubleValue]);
+            CLLocationCoordinate2D pointLoc = CLLocationCoordinate2DMake([[pointProperties valueForKey:@"latitude"] doubleValue], [[pointProperties valueForKey:@"longitude"] doubleValue]);
             TrailPoint * currentPoint = [[[TrailPoint alloc] initWithParams:pointID 
                                                                    location:pointLoc 
                                                                    category:[pointProperties valueForKey:@"category"] 

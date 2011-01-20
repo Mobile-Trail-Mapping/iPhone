@@ -9,7 +9,7 @@
 @synthesize color = _color;
 @synthesize categoryID = _categoryID;
 
--(id) initWithParams:(NSInteger)pointID location:(CGPoint)p category:(NSString *)c title:(NSString *)t {
+-(id) initWithParams:(NSInteger)pointID location:(CLLocationCoordinate2D)p category:(NSString *)c title:(NSString *)t {
         
 	self = [super init];
 	if (self != nil) {
@@ -35,10 +35,10 @@
 #pragma mark MKAnnotation methods
 
 - (CLLocationCoordinate2D)coordinate {
-    return CLLocationCoordinate2DMake(self.location.x, self.location.y);
+    return self.location;
 }
 - (void)setCoordinate:(CLLocationCoordinate2D)newCoordinate {
-    self.location = CGPointMake(newCoordinate.latitude, newCoordinate.longitude);
+    self.location = newCoordinate;
 }
 - (NSString *)subtitle {
     // TODO

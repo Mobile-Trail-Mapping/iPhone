@@ -15,7 +15,7 @@
 @property (nonatomic, retain) NSMutableArray *unresolvableLinks;
 @property (nonatomic, assign) BOOL hasUnresolvedLinks;
 
-- (id)initWithID:(NSInteger)pointID location:(CGPoint)p category:(NSString *)c title:(NSString *)t connections:(NSMutableSet *)connections;
+- (id)initWithID:(NSInteger)pointID location:(CLLocationCoordinate2D)p category:(NSString *)c title:(NSString *)t connections:(NSMutableSet *)connections;
 - (void)resolveLinksWithinTrail:(Trail *)trail;
 
 @end
