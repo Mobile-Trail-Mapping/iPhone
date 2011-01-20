@@ -1,7 +1,5 @@
 #import "MapView.h"
 #import "TouchXML.h"
-#import "ConnectionAnnotation.h"
-#import "ConnectionAnnotationView.h"
 
 @interface MapView(Logging)
 
@@ -96,10 +94,6 @@
         for(TrailPoint * point in trail.trailPoints) {
             if(point.hasUnresolvedLinks) {
                 [point resolveLinksWithinTrail:trail];
-            }
-            for(TrailPoint * target in point.connections) {
-                ConnectionAnnotation * annotation = [[[ConnectionAnnotation alloc] initWithStartPoint:point endPoint:target] autorelease];
-                ConnectionAnnotationView * annotationView = [[[ConnectionAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:nil] autorelease];
             }
         }
     }
