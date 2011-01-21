@@ -8,9 +8,14 @@
  * instantiated after application launch.
  */
 @interface iPhoneViewController : UIViewController {
+    
+@private
     MKMapView * _mapView;
 }
 
+/**
+ * The map view on which to display trails.
+ */
 @property (nonatomic, retain) MKMapView * mapView;
 
 @end
