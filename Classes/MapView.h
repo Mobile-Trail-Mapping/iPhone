@@ -3,12 +3,10 @@
 
 @interface MapView : UIView<MKMapViewDelegate> {
 	MKMapView * mapView;
-    NSMutableArray * _trails;
+    NSArray * _trails;
     NSMutableDictionary * _overlayPathViews;
 }
 
-@property (nonatomic, retain) NSMutableArray * trails;
+@property (nonatomic, retain) NSArray * trails;
 
--(void) parseXMLData:(NSString *)xmlAddress;
--(void) parseXML;
 @end

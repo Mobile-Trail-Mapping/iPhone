@@ -11,6 +11,7 @@
 		220CD76812E92603000804E8 /* MTMLogo_iOS_iPhone_Retina.png in Resources */ = {isa = PBXBuildFile; fileRef = 220CD76712E92603000804E8 /* MTMLogo_iOS_iPhone_Retina.png */; };
 		2233DACD12E8FA0E0004A33A /* TrailOverlayPathView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2233DACC12E8FA0E0004A33A /* TrailOverlayPathView.m */; };
 		2233DAD112E8FD260004A33A /* TrailOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 2233DAD012E8FD260004A33A /* TrailOverlay.m */; };
+		2237895D12EA0BDA00BAF18A /* DataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2237895C12EA0BDA00BAF18A /* DataParser.m */; };
 		22C07D6212E6896500381FE5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22C07D6112E6896500381FE5 /* CoreLocation.framework */; };
 		A71079DD12DD2C5C00B19EBC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71079DC12DD2C5C00B19EBC /* MapKit.framework */; };
 		A7107A2612DD2D0500B19EBC /* CXMLDocument_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7107A0D12DD2D0500B19EBC /* CXMLDocument_CreationExtensions.m */; };
@@ -49,6 +50,8 @@
 		2233DACC12E8FA0E0004A33A /* TrailOverlayPathView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrailOverlayPathView.m; sourceTree = "<group>"; };
 		2233DACF12E8FD260004A33A /* TrailOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailOverlay.h; sourceTree = "<group>"; };
 		2233DAD012E8FD260004A33A /* TrailOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrailOverlay.m; sourceTree = "<group>"; };
+		2237895B12EA0BDA00BAF18A /* DataParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataParser.h; sourceTree = "<group>"; };
+		2237895C12EA0BDA00BAF18A /* DataParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataParser.m; sourceTree = "<group>"; };
 		22C07D6112E6896500381FE5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		A71079DC12DD2C5C00B19EBC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Libs/MapKit.framework; sourceTree = "<group>"; };
 		A7107A0C12DD2D0500B19EBC /* CXMLDocument_CreationExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLDocument_CreationExtensions.h; sourceTree = "<group>"; };
@@ -217,6 +220,8 @@
 				A7D94A5C12ADC542003BDB1C /* iPhoneAppDelegate.m */,
 				A7D94A6112ADC542003BDB1C /* iPhoneViewController.h */,
 				A7D94A6212ADC542003BDB1C /* iPhoneViewController.m */,
+				2237895B12EA0BDA00BAF18A /* DataParser.h */,
+				2237895C12EA0BDA00BAF18A /* DataParser.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -349,6 +354,7 @@
 				A7107A3112DD2D0500B19EBC /* CTidy.m in Sources */,
 				2233DACD12E8FA0E0004A33A /* TrailOverlayPathView.m in Sources */,
 				2233DAD112E8FD260004A33A /* TrailOverlay.m in Sources */,
+				2237895D12EA0BDA00BAF18A /* DataParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
