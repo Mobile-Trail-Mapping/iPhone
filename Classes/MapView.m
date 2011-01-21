@@ -106,10 +106,11 @@
             }
             
             CLLocationCoordinate2D pointLoc = CLLocationCoordinate2DMake([[pointProperties valueForKey:@"latitude"] doubleValue], [[pointProperties valueForKey:@"longitude"] doubleValue]);
-            TrailPoint * currentPoint = [[[TrailPoint alloc] initWithParams:pointID 
-                                                                   location:pointLoc 
-                                                                   category:[pointProperties valueForKey:@"category"] 
-                                                                      title:[pointProperties valueForKey:@"title"]] autorelease];
+            TrailPoint * currentPoint = [[[TrailPoint alloc] initWithID:pointID
+                                                               location:pointLoc 
+                                                               category:[pointProperties valueForKey:@"category"] 
+                                                                  title:[pointProperties valueForKey:@"title"]
+                                                            connections:nil] autorelease];
             currentPoint.unresolvableLinks = pointLinks;
             currentPoint.hasUnresolvedLinks = YES;
             [currentTrail.trailPoints addObject:currentPoint];

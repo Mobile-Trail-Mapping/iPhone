@@ -1,5 +1,6 @@
 #import "TrailOverlayPathView.h"
 #import "TrailOverlay.h"
+#import "TrailPoint.h"
 #import "Trail.h"
 
 @implementation TrailOverlayPathView
@@ -14,7 +15,7 @@
         
         //TODO debug
         self.fillColor = [UIColor redColor];
-        self.strokeColor = [UIColor greenColor];
+        self.strokeColor = [UIColor redColor];
         self.lineWidth = 2.0f;
     }
     return self;
@@ -38,9 +39,22 @@
     
     CGMutablePathRef path = CGPathCreateMutable();
     
-    CGPoint center = [self.mapView convertCoordinate:self.overlay.coordinate toPointToView:self];
-    //CGPathMoveToPoint(path, NULL, center.x, center.y);
-    CGPathAddArc(path, NULL, center.x, center.y, 500.0f, 0, 2.0f * M_PI, false);
+    for(TrailPoint * sourceTrailPoint in self.trail.trailPoints) {
+        CLLocationCoordinate2D sourceLocation = sourceTrailPoint.location;
+        CGPoint sourcePoint = [self.mapView convertCoordinate:sourceLocation toPointToView:self];
+        
+        NSLog(@"  sourcing lines from point (%f,%f)", sourceLocation.latitude, sourceLocation.longitude);
+        
+        for(TrailPoint * targetTrailPoint in sourceTrailPoint.connections) {
+            CLLocationCoordinate2D targetLocation = targetTrailPoint.location;
+            CGPoint targetPoint = [self.mapView convertCoordinate:targetLocation toPointToView:self];
+            
+            NSLog(@"    adding line to point (%f,%f)", targetLocation.latitude, targetLocation.longitude);
+            
+            CGPathMoveToPoint(path, NULL, sourcePoint.x, sourcePoint.y);
+            CGPathAddLineToPoint(path, NULL, targetPoint.x, targetPoint.y);
+        }
+    }
     
     self.path = path;
     CGPathRetain(path);

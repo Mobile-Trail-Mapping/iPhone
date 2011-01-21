@@ -11,7 +11,11 @@
     
 	self = [super initWithParams:pointID location:p category:c title:t];
 	if (self != nil) {
-        _connections = connections;
+        if(connections) {
+            self.connections = connections;
+        } else {
+            self.connections = [[[NSMutableArray alloc] init] autorelease];
+        }
 	}
 	return self;
 }
