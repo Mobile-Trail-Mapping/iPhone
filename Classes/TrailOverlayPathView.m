@@ -13,9 +13,8 @@
         self.trail = trail;
         self.mapView = mapView;
         
-        //TODO debug
-        self.fillColor = [UIColor redColor];
-        self.strokeColor = [UIColor redColor];
+        self.fillColor = trail.trailPaint;
+        self.strokeColor = trail.trailPaint;
         self.lineWidth = 2.0f;
     }
     return self;

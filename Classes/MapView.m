@@ -4,6 +4,7 @@
 #import "LocationMarker.h"
 #import "TrailOverlay.h"
 #import "TrailOverlayPathView.h"
+#import "TrailPointAnnotation.h"
 #import "DataParser.h"
 
 @interface TrailAnnotation : NSObject <MKAnnotation> {
@@ -55,6 +56,11 @@
             TrailOverlayPathView * overlayPathView = [[TrailOverlayPathView alloc] initWithTrail:trail mapView:mapView];
             [_overlayPathViews setValue:overlayPathView forKey:[trail name]];
             [mapView addOverlay:[overlayPathView overlay]];
+            
+            for(TrailPoint * head in trail.trailHeads) {
+                TrailPointAnnotation * headAnnotation = [[[TrailPointAnnotation alloc] initWithTrailPoint:head] autorelease];
+                [mapView addAnnotation:headAnnotation];
+            }
         }
 	}
 	return self;
