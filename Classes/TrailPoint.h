@@ -11,7 +11,6 @@
     Trail *_trail;
     NSMutableSet *_connections;
     NSMutableArray *_unresolvableLinks;
-    BOOL _hasUnresolvedLinks;
 }
 
 /**
