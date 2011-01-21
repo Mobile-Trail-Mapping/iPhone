@@ -2,6 +2,7 @@
 IconStaging/
 secret.xml
 photos/
+Documentation/
 
 # Xcode
 build/*
