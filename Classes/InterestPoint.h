@@ -22,6 +22,6 @@
 @property (nonatomic, retain) UIColor* color;
 @property (nonatomic) NSInteger categoryID;
 
--(id) initWithParams:(NSInteger)id location:(CLLocationCoordinate2D)p category:(NSString *)c title:(NSString *)t;
+-(id) initWithID:(NSInteger)pointID location:(CLLocationCoordinate2D)p category:(NSString *)c title:(NSString *)t;
 
 @end

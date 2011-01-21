@@ -9,7 +9,7 @@
 
 -(id) initWithID:(NSInteger)pointID location:(CLLocationCoordinate2D)p category:(NSString *)c title:(NSString *)t connections:(NSMutableSet *)connections {
     
-	self = [super initWithParams:pointID location:p category:c title:t];
+	self = [super initWithID:pointID location:p category:c title:t];
 	if (self != nil) {
         if(connections) {
             self.connections = connections;

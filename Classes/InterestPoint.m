@@ -9,7 +9,7 @@
 @synthesize color = _color;
 @synthesize categoryID = _categoryID;
 
--(id) initWithParams:(NSInteger)pointID location:(CLLocationCoordinate2D)p category:(NSString *)c title:(NSString *)t {
+-(id) initWithID:(NSInteger)pointID location:(CLLocationCoordinate2D)p category:(NSString *)c title:(NSString *)t {
         
 	self = [super init];
 	if (self != nil) {
