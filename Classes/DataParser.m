@@ -84,7 +84,6 @@
                                                                   title:[pointProperties valueForKey:@"title"]
                                                             connections:nil] autorelease];
             currentPoint.unresolvableLinks = pointLinks;
-            currentPoint.hasUnresolvedLinks = YES;
             [currentTrail.trailPoints addObject:currentPoint];
             if([currentPoint.category isEqualToString:@"Trailhead"]) {
                 [currentTrail.trailHeads addObject:currentPoint];

@@ -5,7 +5,6 @@
 @synthesize trail = _trail;
 @synthesize connections = _connections;
 @synthesize unresolvableLinks = _unresolvableLinks;
-@synthesize hasUnresolvedLinks = _hasUnresolvedLinks;
 
 -(id) initWithID:(NSInteger)pointID location:(CLLocationCoordinate2D)p category:(NSString *)c title:(NSString *)t connections:(NSMutableSet *)connections {
     
@@ -18,6 +17,10 @@
         }
 	}
 	return self;
+}
+
+- (BOOL)hasUnresolvedLinks {
+    return [self.unresolvableLinks count] > 0;
 }
 
 - (void)resolveLinksWithinTrail:(Trail *)trail {

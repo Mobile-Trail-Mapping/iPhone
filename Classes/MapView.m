@@ -1,7 +1,6 @@
 #import "MapView.h"
 #import "TouchXML.h"
 #import "TrailPoint.h"
-#import "LocationMarker.h"
 #import "TrailOverlay.h"
 #import "TrailOverlayPathView.h"
 #import "TrailPointAnnotation.h"

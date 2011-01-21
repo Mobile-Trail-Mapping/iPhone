@@ -25,6 +25,10 @@
     return self.trailPoint.location;
 }
 
+- (void)setCoordinate:(CLLocationCoordinate2D)newCoordinate {
+    NSLog(@"Tried to directly set coordinate of a trail point annotation! Ignoring...");
+}
+
 - (NSString *)title {
     return self.trailPoint.title;
 }
