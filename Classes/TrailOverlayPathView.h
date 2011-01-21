@@ -11,4 +11,6 @@
 @property (nonatomic, retain) Trail * trail;
 @property (nonatomic, retain) MKMapView * mapView;
 
+- (id)initWithTrail:(Trail *)trail mapView:(MKMapView *)mapView;
+
 @end

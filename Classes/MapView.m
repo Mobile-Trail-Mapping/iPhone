@@ -1,5 +1,9 @@
 #import "MapView.h"
 #import "TouchXML.h"
+#import "TrailPoint.h"
+#import "LocationMarker.h"
+#import "TrailOverlay.h"
+#import "TrailOverlayPathView.h"
 
 @interface MapView(Logging)
 
@@ -8,9 +12,28 @@
 
 @end
 
-@interface MapView(Testing)
+@interface TrailAnnotation : NSObject <MKAnnotation> {
+@private
+    CLLocationCoordinate2D coord;
+}
+@end
 
-- (void)refreshMap;
+@implementation TrailAnnotation
+
+- (CLLocationCoordinate2D)coordinate {
+    return coord;
+}
+
+- (NSString *)title {
+    return @"HELLO THERE";
+}
+
+- (id)initWithCoordinate:(CLLocationCoordinate2D)c {
+    if((self = [super init])) {
+        coord = coord;
+    }
+    return self;
+}
 
 @end
 
@@ -27,6 +50,7 @@
 		[self addSubview:mapView];
         
         self.trails = [[[NSMutableArray alloc] init] autorelease];
+        _overlayPathViews = [[[NSMutableDictionary alloc] init] retain];
         
         [self parseXML];
 	}
@@ -35,7 +59,14 @@
 
 - (void) parseXML {
     [self parseXMLData:@"http://mtmserver.heroku.com/point/get"];
-    [self refreshMap];
+    
+    for(Trail * trail in self.trails) {
+        for(TrailPoint * point in trail.trailPoints) {
+            if(point.hasUnresolvedLinks) {
+                [point resolveLinksWithinTrail:trail];
+            }
+        }
+    }
 }
 
 -(void) parseXMLData:(NSString *)xmlAddress {
@@ -85,18 +116,14 @@
         }
         
         [self.trails addObject:currentTrail];
+        
+        NSLog(@"  instantiating overlay and annotation");
+        
+        TrailOverlayPathView * overlayPathView = [[TrailOverlayPathView alloc] initWithTrail:currentTrail mapView:mapView];
+        [_overlayPathViews setValue:overlayPathView forKey:[currentTrail name]];
+        [mapView addOverlay:[overlayPathView overlay]];
     }
     
-}
-
-- (void)refreshMap {
-    for(Trail * trail in self.trails) {
-        for(TrailPoint * point in trail.trailPoints) {
-            if(point.hasUnresolvedLinks) {
-                [point resolveLinksWithinTrail:trail];
-            }
-        }
-    }
 }
 
 - (void)debugXMLDoc:(CXMLDocument *)doc {
@@ -118,10 +145,35 @@
 }
 
 #pragma mark -
-#pragma mark - Dealloc
+#pragma mark MKMapViewDelegate methods
+
+- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay {
+    NSLog(@"fetching view for overlay");
+    
+    if([overlay isKindOfClass:[TrailOverlay class]]) {
+        TrailOverlay * trailOverlay = (TrailOverlay *)overlay;
+        return [_overlayPathViews valueForKey:trailOverlay.trail.name];
+    }
+    return nil;
+}
+
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+    NSLog(@"region did change");
+    
+    for(NSString * overlayPathViewKey in _overlayPathViews) {
+        TrailOverlayPathView * overlayPathView = [_overlayPathViews valueForKey:overlayPathViewKey];
+        [overlayPathView invalidatePath];
+        [overlayPathView setNeedsDisplay];
+    }
+}
+
+#pragma mark -
+#pragma mark Dealloc
 
 - (void)dealloc {
 	[mapView release];
+	[_overlayPathViews release];
+	
     [super dealloc];
 }
 
