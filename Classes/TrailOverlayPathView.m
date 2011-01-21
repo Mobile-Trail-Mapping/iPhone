@@ -36,7 +36,7 @@
     
     NSLog(@"creating path");
     
-    CGPathRef path = CGPathCreateMutable();
+    CGMutablePathRef path = CGPathCreateMutable();
     
     CGPoint center = [self.mapView convertCoordinate:self.overlay.coordinate toPointToView:self];
     //CGPathMoveToPoint(path, NULL, center.x, center.y);
