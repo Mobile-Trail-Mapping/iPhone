@@ -19,15 +19,16 @@
 @property (nonatomic, retain) NSURL * dataURL;
 
 /**
- * Designated initializer. Creates a new instance of DataParser with the
- * given data URL.
+ * Create a new instance of DataParser with the given data URL. Designated
+ * initializer.
  */
 - (id)initWithDataURL:(NSURL * )dataURL;
 
 /**
- * Alternate initalizer. Converts the given address to an instance of NSURL,
- * then calls the designated initailizer DataParser#initWithDataURL: with the
- * converted URL.
+ * Create a new instance of DataParser with the given data address. Converts 
+ * the given address to an instance of NSURL, then calls the 
+ * designated initailizer DataParser#initWithDataURL: with the
+ * converted URL. Alternate initializer.
  */
 - (id)initWithDataAddress:(NSString *)dataAddress;
 
