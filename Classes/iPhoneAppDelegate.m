@@ -12,7 +12,7 @@
 }
 
 #pragma mark -
-#pragma mark - Dealloc
+#pragma mark Dealloc
 
 - (void)dealloc {
     [viewController release];
