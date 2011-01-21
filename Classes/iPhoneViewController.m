@@ -9,6 +9,8 @@
     
 	self.mapView = [[[MapView alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)] autorelease];
 	[self.view addSubview:self.mapView];
+    self.view.clipsToBounds = NO;
+    self.view.backgroundColor = [UIColor blueColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -23,15 +25,7 @@
 #pragma mark Rotation methods
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
-    return YES;
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
-    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-    
-    NSLog(@"will rotate; new size for the view is (%f,%f)", self.view.frame.size.width, self.view.frame.size.height);
-    
-    [self.mapView setFrame:self.view.bounds];
+    return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
 }
 
 @end
