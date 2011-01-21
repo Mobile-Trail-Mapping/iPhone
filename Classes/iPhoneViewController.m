@@ -29,9 +29,9 @@
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
     
-    NSLog(@"did rotate; new size for the view is (%f,%f)", self.view.frame.size.width, self.view.frame.size.height);
+    NSLog(@"will rotate; new size for the view is (%f,%f)", self.view.frame.size.width, self.view.frame.size.height);
     
-    self.mapView.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
+    [self.mapView setFrame:self.view.bounds];
 }
 
 @end

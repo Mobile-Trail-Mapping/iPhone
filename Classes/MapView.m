@@ -163,8 +163,8 @@
     
     for(NSString * overlayPathViewKey in _overlayPathViews) {
         TrailOverlayPathView * overlayPathView = [_overlayPathViews valueForKey:overlayPathViewKey];
-        [overlayPathView invalidatePath];
-        [overlayPathView setNeedsDisplay];
+        //[overlayPathView invalidatePath];
+        //[overlayPathView setNeedsDisplay];
     }
 }
 
