@@ -6,30 +6,6 @@
 #import "TrailPointAnnotation.h"
 #import "DataParser.h"
 
-@interface TrailAnnotation : NSObject <MKAnnotation> {
-@private
-    CLLocationCoordinate2D coord;
-}
-@end
-
-@implementation TrailAnnotation
-
-- (CLLocationCoordinate2D)coordinate {
-    return coord;
-}
-
-- (NSString *)title {
-    return @"HELLO THERE";
-}
-
-- (id)initWithCoordinate:(CLLocationCoordinate2D)c {
-    if((self = [super init])) {
-        coord = c;
-    }
-    return self;
-}
-
-@end
 
 @implementation MapView
 

@@ -22,7 +22,7 @@
 
 /**
  * Create a new TrailPointAnnotation with the given TrailPoint.
- *//
+ */
 - (id)initWithTrailPoint:(TrailPoint *)trailPoint;
 
 @end
