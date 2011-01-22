@@ -1,11 +1,13 @@
-#import "iPhoneViewController.h"
+#import "MainViewController.h"
 
-@implementation iPhoneViewController
+@implementation MainViewController
 
 @synthesize mapView = _mapView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSLog(@"iPhone viewDidLoad");
     
 	self.mapView = [[[MapView alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)] autorelease];
 	[self.view addSubview:self.mapView];

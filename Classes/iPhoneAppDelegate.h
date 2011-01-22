@@ -1,6 +1,6 @@
 #import <UIKit/UIKit.h>
 
-@class iPhoneViewController;
+@class MainViewController;
 
 /**
  * The application delegate for the MTM iPhone app. Creates the root view
@@ -11,7 +11,7 @@
 
 @private
     UIWindow * _window;
-    iPhoneViewController * _viewController;
+    MainViewController * _viewController;
 }
 
 /**
@@ -23,7 +23,7 @@
  * The main view controller for the iPhone application. An instance of
  * iPhoneViewController.
  */
-@property (nonatomic, retain) IBOutlet iPhoneViewController *viewController;
+@property (nonatomic, retain) IBOutlet MainViewController *viewController;
 
 @end
 

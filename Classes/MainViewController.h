@@ -7,7 +7,7 @@
  * instance of MKMapView for trails display, and is the first view controller
  * instantiated after application launch.
  */
-@interface iPhoneViewController : UIViewController {
+@interface MainViewController : UIViewController {
     
 @private
     MKMapView * _mapView;
