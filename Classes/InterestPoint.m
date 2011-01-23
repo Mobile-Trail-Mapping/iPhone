@@ -11,16 +11,14 @@
 @synthesize desc = _desc;
 
 -(id) initWithID:(NSInteger)pointID location:(CLLocationCoordinate2D)p category:(NSString *)c title:(NSString *)t desc:(NSString *)d {
-        
-	self = [super init];
-	if (self != nil) {
-        _pointID = pointID;
-        _location = p;
-        _category = c;
-        _title = t;
-        _desc = d;
-        _categoryID = -1;
-        _color = [UIColor redColor];
+	if ((self = [super init])) {
+        self.pointID = pointID;
+        self.location = p;
+        self.category = c;
+        self.title = t;
+        self.desc = d;
+        self.categoryID = -1;
+        self.color = [UIColor redColor];
 	}
 	return self;
 }
