@@ -14,9 +14,10 @@
 @private
     NSInteger _pointID;
     CLLocationCoordinate2D _location;
-	NSString* _category;
-	NSString* _title;
-    UIColor* _color;
+	NSString * _category;
+	NSString * _title;
+    NSString * _desc;
+    UIColor * _color;
     NSInteger _categoryID;
 }
 
@@ -33,17 +34,17 @@
 /**
  * The category to which this point belongs.
  */
-@property (nonatomic, retain) NSString* category;
+@property (nonatomic, retain) NSString * category;
 
 /**
  * The title of this point. Optional for points of category "Trail".
  */
-@property (nonatomic, retain) NSString* title;
+@property (nonatomic, retain) NSString * title;
 
 /**
  * The color to paint this point. Optional.
  */
-@property (nonatomic, retain) UIColor* color;
+@property (nonatomic, retain) UIColor * color;
 
 /**
  * The unique ID of this point's category.
@@ -51,8 +52,13 @@
 @property (nonatomic) NSInteger categoryID;
 
 /**
+ * The description of this point.
+ */
+@property (nonatomic, retain) NSString * desc;
+
+/**
  * Create a new point with the given parameters. Designated initializer.
  */
--(id) initWithID:(NSInteger)pointID location:(CLLocationCoordinate2D)p category:(NSString *)c title:(NSString *)t;
+-(id) initWithID:(NSInteger)pointID location:(CLLocationCoordinate2D)p category:(NSString *)c title:(NSString *)t desc:(NSString *)d;
 
 @end

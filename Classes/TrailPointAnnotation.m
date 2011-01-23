@@ -33,4 +33,8 @@
     return self.trailPoint.title;
 }
 
+- (NSString *)subtitle {
+    return self.trailPoint.category;
+}
+
 @end

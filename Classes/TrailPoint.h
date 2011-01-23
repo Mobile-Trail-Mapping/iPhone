@@ -55,7 +55,7 @@
  * If the <code>connections</code> parameter is <code>nil</code>, creates
  * an empty connections set which can be manipulated later.
  */
-- (id)initWithID:(NSInteger)pointID location:(CLLocationCoordinate2D)p category:(NSString *)c title:(NSString *)t connections:(NSMutableSet *)connections;
+- (id)initWithID:(NSInteger)pointID location:(CLLocationCoordinate2D)p category:(NSString *)c title:(NSString *)t desc:(NSString *)d connections:(NSMutableSet *)connections;
 
 /**
  * Iterate through the set of unresolved connections on this TrailPoint,

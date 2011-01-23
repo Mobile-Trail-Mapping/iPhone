@@ -46,7 +46,7 @@
     NSMutableArray * trails = [[[NSMutableArray alloc] init] autorelease];
     
     CXMLDocument *doc = [[[CXMLDocument alloc] initWithContentsOfURL:url options:0 error:nil] autorelease];
-    //[self debugXMLDoc:doc]; //logging
+    [self debugXMLDoc:doc]; //logging
     
     NSArray *trailElements = [doc nodesForXPath:@"//trails/trail" error:nil];
     
@@ -58,14 +58,14 @@
         
         for(CXMLElement * pointElement in pointElements) {
             NSInteger pointID = [[[pointElement attributeForName:@"id"] stringValue] intValue];
-            //NSLog(@"Found point %d in trail %d", pointID, trailID);
+            NSLog(@"Found point %d in trail %d", pointID, trailID);
             
             NSMutableArray * pointLinks = [[[NSMutableArray alloc] init] autorelease];
             
             NSMutableDictionary * pointProperties = [[[NSMutableDictionary alloc] initWithCapacity:10] autorelease];
             NSArray * pointPropertyElements = [doc nodesForXPath:[NSString stringWithFormat:@"//trails/trail[@id='%d']/points/point[@id='%d']/*", trailID, pointID] error:nil];
             for(CXMLElement * propertyElement in pointPropertyElements) {
-                //NSLog(@"  Dealing with property element %@ (which has %d children)", [propertyElement name], [propertyElement childCount]);
+                NSLog(@"  Dealing with property element %@ (which has %d children)", [propertyElement name], [propertyElement childCount]);
                 if([[propertyElement name] isEqualToString:@"connections"]) {
                     NSArray * connectionElements = [doc nodesForXPath:[NSString stringWithFormat:@"//trails/trail[@id='%d']/points/point[@id='%d']/connections/connection", trailID, pointID] error:nil];
                     
@@ -78,10 +78,12 @@
             }
             
             CLLocationCoordinate2D pointLoc = CLLocationCoordinate2DMake([[pointProperties valueForKey:@"latitude"] doubleValue], [[pointProperties valueForKey:@"longitude"] doubleValue]);
+            NSLog(@"about to create point: (%d, %@, %@)", pointID, [pointProperties valueForKey:@"category"], [pointProperties valueForKey:@"title"]);
             TrailPoint * currentPoint = [[[TrailPoint alloc] initWithID:pointID
                                                                location:pointLoc 
                                                                category:[pointProperties valueForKey:@"category"] 
                                                                   title:[pointProperties valueForKey:@"title"]
+                                                                   desc:[pointProperties valueForKey:@"description"]
                                                             connections:nil] autorelease];
             currentPoint.unresolvableLinks = pointLinks;
             [currentTrail.trailPoints addObject:currentPoint];
@@ -122,7 +124,11 @@
         [str appendString:@"| "];
     }
     [str appendString:@"|-"];
-    [str appendString:[elem name]];
+    if([elem kind] == CXMLTextKind) {
+        [str appendFormat:@"\"%@\"", [elem stringValue]];
+    } else {
+        [str appendString:[elem name]];
+    }
     NSLog(@"%@", str);
     for(CXMLElement * e in [elem children]) {
         [self debugXMLElement:e nestingDepth:depth+1];

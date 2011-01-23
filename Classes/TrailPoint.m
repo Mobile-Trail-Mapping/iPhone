@@ -6,9 +6,9 @@
 @synthesize connections = _connections;
 @synthesize unresolvableLinks = _unresolvableLinks;
 
--(id) initWithID:(NSInteger)pointID location:(CLLocationCoordinate2D)p category:(NSString *)c title:(NSString *)t connections:(NSMutableSet *)connections {
+-(id) initWithID:(NSInteger)pointID location:(CLLocationCoordinate2D)p category:(NSString *)c title:(NSString *)t desc:(NSString *)d connections:(NSMutableSet *)connections {
     
-	self = [super initWithID:pointID location:p category:c title:t];
+	self = [super initWithID:pointID location:p category:c title:t desc:d];
 	if (self != nil) {
         if(connections) {
             self.connections = connections;
