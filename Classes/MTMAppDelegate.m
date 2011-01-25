@@ -1,7 +1,7 @@
-#import "iPhoneAppDelegate.h"
+#import "MTMAppDelegate.h"
 #import "MainViewController.h"
 
-@implementation iPhoneAppDelegate
+@implementation MTMAppDelegate
 
 @synthesize window;
 @synthesize viewController;

@@ -3,11 +3,11 @@
 @class MainViewController;
 
 /**
- * The application delegate for the MTM iPhone app. Creates the root view
+ * The application delegate for the MTM application. Creates the root view
  * controller (an instance of iPhoneViewController) and hands off
  * UI control to that instance.
  */
-@interface iPhoneAppDelegate : NSObject <UIApplicationDelegate> {
+@interface MTMAppDelegate : NSObject <UIApplicationDelegate> {
 
 @private
     UIWindow * _window;
@@ -20,8 +20,8 @@
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 
 /**
- * The main view controller for the iPhone application. An instance of
- * iPhoneViewController.
+ * The main view controller for the MTM application. An instance of
+ * MainViewController.
  */
 @property (nonatomic, retain) IBOutlet MainViewController *viewController;
 

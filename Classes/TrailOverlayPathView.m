@@ -31,10 +31,9 @@
 #pragma mark MKOverlayPathView methods
 
 - (void)createPath {
-    //TODO create path
     // Note that [super createPath] has an empty implementation, so no call needed
     
-    NSLog(@"creating path");
+    //NSLog(@"creating path");
     
     CGMutablePathRef path = CGPathCreateMutable();
     
@@ -42,13 +41,13 @@
         CLLocationCoordinate2D sourceLocation = sourceTrailPoint.location;
         CGPoint sourcePoint = [self.mapView convertCoordinate:sourceLocation toPointToView:self];
         
-        NSLog(@"  sourcing lines from point (%f,%f)", sourceLocation.latitude, sourceLocation.longitude);
+        //NSLog(@"  sourcing lines from point (%f,%f)", sourceLocation.latitude, sourceLocation.longitude);
         
         for(TrailPoint * targetTrailPoint in sourceTrailPoint.connections) {
             CLLocationCoordinate2D targetLocation = targetTrailPoint.location;
             CGPoint targetPoint = [self.mapView convertCoordinate:targetLocation toPointToView:self];
             
-            NSLog(@"    adding line to point (%f,%f)", targetLocation.latitude, targetLocation.longitude);
+            //NSLog(@"    adding line to point (%f,%f)", targetLocation.latitude, targetLocation.longitude);
             
             CGPathMoveToPoint(path, NULL, sourcePoint.x, sourcePoint.y);
             CGPathAddLineToPoint(path, NULL, targetPoint.x, targetPoint.y);
@@ -62,19 +61,19 @@
 - (void)invalidatePath {
     [super invalidatePath];
     
-    NSLog(@"invalidating path");
+    //NSLog(@"invalidating path");
 }
 
 - (void)strokePath:(CGPathRef)path inContext:(CGContextRef)context {
     [super strokePath:path inContext:context];
     
-    NSLog(@"stroking path");
+    //NSLog(@"stroking path");
 }
 
 - (void)fillPath:(CGPathRef)path inContext:(CGContextRef)context {
     [super fillPath:path inContext:context];
     
-    NSLog(@"filling path");
+    //NSLog(@"filling path");
 }
 
 @end
