@@ -16,6 +16,8 @@
 	<array>
 		<string>MTMLogo_iOS_iPhone.png</string>
 		<string>MTMLogo_iOS_iPhone_Retina.png</string>
+		<string>MTMLogo_iOS_iPad.png</string>
+		<string>MTMLogo_iOS_iPad.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
 	<string>com.brousalis.${PRODUCT_NAME:rfc1034identifier}</string>
