@@ -4,6 +4,7 @@
 #import "TrailOverlay.h"
 #import "TrailOverlayPathView.h"
 #import "TrailPointAnnotation.h"
+#import "TrailPointAnnotationView.h"
 #import "DataParser.h"
 
 
@@ -44,6 +45,12 @@
 #pragma mark -
 #pragma mark MKMapViewDelegate methods
 
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
+    for(MKAnnotationView * view in views) {
+        view.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    }
+}
+
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay {
     NSLog(@"fetching view for overlay");
     
@@ -51,6 +58,7 @@
         TrailOverlay * trailOverlay = (TrailOverlay *)overlay;
         return [_overlayPathViews valueForKey:trailOverlay.trail.name];
     }
+    
     return nil;
 }
 
