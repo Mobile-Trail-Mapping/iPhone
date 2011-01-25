@@ -7,8 +7,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"iPhone viewDidLoad");
-    
 	self.mapView = [[[MapView alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)] autorelease];
 	[self.view addSubview:self.mapView];
     self.view.clipsToBounds = NO;
