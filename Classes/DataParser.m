@@ -106,7 +106,6 @@
     }
     
     return trails;
-    
 }
 
 #pragma mark -
