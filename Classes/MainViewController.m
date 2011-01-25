@@ -1,4 +1,6 @@
 #import "MainViewController.h"
+#import "TrailPoint.h"
+#import "MapView.h"
 
 @implementation MainViewController
 
@@ -8,6 +10,7 @@
     [super viewDidLoad];
     
 	self.mapView = [[[MapView alloc] initWithFrame: CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)] autorelease];
+    self.mapView.delegate = self;
 	[self.view addSubview:self.mapView];
     self.view.clipsToBounds = NO;
     self.view.backgroundColor = [UIColor blueColor];
@@ -26,6 +29,13 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
     return UIInterfaceOrientationIsPortrait(toInterfaceOrientation);
+}
+
+#pragma mark -
+#pragma mark TrailActionDelegate methods
+
+- (void)showInformationForTrailPoint:(TrailPoint *)trailPoint {
+    NSLog(@"need to show info for trail point %@", trailPoint);
 }
 
 @end

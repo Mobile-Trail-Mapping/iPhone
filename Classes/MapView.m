@@ -4,13 +4,13 @@
 #import "TrailOverlay.h"
 #import "TrailOverlayPathView.h"
 #import "TrailPointAnnotation.h"
-#import "TrailPointAnnotationView.h"
 #import "DataParser.h"
 
 
 @implementation MapView
 
 @synthesize trails = _trails;
+@synthesize delegate = _delegate;
 
 - (id) initWithFrame:(CGRect) frame {
 	self = [super initWithFrame:frame];
@@ -51,6 +51,14 @@
     }
 }
 
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    if(control == view.rightCalloutAccessoryView) {
+        NSLog(@"callout accessory control tapped");
+        TrailPointAnnotation * trailPointAnnotation = (TrailPointAnnotation *)(view.annotation);
+        [self.delegate showInformationForTrailPoint:trailPointAnnotation.trailPoint];
+    }
+}
+
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay {
     NSLog(@"fetching view for overlay");
     
@@ -60,16 +68,6 @@
     }
     
     return nil;
-}
-
-- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
-    NSLog(@"region did change");
-    
-    for(NSString * overlayPathViewKey in _overlayPathViews) {
-        //TrailOverlayPathView * overlayPathView = [_overlayPathViews valueForKey:overlayPathViewKey];
-        //[overlayPathView invalidatePath];
-        //[overlayPathView setNeedsDisplay];
-    }
 }
 
 #pragma mark -
