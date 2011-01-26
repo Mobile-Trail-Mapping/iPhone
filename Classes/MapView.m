@@ -6,6 +6,9 @@
 #import "TrailPointAnnotation.h"
 #import "DataParser.h"
 
+@interface MapView(Testing)
+- (void)beginParse;
+@end
 
 @implementation MapView
 
@@ -23,23 +26,25 @@
         self.trails = [[[NSMutableArray alloc] init] autorelease];
         _overlayPathViews = [[[NSMutableDictionary alloc] init] retain];
         
-        //[self parseXML];
-        
-        DataParser * parser = [[[DataParser alloc] initWithDataAddress:@"http://mtmserver.heroku.com/point/get"] autorelease];
-        self.trails = [parser parseTrails];
-        
-        for(Trail * trail in self.trails) {
-            TrailOverlayPathView * overlayPathView = [[TrailOverlayPathView alloc] initWithTrail:trail mapView:mapView];
-            [_overlayPathViews setValue:overlayPathView forKey:[trail name]];
-            [mapView addOverlay:[overlayPathView overlay]];
-            
-            for(TrailPoint * head in trail.trailHeads) {
-                TrailPointAnnotation * headAnnotation = [[[TrailPointAnnotation alloc] initWithTrailPoint:head] autorelease];
-                [mapView addAnnotation:headAnnotation];
-            }
-        }
+        [self performSelectorInBackground:@selector(beginParse) withObject:nil];
 	}
 	return self;
+}
+
+- (void)beginParse {
+    DataParser * parser = [[[DataParser alloc] initWithDataAddress:@"http://mtmserver.heroku.com/point/get"] autorelease];
+    self.trails = [parser parseTrails];
+    
+    for(Trail * trail in self.trails) {
+        TrailOverlayPathView * overlayPathView = [[TrailOverlayPathView alloc] initWithTrail:trail mapView:mapView];
+        [_overlayPathViews setValue:overlayPathView forKey:[trail name]];
+        [mapView addOverlay:[overlayPathView overlay]];
+        
+        for(TrailPoint * head in trail.trailHeads) {
+            TrailPointAnnotation * headAnnotation = [[[TrailPointAnnotation alloc] initWithTrailPoint:head] autorelease];
+            [mapView addAnnotation:headAnnotation];
+        }
+    }
 }
 
 #pragma mark -
