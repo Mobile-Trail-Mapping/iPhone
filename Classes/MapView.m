@@ -6,7 +6,7 @@
 #import "TrailPointAnnotation.h"
 #import "DataParser.h"
 
-@interface MapView(Testing)
+@interface MapView(Parsing)
 - (void)beginParse;
 @end
 
