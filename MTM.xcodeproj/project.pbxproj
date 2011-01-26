@@ -71,6 +71,7 @@
 		22C635F212EF624B00C53C84 /* MainViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController_iPad.m; sourceTree = "<group>"; };
 		22C635F412EF625100C53C84 /* MainViewController_iPhone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController_iPhone.h; sourceTree = "<group>"; };
 		22C635F512EF625100C53C84 /* MainViewController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController_iPhone.m; sourceTree = "<group>"; };
+		22E3C66612F0CD8000044FB7 /* TrailPointInfoModalDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailPointInfoModalDelegate.h; sourceTree = "<group>"; };
 		A71079DC12DD2C5C00B19EBC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Libs/MapKit.framework; sourceTree = "<group>"; };
 		A7107A0C12DD2D0500B19EBC /* CXMLDocument_CreationExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLDocument_CreationExtensions.h; sourceTree = "<group>"; };
 		A7107A0D12DD2D0500B19EBC /* CXMLDocument_CreationExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMLDocument_CreationExtensions.m; sourceTree = "<group>"; };
@@ -175,6 +176,7 @@
 				22C011AE12EF851C000D5C9F /* TrailPointInfoViewController.m */,
 				2237895B12EA0BDA00BAF18A /* DataParser.h */,
 				2237895C12EA0BDA00BAF18A /* DataParser.m */,
+				22E3C66612F0CD8000044FB7 /* TrailPointInfoModalDelegate.h */,
 				22C011A912EF7D18000D5C9F /* TrailActionDelegate.h */,
 			);
 			name = Common;

@@ -1,4 +1,5 @@
 #import "MainViewController_iPhone.h"
+#import "TrailPointInfoViewController.h"
 
 @implementation MainViewController_iPhone
 
@@ -11,6 +12,11 @@
 #pragma mark -
 #pragma mark TrailActionDelegate methods
 
-
+- (void)showInformationForTrailPoint:(TrailPoint *)trailPoint sender:(id)sender {
+    [super showInformationForTrailPoint:trailPoint sender:sender];
+    
+    TrailPointInfoViewController * vc = [[[TrailPointInfoViewController alloc] initWithNibName:@"TrailPointInfoView" bundle:nil] autorelease];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 @end

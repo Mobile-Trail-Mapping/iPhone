@@ -2,10 +2,11 @@
 
 @implementation TrailPointInfoViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    self.modalPresentationStyle = UIModalPresentationFormSheet;
+@synthesize dismissButton = _dismissButton;
+@synthesize delegate = _delegate;
+
+- (IBAction)dismiss:(id)sender {
+    [self.delegate dismissModalController];
 }
 
 @end

@@ -1,6 +1,7 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "TrailActionDelegate.h"
+#import "TrailPointInfoModalDelegate.h"
 
 @class TrailAction;
 @class MapView;

@@ -16,9 +16,18 @@
 - (void)showInformationForTrailPoint:(TrailPoint *)trailPoint sender:(id)sender {
     [super showInformationForTrailPoint:trailPoint sender:sender];
     
-    TrailPointInfoViewController * vc = [[[TrailPointInfoViewController alloc] initWithNibName:@"TrailPointInfoView" bundle:nil] autorelease];
-    [self presentModalViewController:vc animated:YES];
-    
+    TrailPointInfoViewController * vc = [[[TrailPointInfoViewController alloc] initWithNibName:@"TrailPointInfoView" bundle:nil] autorelease];    
+    vc.delegate = self;
+    UINavigationController * nav = [[[UINavigationController alloc] initWithRootViewController:vc] autorelease];
+    nav.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentModalViewController:nav animated:YES];
+}
+
+#pragma mark -
+#pragma mark TrailPointInfoModalDelegate methods
+
+- (void)dismissModalController {
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end
