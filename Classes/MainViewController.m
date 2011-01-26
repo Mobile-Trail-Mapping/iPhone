@@ -34,8 +34,12 @@
 #pragma mark -
 #pragma mark TrailActionDelegate methods
 
-- (void)showInformationForTrailPoint:(TrailPoint *)trailPoint {
+- (void)showInformationForTrailPoint:(TrailPoint *)trailPoint sender:(id)sender {
     NSLog(@"need to show info for trail point %@", trailPoint);
+}
+
+- (UIView *)calloutViewForTrailPointAnnotation:(MKAnnotationView *)annotation {
+    return [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
 }
 
 @end

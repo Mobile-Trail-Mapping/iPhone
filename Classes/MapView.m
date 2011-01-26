@@ -47,7 +47,7 @@
 
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
     for(MKAnnotationView * view in views) {
-        view.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        view.rightCalloutAccessoryView = [self.delegate calloutViewForTrailPointAnnotation:view];
     }
 }
 
@@ -55,7 +55,7 @@
     if(control == view.rightCalloutAccessoryView) {
         NSLog(@"callout accessory control tapped");
         TrailPointAnnotation * trailPointAnnotation = (TrailPointAnnotation *)(view.annotation);
-        [self.delegate showInformationForTrailPoint:trailPointAnnotation.trailPoint];
+        [self.delegate showInformationForTrailPoint:trailPointAnnotation.trailPoint sender:view];
     }
 }
 

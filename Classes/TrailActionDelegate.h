@@ -1,7 +1,10 @@
 @class TrailPoint;
+@class TrailPointAnnotation;
 
 @protocol TrailActionDelegate
 
-- (void)showInformationForTrailPoint:(TrailPoint *)trailPoint;
+- (UIView *)calloutViewForTrailPointAnnotation:(MKAnnotationView *)annotation;
+
+- (void)showInformationForTrailPoint:(TrailPoint *)trailPoint sender:(id)sender;
 
 @end

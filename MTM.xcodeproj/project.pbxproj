@@ -15,6 +15,8 @@
 		2237895D12EA0BDA00BAF18A /* DataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2237895C12EA0BDA00BAF18A /* DataParser.m */; };
 		2237896012EA113800BAF18A /* TrailPointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2237895F12EA113800BAF18A /* TrailPointAnnotation.m */; };
 		22C011A512EF659D000D5C9F /* MTMLogo_iOS_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 22C011A412EF659D000D5C9F /* MTMLogo_iOS_iPad.png */; };
+		22C011AF12EF851C000D5C9F /* TrailPointInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C011AE12EF851C000D5C9F /* TrailPointInfoViewController.m */; };
+		22C011B312EF85B5000D5C9F /* TrailPointInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C011B212EF85B5000D5C9F /* TrailPointInfoView.xib */; };
 		22C07D6212E6896500381FE5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22C07D6112E6896500381FE5 /* CoreLocation.framework */; };
 		22C635F312EF624B00C53C84 /* MainViewController_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C635F212EF624B00C53C84 /* MainViewController_iPad.m */; };
 		22C635F612EF625100C53C84 /* MainViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C635F512EF625100C53C84 /* MainViewController_iPhone.m */; };
@@ -61,6 +63,9 @@
 		2237895F12EA113800BAF18A /* TrailPointAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrailPointAnnotation.m; sourceTree = "<group>"; };
 		22C011A412EF659D000D5C9F /* MTMLogo_iOS_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MTMLogo_iOS_iPad.png; sourceTree = "<group>"; };
 		22C011A912EF7D18000D5C9F /* TrailActionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailActionDelegate.h; sourceTree = "<group>"; };
+		22C011AD12EF851C000D5C9F /* TrailPointInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailPointInfoViewController.h; sourceTree = "<group>"; };
+		22C011AE12EF851C000D5C9F /* TrailPointInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrailPointInfoViewController.m; sourceTree = "<group>"; };
+		22C011B212EF85B5000D5C9F /* TrailPointInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TrailPointInfoView.xib; sourceTree = "<group>"; };
 		22C07D6112E6896500381FE5 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		22C635F112EF624B00C53C84 /* MainViewController_iPad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController_iPad.h; sourceTree = "<group>"; };
 		22C635F212EF624B00C53C84 /* MainViewController_iPad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController_iPad.m; sourceTree = "<group>"; };
@@ -166,6 +171,8 @@
 				A7D94A5C12ADC542003BDB1C /* MTMAppDelegate.m */,
 				A7D94A6112ADC542003BDB1C /* MainViewController.h */,
 				A7D94A6212ADC542003BDB1C /* MainViewController.m */,
+				22C011AD12EF851C000D5C9F /* TrailPointInfoViewController.h */,
+				22C011AE12EF851C000D5C9F /* TrailPointInfoViewController.m */,
 				2237895B12EA0BDA00BAF18A /* DataParser.h */,
 				2237895C12EA0BDA00BAF18A /* DataParser.m */,
 				22C011A912EF7D18000D5C9F /* TrailActionDelegate.h */,
@@ -295,6 +302,7 @@
 				A7D94A5612ADC542003BDB1C /* InfoPlist.strings */,
 				A7D94A5E12ADC542003BDB1C /* MainWindow.xib */,
 				A7D94A6412ADC542003BDB1C /* MainViewController.xib */,
+				22C011B212EF85B5000D5C9F /* TrailPointInfoView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -374,6 +382,7 @@
 				220CD76812E92603000804E8 /* MTMLogo_iOS_iPhone_Retina.png in Resources */,
 				2236E44712EAA9EE00297F28 /* MainWindow-iPad.xib in Resources */,
 				22C011A512EF659D000D5C9F /* MTMLogo_iOS_iPad.png in Resources */,
+				22C011B312EF85B5000D5C9F /* TrailPointInfoView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +418,7 @@
 				2237896012EA113800BAF18A /* TrailPointAnnotation.m in Sources */,
 				22C635F312EF624B00C53C84 /* MainViewController_iPad.m in Sources */,
 				22C635F612EF625100C53C84 /* MainViewController_iPhone.m in Sources */,
+				22C011AF12EF851C000D5C9F /* TrailPointInfoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
