@@ -11,7 +11,7 @@
 
 @private
     UIWindow * _window;
-    MainViewController * _viewController;
+    UIViewController * _viewController;
 }
 
 /**
@@ -23,7 +23,7 @@
  * The main view controller for the MTM application. An instance of
  * MainViewController.
  */
-@property (nonatomic, retain) IBOutlet MainViewController *viewController;
+@property (nonatomic, retain) IBOutlet UIViewController *viewController;
 
 @end
 
