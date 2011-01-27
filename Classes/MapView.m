@@ -32,6 +32,8 @@
 }
 
 - (void)beginParse {
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+    
     DataParser * parser = [[[DataParser alloc] initWithDataAddress:@"http://mtmserver.heroku.com/point/get"] autorelease];
     self.trails = [parser parseTrails];
     
@@ -45,6 +47,8 @@
             [mapView addAnnotation:headAnnotation];
         }
     }
+    
+    [pool drain];
 }
 
 #pragma mark -
