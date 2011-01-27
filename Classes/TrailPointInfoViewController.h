@@ -23,6 +23,10 @@
  */
 @property (nonatomic, retain) TrailPoint * trailPoint;
 
+/**
+ * Dismiss the modal controller being displayed, if any. Primarily used to
+ * hide instances of TrailPointInfoViewController.
+ */
 - (IBAction)dismiss:(id)sender;
 
 @end

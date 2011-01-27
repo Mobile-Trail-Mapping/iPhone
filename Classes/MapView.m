@@ -7,6 +7,14 @@
 #import "DataParser.h"
 
 @interface MapView(Parsing)
+/**
+ * Start point for background thread to fetch trails data and add to this
+ * object's instance of MKMapView. Handles its own autorelease pool and
+ * dispatches an instance of DataParser.
+ *
+ * Until this method completes, MapView#trails will be an empty array, and
+ * this object's MKMapView will behave like a standard Google Maps interface.
+ */
 - (void)beginParse;
 @end
 

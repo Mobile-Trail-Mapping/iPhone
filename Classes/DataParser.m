@@ -5,7 +5,16 @@
 
 @interface DataParser(Logging)
 
+/**
+ * Log an entire XML document elementwise.
+ */
 - (void)debugXMLDoc:(CXMLDocument *)doc;
+
+/**
+ * Log a single XML element at the given nesting depth. Used primarily by
+ * DataParser#debugXMLDoc for recursive nesting. Generally should not be
+ * called directly.
+ */
 - (void)debugXMLElement:(CXMLElement *)elem nestingDepth:(NSInteger)depth;
 
 @end
