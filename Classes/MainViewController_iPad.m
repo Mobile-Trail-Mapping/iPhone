@@ -18,8 +18,14 @@
     
     TrailPointInfoViewController * vc = [[[TrailPointInfoViewController alloc] initWithNibName:@"TrailPointInfoView" bundle:nil] autorelease];    
     vc.delegate = self;
+    vc.trailPoint = trailPoint;
+    vc.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone 
+                                                                                          target:vc 
+                                                                                          action:@selector(dismiss:)] autorelease];
+    
     UINavigationController * nav = [[[UINavigationController alloc] initWithRootViewController:vc] autorelease];
     nav.modalPresentationStyle = UIModalPresentationFormSheet;
+    
     [self presentModalViewController:nav animated:YES];
 }
 
