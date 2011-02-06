@@ -15,6 +15,7 @@
 		2237895D12EA0BDA00BAF18A /* DataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2237895C12EA0BDA00BAF18A /* DataParser.m */; };
 		2237896012EA113800BAF18A /* TrailPointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2237895F12EA113800BAF18A /* TrailPointAnnotation.m */; };
 		22876D7A12FF47DA00BEF630 /* InterestPointTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 22876D7912FF47D900BEF630 /* InterestPointTest.m */; };
+		22876D7D12FF4A1E00BEF630 /* TrailPointTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 22876D7C12FF4A1E00BEF630 /* TrailPointTest.m */; };
 		22C011A512EF659D000D5C9F /* MTMLogo_iOS_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 22C011A412EF659D000D5C9F /* MTMLogo_iOS_iPad.png */; };
 		22C011AF12EF851C000D5C9F /* TrailPointInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C011AE12EF851C000D5C9F /* TrailPointInfoViewController.m */; };
 		22C011B312EF85B5000D5C9F /* TrailPointInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C011B212EF85B5000D5C9F /* TrailPointInfoView.xib */; };
@@ -116,6 +117,8 @@
 		2237895F12EA113800BAF18A /* TrailPointAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrailPointAnnotation.m; sourceTree = "<group>"; };
 		22876D7812FF47D900BEF630 /* InterestPointTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterestPointTest.h; sourceTree = "<group>"; };
 		22876D7912FF47D900BEF630 /* InterestPointTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterestPointTest.m; sourceTree = "<group>"; };
+		22876D7B12FF4A1E00BEF630 /* TrailPointTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailPointTest.h; sourceTree = "<group>"; };
+		22876D7C12FF4A1E00BEF630 /* TrailPointTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrailPointTest.m; sourceTree = "<group>"; };
 		22C011A412EF659D000D5C9F /* MTMLogo_iOS_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MTMLogo_iOS_iPad.png; sourceTree = "<group>"; };
 		22C011A912EF7D18000D5C9F /* TrailActionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailActionDelegate.h; sourceTree = "<group>"; };
 		22C011AD12EF851C000D5C9F /* TrailPointInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailPointInfoViewController.h; sourceTree = "<group>"; };
@@ -286,6 +289,8 @@
 				22E80ACE12FA9771009CF69F /* TrailTest.m */,
 				22876D7812FF47D900BEF630 /* InterestPointTest.h */,
 				22876D7912FF47D900BEF630 /* InterestPointTest.m */,
+				22876D7B12FF4A1E00BEF630 /* TrailPointTest.h */,
+				22876D7C12FF4A1E00BEF630 /* TrailPointTest.m */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -569,6 +574,7 @@
 				22E80B9D12FA9D42009CF69F /* Trail.m in Sources */,
 				22E80B8A12FA9CC4009CF69F /* TrailTest.m in Sources */,
 				22876D7A12FF47DA00BEF630 /* InterestPointTest.m in Sources */,
+				22876D7D12FF4A1E00BEF630 /* TrailPointTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
