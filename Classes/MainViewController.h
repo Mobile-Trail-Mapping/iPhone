@@ -22,5 +22,10 @@
  */
 @property (nonatomic, retain) MapView * mapView;
 
+/**
+ * Display a modal settings dialog for editing application configuration.
+ */
+- (void)showSettings;
+
 @end
 

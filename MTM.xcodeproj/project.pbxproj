@@ -17,6 +17,11 @@
 		22876D7A12FF47DA00BEF630 /* InterestPointTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 22876D7912FF47D900BEF630 /* InterestPointTest.m */; };
 		22876D7D12FF4A1E00BEF630 /* TrailPointTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 22876D7C12FF4A1E00BEF630 /* TrailPointTest.m */; };
 		22876D8612FFBBCF00BEF630 /* redx.png in Resources */ = {isa = PBXBuildFile; fileRef = 22876D8512FFBBCF00BEF630 /* redx.png */; };
+		229CA36713005FFC001E338E /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 229CA36613005FFC001E338E /* SettingsViewController.xib */; };
+		229CA368130060C9001E338E /* InterestPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A792BE6712C7379E005EFAC6 /* InterestPoint.m */; };
+		229CA369130060CC001E338E /* TrailPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A7306D6E12B6F8AA0099C0C2 /* TrailPoint.m */; };
+		229CA36A130060D6001E338E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 229CA36213005FDB001E338E /* SettingsViewController.m */; };
+		229CA36B13006107001E338E /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 229CA36613005FFC001E338E /* SettingsViewController.xib */; };
 		22C011A512EF659D000D5C9F /* MTMLogo_iOS_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 22C011A412EF659D000D5C9F /* MTMLogo_iOS_iPad.png */; };
 		22C011AF12EF851C000D5C9F /* TrailPointInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C011AE12EF851C000D5C9F /* TrailPointInfoViewController.m */; };
 		22C011B312EF85B5000D5C9F /* TrailPointInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C011B212EF85B5000D5C9F /* TrailPointInfoView.xib */; };
@@ -121,6 +126,9 @@
 		22876D7B12FF4A1E00BEF630 /* TrailPointTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailPointTest.h; sourceTree = "<group>"; };
 		22876D7C12FF4A1E00BEF630 /* TrailPointTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrailPointTest.m; sourceTree = "<group>"; };
 		22876D8512FFBBCF00BEF630 /* redx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redx.png; sourceTree = "<group>"; };
+		229CA36113005FDB001E338E /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		229CA36213005FDB001E338E /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		229CA36613005FFC001E338E /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		22C011A412EF659D000D5C9F /* MTMLogo_iOS_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MTMLogo_iOS_iPad.png; sourceTree = "<group>"; };
 		22C011A912EF7D18000D5C9F /* TrailActionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailActionDelegate.h; sourceTree = "<group>"; };
 		22C011AD12EF851C000D5C9F /* TrailPointInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailPointInfoViewController.h; sourceTree = "<group>"; };
@@ -232,6 +240,15 @@
 			name = "Resources-iPad";
 			sourceTree = "<group>";
 		};
+		229CA36013005FC4001E338E /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				229CA36113005FDB001E338E /* SettingsViewController.h */,
+				229CA36213005FDB001E338E /* SettingsViewController.m */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		22C07D6412E6933900381FE5 /* Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,6 +267,7 @@
 		22C635EE12EF61C500C53C84 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				229CA36013005FC4001E338E /* Settings */,
 				22C07D6412E6933900381FE5 /* Map */,
 				A792BDE312C71BCB005EFAC6 /* Objects */,
 				A7D94A5B12ADC542003BDB1C /* MTMAppDelegate.h */,
@@ -396,6 +414,7 @@
 		A7D94A4512ADC542003BDB1C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				229CA36613005FFC001E338E /* SettingsViewController.xib */,
 				22876D8512FFBBCF00BEF630 /* redx.png */,
 				220CD76512E925EF000804E8 /* MTMLogo_iOS_iPhone.png */,
 				220CD76712E92603000804E8 /* MTMLogo_iOS_iPhone_Retina.png */,
@@ -517,6 +536,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22876D8612FFBBCF00BEF630 /* redx.png in Resources */,
+				229CA36713005FFC001E338E /* SettingsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,6 +569,7 @@
 				2236E44712EAA9EE00297F28 /* MainWindow-iPad.xib in Resources */,
 				22C011A512EF659D000D5C9F /* MTMLogo_iOS_iPad.png in Resources */,
 				22C011B312EF85B5000D5C9F /* TrailPointInfoView.xib in Resources */,
+				229CA36B13006107001E338E /* SettingsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,7 +598,9 @@
 			files = (
 				22E80B9D12FA9D42009CF69F /* Trail.m in Sources */,
 				22E80B8A12FA9CC4009CF69F /* TrailTest.m in Sources */,
+				229CA368130060C9001E338E /* InterestPoint.m in Sources */,
 				22876D7A12FF47DA00BEF630 /* InterestPointTest.m in Sources */,
+				229CA369130060CC001E338E /* TrailPoint.m in Sources */,
 				22876D7D12FF4A1E00BEF630 /* TrailPointTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -645,6 +668,7 @@
 				22C635F312EF624B00C53C84 /* MainViewController_iPad.m in Sources */,
 				22C635F612EF625100C53C84 /* MainViewController_iPhone.m in Sources */,
 				22C011AF12EF851C000D5C9F /* TrailPointInfoViewController.m in Sources */,
+				229CA36A130060D6001E338E /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

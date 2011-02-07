@@ -2,6 +2,7 @@
 #import "TrailPoint.h"
 #import "MapView.h"
 #import "TrailPointInfoViewController.h"
+#import "SettingsViewController.h"
 
 @implementation MainViewController
 
@@ -15,6 +16,8 @@
 	[self.view addSubview:self.mapView];
     self.view.clipsToBounds = NO;
     self.view.backgroundColor = [UIColor blueColor];
+    
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStyleDone target:self action:@selector(showSettings)] autorelease];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,6 +56,16 @@
 
 - (UIView *)calloutViewForTrailPointAnnotation:(MKAnnotationView *)annotation {
     return [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+}
+
+#pragma mark -
+#pragma mark Settings methods
+
+- (void)showSettings {
+    SettingsViewController * settingsController = [[[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil] autorelease];
+    UINavigationController * navController = [[[UINavigationController alloc] initWithRootViewController:settingsController] autorelease];
+    navController.modalPresentationStyle = UIModalPresentationFormSheet;
+    [self presentModalViewController:navController animated:YES];
 }
 
 @end
