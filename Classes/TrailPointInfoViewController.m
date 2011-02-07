@@ -21,6 +21,8 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     NSLog(@"formatting trail head description %@", self.trailPoint.desc);
     NSString * conditionString = [NSString stringWithFormat:@"Condition: %@", self.trailPoint.condition];
     self.conditionLabel.text = conditionString;
@@ -34,6 +36,13 @@
     } else {
         [self startImageAnimations];
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [_imageAnimationTimer invalidate];
+    [_imageAnimationTimer release];
 }
 
 - (void)dealloc {
@@ -65,10 +74,6 @@
 #pragma mark IBActions
 
 - (IBAction)dismiss:(id)sender {
-    NSLog(@"dismissing %@", self);
-    [_imageAnimationTimer invalidate];
-    [_imageAnimationTimer release];
-    
     [self.delegate dismissModalController];
 }
 

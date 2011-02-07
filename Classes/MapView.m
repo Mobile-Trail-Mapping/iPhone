@@ -69,6 +69,7 @@
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
     for(MKAnnotationView * view in views) {
         view.rightCalloutAccessoryView = [self.delegate calloutViewForTrailPointAnnotation:view];
+        [view setNeedsDisplay];
     }
 }
 
