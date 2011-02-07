@@ -11,6 +11,8 @@
 @synthesize activityIndicatorView = _activityIndicatorView;
 @synthesize images = _images;
 
+#define IMAGE_DISPLAY_DURATION 5.0
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         [self addObserver:self forKeyPath:@"trailPoint" options:0 context:nil];
@@ -106,7 +108,7 @@
     [self.activityIndicatorView performSelectorOnMainThread:@selector(stopAnimating) withObject:nil waitUntilDone:YES];
     
     self.imageView.animationImages = self.images;
-    self.imageView.animationDuration = (NSTimeInterval) self.images.count * 3.0;
+    self.imageView.animationDuration = (NSTimeInterval) self.images.count * IMAGE_DISPLAY_DURATION;
     [self.imageView performSelectorOnMainThread:@selector(startAnimating) withObject:nil waitUntilDone:YES];
     
     [threadPool drain];
