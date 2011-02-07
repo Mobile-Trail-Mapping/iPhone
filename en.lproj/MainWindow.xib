@@ -64,9 +64,10 @@
 				<object class="NSMutableArray" key="IBUIViewControllers">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<object class="IBUIViewController" id="361104259">
+						<string key="IBUITitle"/>
 						<object class="IBUINavigationItem" key="IBUINavigationItem" id="982648637">
 							<reference key="IBUINavigationBar"/>
-							<string key="IBUITitle">Root View Controller</string>
+							<string key="IBUITitle">Trails</string>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
 						<reference key="IBUIParentViewController" ref="553870933"/>
