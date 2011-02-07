@@ -94,6 +94,7 @@
                                                                   title:[pointProperties valueForKey:@"title"]
                                                                    desc:[pointProperties valueForKey:@"description"]
                                                             connections:nil] autorelease];
+            currentPoint.condition = [pointProperties valueForKey:@"condition"];
             currentPoint.unresolvableLinks = pointLinks;
             [currentTrail.trailPoints addObject:currentPoint];
             if([currentPoint.category isEqualToString:@"Trailhead"]) {

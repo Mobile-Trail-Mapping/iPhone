@@ -7,7 +7,8 @@
 @synthesize trailPoint = _trailPoint;
 
 @synthesize imageView = _imageView;
-@synthesize tableView = _tableView;
+@synthesize conditionLabel = _conditionLabel;
+@synthesize descLabel = _descLabel;
 @synthesize activityIndicatorView = _activityIndicatorView;
 @synthesize images = _images;
 
@@ -20,7 +21,15 @@
     return self;
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
+    NSLog(@"formatting trail head description %@", self.trailPoint.desc);
+    NSString * conditionString = [NSString stringWithFormat:@"Condition: %@", self.trailPoint.condition];
+    self.conditionLabel.text = conditionString;
+    self.conditionLabel.font = [UIFont boldSystemFontOfSize:17.0];
+    CGSize contentSize = [self.trailPoint.desc sizeWithFont:self.descLabel.font forWidth:self.descLabel.frame.size.width lineBreakMode:UILineBreakModeWordWrap];
+    self.descLabel.frame = CGRectMake(self.descLabel.frame.origin.x, self.descLabel.frame.origin.y, self.descLabel.frame.size.width, contentSize.height);
+    self.descLabel.text = self.trailPoint.desc;
+    
     if(self.imageView.image == nil) {
         [self performSelectorInBackground:@selector(loadRemoteImage) withObject:nil];
     }
@@ -31,7 +40,8 @@
     
     [_trailPoint release];
     [_imageView release];
-    [_tableView release];
+    [_conditionLabel release];
+    [_descLabel release];
     [_activityIndicatorView release];
     [_images release];
     
@@ -106,10 +116,9 @@
     }
     
     [self.activityIndicatorView performSelectorOnMainThread:@selector(stopAnimating) withObject:nil waitUntilDone:YES];
+    [self performSelectorOnMainThread:@selector(startImageAnimations) withObject:nil waitUntilDone:NO];
     
-    self.imageView.animationImages = self.images;
-    self.imageView.animationDuration = (NSTimeInterval) self.images.count * IMAGE_DISPLAY_DURATION;
-    [self.imageView performSelectorOnMainThread:@selector(startAnimating) withObject:nil waitUntilDone:YES];
+    self.imageView.image = [self.images objectAtIndex:0];
     
     [threadPool drain];
 }
@@ -122,27 +131,40 @@
 }
 
 #pragma mark -
-#pragma mark UITableViewDataSource methods
+#pragma mark Image animation methods
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+- (void)startImageAnimations {
+    NSTimer * animationTimer = [NSTimer timerWithTimeInterval:IMAGE_DISPLAY_DURATION target:self selector:@selector(cycleImage) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:animationTimer forMode:NSDefaultRunLoopMode];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+- (void)cycleImage {
+    NSInteger currentIndex = [self.images indexOfObject:self.imageView.image];
+    NSInteger nextIndex = (currentIndex + 1) % self.images.count;
+    
+    _transitionImageView = [[[UIImageView alloc] initWithFrame:self.imageView.frame] retain];
+    _transitionImageView.alpha = 0.0f;
+    _transitionImageView.image = [self.images objectAtIndex:nextIndex];
+    _transitionImageView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:_transitionImageView];
+    
+    [UIView beginAnimations:@"UIImageView transitions" context:NULL];
+    [UIView setAnimationDuration:1.0];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
+    [_transitionImageView setAlpha:1.0f];
+    [UIView commitAnimations];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString * kCellReuseIdentifier = @"Cell";
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:kCellReuseIdentifier];
-    if(cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellReuseIdentifier] autorelease];
-    }
-    
-    // Configure cell
-    cell.textLabel.text = @"Hello world";
-    
-    return cell;
+ - (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
+     NSInteger currentIndex = [self.images indexOfObject:self.imageView.image];
+     NSInteger nextIndex = (currentIndex + 1) % self.images.count;
+     self.imageView.image = [self.images objectAtIndex:nextIndex];
+     
+     [_transitionImageView removeFromSuperview];
+     [_transitionImageView release];
+     _transitionImageView = nil;
 }
 
 @end

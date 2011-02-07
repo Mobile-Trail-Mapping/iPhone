@@ -5,6 +5,7 @@
 @synthesize trail = _trail;
 @synthesize connections = _connections;
 @synthesize unresolvableLinks = _unresolvableLinks;
+@synthesize condition = _condition;
 
 -(id) initWithID:(NSInteger)pointID location:(CLLocationCoordinate2D)p category:(NSString *)c title:(NSString *)t desc:(NSString *)d connections:(NSMutableSet *)connections {
     

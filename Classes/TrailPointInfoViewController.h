@@ -4,13 +4,15 @@
 
 @class TrailPoint;
 
-@interface TrailPointInfoViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface TrailPointInfoViewController : UIViewController {
 @private
     id<TrailPointInfoModalDelegate> _delegate;
     TrailPoint * _trailPoint;
     
     UIImageView * _imageView;
-    UITableView * _tableView;
+    UIImageView * _transitionImageView;
+    UILabel * _conditionLabel;
+    UILabel * _descLabel;
     UIActivityIndicatorView * _activityIndicatorView;
     
     NSMutableArray * _images;
@@ -37,11 +39,18 @@
 @property (nonatomic, retain) IBOutlet UIImageView * imageView;
 
 /**
- * The on-screen view which displays detailed information about this
+ * The on-screen view which displays the condition of this
  * controller's TrailPoint.
  * @see TrailPointInfoViewController#trailPoint
  */
-@property (nonatomic, retain) IBOutlet UITableView * tableView;
+@property (nonatomic, retain) IBOutlet UILabel * conditionLabel;
+
+/**
+ * The on-screen view which displays the description of this
+ * controller's TrailPoint.
+ * @see TrailPointInfoViewController#trailPoint
+ */
+@property (nonatomic, retain) IBOutlet UILabel * descLabel;
 
 /**
  * A basic activity indicator to show image load progress.
@@ -70,6 +79,10 @@
  */
 - (void)loadRemoteImage;
 
+/**
+ * Display the "failure" image shown when there are no images available for
+ * this controller's TrailPoint.
+ */
 - (void)showFailureImage;
 
 /**

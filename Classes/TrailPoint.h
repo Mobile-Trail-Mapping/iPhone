@@ -11,6 +11,7 @@
     Trail *_trail;
     NSMutableSet *_connections;
     NSMutableArray *_unresolvableLinks;
+    NSString * _condition;
 }
 
 /**
@@ -46,6 +47,11 @@
  * @see TrailPoint#resolveLinksWithinTrail:
  */
 @property (nonatomic, readonly) BOOL hasUnresolvedLinks;
+
+/**
+ * The condition of this TrailPoint.
+ */
+@property (nonatomic, retain) NSString * condition;
 
 /**
  * Create a new TrailPoint with the given information and connections set.
