@@ -1,6 +1,7 @@
 #import "MainViewController.h"
 #import "TrailPoint.h"
 #import "MapView.h"
+#import "TrailPointInfoViewController.h"
 
 @implementation MainViewController
 
@@ -18,6 +19,18 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+    
+    [self.mapView clearCachedImages];
+    
+    for(Trail * trail in self.mapView.trails) {
+        for(TrailPoint * trailPoint in trail.trailPoints) {
+            UINavigationController * navController = (UINavigationController *)(self.modalViewController);
+            TrailPointInfoViewController * activeInfoController = (TrailPointInfoViewController *)([navController.viewControllers objectAtIndex:0]);
+            if(activeInfoController.trailPoint != trailPoint) {
+                trailPoint.images = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];
+            }
+        }
+    }
 }
 
 - (void)dealloc {

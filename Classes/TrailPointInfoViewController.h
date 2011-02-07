@@ -15,7 +15,7 @@
     UILabel * _descLabel;
     UIActivityIndicatorView * _activityIndicatorView;
     
-    NSMutableArray * _images;
+    NSTimer * _imageAnimationTimer;
 }
 
 /**
@@ -59,12 +59,6 @@
 @property (nonatomic, retain) IBOutlet UIActivityIndicatorView * activityIndicatorView;
 
 /**
- * The set of images associated with this controller's TrailPoint. Lazy-loaded
- * on each access to the controller. Caching is not implemented at this time.
- */
-@property (nonatomic, retain) NSMutableArray * images;
-
-/**
  * Dismiss the modal controller being displayed, if any. Primarily used to
  * hide instances of TrailPointInfoViewController.
  */
@@ -91,5 +85,11 @@
  * with this controller's TrailPoint.
  */
 - (void)registerImage:(UIImage *)image;
+
+/**
+ * Begin the process of animating through this controller's TrailPoint's
+ * images on a regular basis.
+ */
+- (void)startImageAnimations;
 
 @end

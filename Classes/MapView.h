@@ -26,4 +26,11 @@
  */
 @property (nonatomic, assign) id <TrailActionDelegate> delegate;
 
+/**
+ * Remove all cached images from stored instances of TrailPoint in order
+ * to free up memory. Should only be called in response to memory warnings
+ * from the device.
+ */
+- (void)clearCachedImages;
+
 @end

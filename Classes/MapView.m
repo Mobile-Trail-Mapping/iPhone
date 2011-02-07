@@ -59,6 +59,10 @@
     [pool drain];
 }
 
+- (void)clearCachedImages {
+    
+}
+
 #pragma mark -
 #pragma mark MKMapViewDelegate methods
 

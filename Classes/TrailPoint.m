@@ -6,6 +6,7 @@
 @synthesize connections = _connections;
 @synthesize unresolvableLinks = _unresolvableLinks;
 @synthesize condition = _condition;
+@synthesize images = _images;
 
 -(id) initWithID:(NSInteger)pointID location:(CLLocationCoordinate2D)p category:(NSString *)c title:(NSString *)t desc:(NSString *)d connections:(NSMutableSet *)connections {
     
@@ -16,6 +17,8 @@
         } else {
             self.connections = [[[NSMutableArray alloc] init] autorelease];
         }
+        
+        self.images = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];
 	}
 	return self;
 }

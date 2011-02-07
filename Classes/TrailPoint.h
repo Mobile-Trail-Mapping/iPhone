@@ -12,6 +12,7 @@
     NSMutableSet *_connections;
     NSMutableArray *_unresolvableLinks;
     NSString * _condition;
+    NSMutableArray * _images;
 }
 
 /**
@@ -52,6 +53,12 @@
  * The condition of this TrailPoint.
  */
 @property (nonatomic, retain) NSString * condition;
+
+/**
+ * The set of images associated with this TrailPoint. Loaded as needed by
+ * instances of TrailPointInfoViewController.
+ */
+@property (nonatomic, retain) NSMutableArray * images;
 
 /**
  * Create a new TrailPoint with the given information and connections set.

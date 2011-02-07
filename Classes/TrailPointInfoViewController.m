@@ -10,7 +10,6 @@
 @synthesize conditionLabel = _conditionLabel;
 @synthesize descLabel = _descLabel;
 @synthesize activityIndicatorView = _activityIndicatorView;
-@synthesize images = _images;
 
 #define IMAGE_DISPLAY_DURATION 5.0
 
@@ -30,8 +29,10 @@
     self.descLabel.frame = CGRectMake(self.descLabel.frame.origin.x, self.descLabel.frame.origin.y, self.descLabel.frame.size.width, contentSize.height);
     self.descLabel.text = self.trailPoint.desc;
     
-    if(self.imageView.image == nil) {
+    if(self.trailPoint.images.count == 0) {
         [self performSelectorInBackground:@selector(loadRemoteImage) withObject:nil];
+    } else {
+        [self startImageAnimations];
     }
 }
 
@@ -43,7 +44,6 @@
     [_conditionLabel release];
     [_descLabel release];
     [_activityIndicatorView release];
-    [_images release];
     
     NSLog(@"dealloc %@", self);
     
@@ -65,6 +65,10 @@
 #pragma mark IBActions
 
 - (IBAction)dismiss:(id)sender {
+    NSLog(@"dismissing %@", self);
+    [_imageAnimationTimer invalidate];
+    [_imageAnimationTimer release];
+    
     [self.delegate dismissModalController];
 }
 
@@ -99,9 +103,6 @@
             [self showFailureImage];
         } else {
             NSLog(@"Found %d images for trail point with ID %d", imageCount, self.trailPoint.pointID);
-            if(self.images == nil) {
-                self.images = [[[NSMutableArray alloc] initWithCapacity:imageCount] autorelease];
-            }
             
             for(int i = 0; i < imageCount; i++) {
                 NSString * imageURLString = [[[NSString alloc] initWithFormat:@"http://mtmserver.heroku.com/image/get/%d/%d", trailPointID, i] autorelease];
@@ -118,33 +119,31 @@
     [self.activityIndicatorView performSelectorOnMainThread:@selector(stopAnimating) withObject:nil waitUntilDone:YES];
     [self performSelectorOnMainThread:@selector(startImageAnimations) withObject:nil waitUntilDone:NO];
     
-    self.imageView.image = [self.images objectAtIndex:0];
-    
     [threadPool drain];
 }
 
 - (void)registerImage:(UIImage *)image {
-    if(self.images == nil) {
-        self.images = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];
-    }
-    [self.images addObject:image];
+    [self.trailPoint.images addObject:image];
 }
 
 #pragma mark -
 #pragma mark Image animation methods
 
 - (void)startImageAnimations {
-    NSTimer * animationTimer = [NSTimer timerWithTimeInterval:IMAGE_DISPLAY_DURATION target:self selector:@selector(cycleImage) userInfo:nil repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:animationTimer forMode:NSDefaultRunLoopMode];
+    self.imageView.image = [self.trailPoint.images objectAtIndex:0];
+    _imageAnimationTimer = [[NSTimer timerWithTimeInterval:IMAGE_DISPLAY_DURATION target:self selector:@selector(cycleImage) userInfo:nil repeats:YES] retain];
+    [[NSRunLoop mainRunLoop] addTimer:_imageAnimationTimer forMode:NSDefaultRunLoopMode];
 }
 
 - (void)cycleImage {
-    NSInteger currentIndex = [self.images indexOfObject:self.imageView.image];
-    NSInteger nextIndex = (currentIndex + 1) % self.images.count;
+    NSLog(@"%@ cycling image", self);
+    
+    NSInteger currentIndex = [self.trailPoint.images indexOfObject:self.imageView.image];
+    NSInteger nextIndex = (currentIndex + 1) % self.trailPoint.images.count;
     
     _transitionImageView = [[[UIImageView alloc] initWithFrame:self.imageView.frame] retain];
     _transitionImageView.alpha = 0.0f;
-    _transitionImageView.image = [self.images objectAtIndex:nextIndex];
+    _transitionImageView.image = [self.trailPoint.images objectAtIndex:nextIndex];
     _transitionImageView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_transitionImageView];
     
@@ -158,9 +157,9 @@
 }
 
  - (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
-     NSInteger currentIndex = [self.images indexOfObject:self.imageView.image];
-     NSInteger nextIndex = (currentIndex + 1) % self.images.count;
-     self.imageView.image = [self.images objectAtIndex:nextIndex];
+     NSInteger currentIndex = [self.trailPoint.images indexOfObject:self.imageView.image];
+     NSInteger nextIndex = (currentIndex + 1) % self.trailPoint.images.count;
+     self.imageView.image = [self.trailPoint.images objectAtIndex:nextIndex];
      
      [_transitionImageView removeFromSuperview];
      [_transitionImageView release];
