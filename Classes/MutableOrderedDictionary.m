@@ -43,24 +43,35 @@
     return [_keys objectAtIndex:index];
 }
 
-- (id)objectForKey:(id)key {
-    return [_data objectForKey:key];
+- (id)objectForKey:(id)aKey {
+    return [_data objectForKey:aKey];
 }
 
-- (id)valueForKey:(NSString *)key {
-    return [_data valueForKey:key];
+- (id)valueForKey:(NSString *)aKey {
+    return [_data valueForKey:aKey];
+}
+
+#pragma mark - Enumerators
+
+- (NSEnumerator *)keyEnumerator {
+    return [_data keyEnumerator];
 }
 
 #pragma mark - Mutators
 
-- (void)setObject:(id)object forKey:(id)key {
-    [_keys addObject:key];
-    [_data setObject:object forKey:key];
+- (void)setObject:(id)object forKey:(id)aKey {
+    [_keys addObject:aKey];
+    [_data setObject:object forKey:aKey];
 }
 
-- (void)setValue:(id)value forKey:(NSString *)key {
-    [_keys addObject:key];
-    [_data setValue:value forKey:key];
+- (void)setValue:(id)value forKey:(NSString *)aKey {
+    [_keys addObject:aKey];
+    [_data setValue:value forKey:aKey];
+}
+
+- (void)removeObjectForKey:(id)aKey {
+    [_keys removeObject:aKey];
+    [_data removeObjectForKey:aKey];
 }
 
 @end
