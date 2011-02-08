@@ -45,7 +45,11 @@
  */
 @property (nonatomic, assign) SEL actionSelector;
 
-
+/**
+ * Create a new Setting object with the given attributes. This Setting will
+ * display the given title and call the given selectors on the target when
+ * appropriate actions are performed in the displaying SettingsViewController.
+ */
 - (id)initWithTitle:(NSString *)title target:(id)target onValue:(SEL)value onAction:(SEL)action;
 
 /**
