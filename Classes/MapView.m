@@ -59,8 +59,14 @@
     [pool drain];
 }
 
-- (void)clearCachedImages {
-    
+- (void)clearCachedImagesExceptForTrailPoint:(TrailPoint *)exceptPoint {
+    for(Trail * trail in self.trails) {
+        for(TrailPoint * trailPoint in trail.trailPoints) {
+            if(exceptPoint != trailPoint) {
+                trailPoint.images = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];
+            }
+        }
+    }
 }
 
 #pragma mark -

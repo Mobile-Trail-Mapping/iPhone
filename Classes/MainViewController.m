@@ -23,17 +23,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
-    [self.mapView clearCachedImages];
+    UINavigationController * navController = (UINavigationController *)(self.modalViewController);
+    TrailPointInfoViewController * activeInfoController = (TrailPointInfoViewController *)([navController.viewControllers objectAtIndex:0]);
     
-    for(Trail * trail in self.mapView.trails) {
-        for(TrailPoint * trailPoint in trail.trailPoints) {
-            UINavigationController * navController = (UINavigationController *)(self.modalViewController);
-            TrailPointInfoViewController * activeInfoController = (TrailPointInfoViewController *)([navController.viewControllers objectAtIndex:0]);
-            if(activeInfoController.trailPoint != trailPoint) {
-                trailPoint.images = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];
-            }
-        }
-    }
+    [self.mapView clearCachedImagesExceptForTrailPoint:activeInfoController.trailPoint];
 }
 
 - (void)dealloc {
@@ -63,9 +56,14 @@
 
 - (void)showSettings {
     SettingsViewController * settingsController = [[[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil] autorelease];
+    settingsController.primaryViewController = self;
     UINavigationController * navController = [[[UINavigationController alloc] initWithRootViewController:settingsController] autorelease];
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
     [self presentModalViewController:navController animated:YES];
+}
+
+- (void)clearCachedImages {
+    [self.mapView clearCachedImagesExceptForTrailPoint:nil];
 }
 
 @end

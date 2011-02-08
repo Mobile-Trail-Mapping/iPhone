@@ -2,6 +2,8 @@
 #import <MapKit/MapKit.h>
 #import "TrailActionDelegate.h"
 
+@class TrailPoint;
+
 /**
  * The primary controlling object for the main map view. Handles delegate
  * messages from the MKMapView instance in iPhoneViewController and performs
@@ -31,6 +33,6 @@
  * to free up memory. Should only be called in response to memory warnings
  * from the device.
  */
-- (void)clearCachedImages;
+- (void)clearCachedImagesExceptForTrailPoint:(TrailPoint *)point;
 
 @end

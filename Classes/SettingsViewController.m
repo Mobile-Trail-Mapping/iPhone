@@ -9,7 +9,11 @@
 #import "SettingsViewController.h"
 #import "Setting.h"
 
+#import "MainViewController.h"
+
 @implementation SettingsViewController
+
+@synthesize primaryViewController = _primaryViewController;
 
 - (void)dealloc
 {
@@ -34,10 +38,15 @@
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(done)] autorelease];
     
     _settings = [[[NSMutableArray alloc] initWithCapacity:10] retain];
+    
     Setting * usernameSetting = [[[Setting alloc] initWithTitle:@"Username" target:self onValue:NULL onAction:@selector(deselectCellAt:)] autorelease];
     Setting * passwordSetting = [[[Setting alloc] initWithTitle:@"Password" target:self onValue:NULL onAction:@selector(deselectCellAt:)] autorelease];
     NSMutableArray * userSettings = [[[NSMutableArray alloc] initWithObjects:usernameSetting, passwordSetting, nil] autorelease];
     [_settings addObject:userSettings];
+    
+    Setting * clearImagesSetting = [[[Setting alloc] initWithTitle:@"Clear cached images" target:self onValue:NULL onAction:@selector(clearCachedImages)] autorelease];
+    NSMutableArray * cacheSettings = [[[NSMutableArray alloc] initWithObjects:clearImagesSetting, nil] autorelease];
+    [_settings addObject:cacheSettings];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -130,13 +139,14 @@
     
     //[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     Setting * cellSetting = [[_settings objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    [cellSetting performActionWithArgument:indexPath];
+    [cellSetting performAction];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - Setting callback actions
 
-- (void)deselectCellAt:(NSIndexPath *)indexPath {
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+- (void)clearCachedImages {
+    [self.primaryViewController clearCachedImages];
 }
 
 #pragma mark -

@@ -27,5 +27,10 @@
  */
 - (void)showSettings;
 
+/**
+ * Inform this controller's MapView to clear all image caches.
+ */
+- (void)clearCachedImages;
+
 @end
 
