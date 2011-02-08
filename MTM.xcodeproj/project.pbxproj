@@ -22,6 +22,7 @@
 		229CA369130060CC001E338E /* TrailPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A7306D6E12B6F8AA0099C0C2 /* TrailPoint.m */; };
 		229CA36A130060D6001E338E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 229CA36213005FDB001E338E /* SettingsViewController.m */; };
 		229CA36B13006107001E338E /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 229CA36613005FFC001E338E /* SettingsViewController.xib */; };
+		229CA36E1301B3F0001E338E /* Setting.m in Sources */ = {isa = PBXBuildFile; fileRef = 229CA36D1301B3F0001E338E /* Setting.m */; };
 		22C011A512EF659D000D5C9F /* MTMLogo_iOS_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 22C011A412EF659D000D5C9F /* MTMLogo_iOS_iPad.png */; };
 		22C011AF12EF851C000D5C9F /* TrailPointInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C011AE12EF851C000D5C9F /* TrailPointInfoViewController.m */; };
 		22C011B312EF85B5000D5C9F /* TrailPointInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C011B212EF85B5000D5C9F /* TrailPointInfoView.xib */; };
@@ -129,6 +130,8 @@
 		229CA36113005FDB001E338E /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		229CA36213005FDB001E338E /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		229CA36613005FFC001E338E /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		229CA36C1301B3F0001E338E /* Setting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Setting.h; sourceTree = "<group>"; };
+		229CA36D1301B3F0001E338E /* Setting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Setting.m; sourceTree = "<group>"; };
 		22C011A412EF659D000D5C9F /* MTMLogo_iOS_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MTMLogo_iOS_iPad.png; sourceTree = "<group>"; };
 		22C011A912EF7D18000D5C9F /* TrailActionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailActionDelegate.h; sourceTree = "<group>"; };
 		22C011AD12EF851C000D5C9F /* TrailPointInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailPointInfoViewController.h; sourceTree = "<group>"; };
@@ -245,6 +248,8 @@
 			children = (
 				229CA36113005FDB001E338E /* SettingsViewController.h */,
 				229CA36213005FDB001E338E /* SettingsViewController.m */,
+				229CA36C1301B3F0001E338E /* Setting.h */,
+				229CA36D1301B3F0001E338E /* Setting.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -669,6 +674,7 @@
 				22C635F612EF625100C53C84 /* MainViewController_iPhone.m in Sources */,
 				22C011AF12EF851C000D5C9F /* TrailPointInfoViewController.m in Sources */,
 				229CA36A130060D6001E338E /* SettingsViewController.m in Sources */,
+				229CA36E1301B3F0001E338E /* Setting.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

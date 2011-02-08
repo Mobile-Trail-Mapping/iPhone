@@ -7,30 +7,15 @@
 //
 
 #import "SettingsViewController.h"
-
+#import "Setting.h"
 
 @implementation SettingsViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)dealloc
 {
-    [super dealloc];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
+    [_settings release];
     
-    // Release any cached data, images, etc that aren't in use.
+    [super dealloc];
 }
 
 #pragma mark - View lifecycle
@@ -47,6 +32,12 @@
     
     self.navigationItem.title = @"Settings";
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(done)] autorelease];
+    
+    _settings = [[[NSMutableArray alloc] initWithCapacity:10] retain];
+    Setting * usernameSetting = [[[Setting alloc] initWithTitle:@"Username" target:self onValue:NULL onAction:@selector(deselectCellAt:)] autorelease];
+    Setting * passwordSetting = [[[Setting alloc] initWithTitle:@"Password" target:self onValue:NULL onAction:@selector(deselectCellAt:)] autorelease];
+    NSMutableArray * userSettings = [[[NSMutableArray alloc] initWithObjects:usernameSetting, passwordSetting, nil] autorelease];
+    [_settings addObject:userSettings];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -60,13 +51,13 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return [_settings count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 2;
+    return [[_settings objectAtIndex:section] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -75,21 +66,12 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
     }
     
-    // Configure the cell...
-    switch(indexPath.row) {
-        case 0:
-            cell.textLabel.text = @"Look at me";
-            break;
-        case 1:
-            cell.textLabel.text = @"I'm a table view";
-            break;
-        default:
-            cell.textLabel.text = @"Oh no!";
-            break;
-    }
+    Setting * cellSetting = [[_settings objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    cell.textLabel.text = cellSetting.title;
+    cell.detailTextLabel.text = [cellSetting value];
     
     return cell;
 }
@@ -146,6 +128,14 @@
      [detailViewController release];
      */
     
+    //[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    Setting * cellSetting = [[_settings objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    [cellSetting performActionWithArgument:indexPath];
+}
+
+#pragma mark - Setting callback actions
+
+- (void)deselectCellAt:(NSIndexPath *)indexPath {
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

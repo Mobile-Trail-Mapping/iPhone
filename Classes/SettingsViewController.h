@@ -11,7 +11,7 @@
 
 @interface SettingsViewController : UITableViewController {
 @private
-    
+    NSMutableArray * _settings;
 }
 
 @end
