@@ -9,10 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @class MainViewController;
+@class MutableOrderedDictionary;
 
 @interface SettingsViewController : UITableViewController {
 @private
-    NSMutableArray * _settings;
+    MutableOrderedDictionary * _settings;
     
     MainViewController * _primaryViewController;
 }

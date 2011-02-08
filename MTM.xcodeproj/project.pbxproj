@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		220CD76612E925EF000804E8 /* MTMLogo_iOS_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 220CD76512E925EF000804E8 /* MTMLogo_iOS_iPhone.png */; };
 		220CD76812E92603000804E8 /* MTMLogo_iOS_iPhone_Retina.png in Resources */ = {isa = PBXBuildFile; fileRef = 220CD76712E92603000804E8 /* MTMLogo_iOS_iPhone_Retina.png */; };
+		2214BB521301CDCD009EC84E /* MutableOrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 2214BB511301CDCD009EC84E /* MutableOrderedDictionary.m */; };
 		2233DACD12E8FA0E0004A33A /* TrailOverlayPathView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2233DACC12E8FA0E0004A33A /* TrailOverlayPathView.m */; };
 		2233DAD112E8FD260004A33A /* TrailOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 2233DAD012E8FD260004A33A /* TrailOverlay.m */; };
 		2236E44712EAA9EE00297F28 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2236E44512EAA9EE00297F28 /* MainWindow-iPad.xib */; };
@@ -113,6 +114,8 @@
 /* Begin PBXFileReference section */
 		220CD76512E925EF000804E8 /* MTMLogo_iOS_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MTMLogo_iOS_iPhone.png; sourceTree = "<group>"; };
 		220CD76712E92603000804E8 /* MTMLogo_iOS_iPhone_Retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MTMLogo_iOS_iPhone_Retina.png; sourceTree = "<group>"; };
+		2214BB501301CDCD009EC84E /* MutableOrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MutableOrderedDictionary.h; sourceTree = "<group>"; };
+		2214BB511301CDCD009EC84E /* MutableOrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MutableOrderedDictionary.m; sourceTree = "<group>"; };
 		2233DACB12E8FA0E0004A33A /* TrailOverlayPathView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailOverlayPathView.h; sourceTree = "<group>"; };
 		2233DACC12E8FA0E0004A33A /* TrailOverlayPathView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrailOverlayPathView.m; sourceTree = "<group>"; };
 		2233DACF12E8FD260004A33A /* TrailOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailOverlay.h; sourceTree = "<group>"; };
@@ -250,6 +253,8 @@
 				229CA36213005FDB001E338E /* SettingsViewController.m */,
 				229CA36C1301B3F0001E338E /* Setting.h */,
 				229CA36D1301B3F0001E338E /* Setting.m */,
+				2214BB501301CDCD009EC84E /* MutableOrderedDictionary.h */,
+				2214BB511301CDCD009EC84E /* MutableOrderedDictionary.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -675,6 +680,7 @@
 				22C011AF12EF851C000D5C9F /* TrailPointInfoViewController.m in Sources */,
 				229CA36A130060D6001E338E /* SettingsViewController.m in Sources */,
 				229CA36E1301B3F0001E338E /* Setting.m in Sources */,
+				2214BB521301CDCD009EC84E /* MutableOrderedDictionary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

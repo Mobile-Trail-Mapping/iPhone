@@ -10,6 +10,7 @@
 #import "Setting.h"
 
 #import "MainViewController.h"
+#import "MutableOrderedDictionary.h"
 
 @implementation SettingsViewController
 
@@ -37,16 +38,16 @@
     self.navigationItem.title = @"Settings";
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(done)] autorelease];
     
-    _settings = [[[NSMutableArray alloc] initWithCapacity:10] retain];
+    _settings = [[[MutableOrderedDictionary alloc] initWithCapacity:10] retain];
     
     Setting * usernameSetting = [[[Setting alloc] initWithTitle:@"Username" target:self onValue:NULL onAction:@selector(deselectCellAt:)] autorelease];
     Setting * passwordSetting = [[[Setting alloc] initWithTitle:@"Password" target:self onValue:NULL onAction:@selector(deselectCellAt:)] autorelease];
     NSMutableArray * userSettings = [[[NSMutableArray alloc] initWithObjects:usernameSetting, passwordSetting, nil] autorelease];
-    [_settings addObject:userSettings];
+    [_settings setObject:userSettings forKey:@"Authentication"];
     
     Setting * clearImagesSetting = [[[Setting alloc] initWithTitle:@"Clear cached images" target:self onValue:NULL onAction:@selector(clearCachedImages)] autorelease];
     NSMutableArray * cacheSettings = [[[NSMutableArray alloc] initWithObjects:clearImagesSetting, nil] autorelease];
-    [_settings addObject:cacheSettings];
+    [_settings setObject:cacheSettings forKey:@"Cache"];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -141,6 +142,10 @@
     Setting * cellSetting = [[_settings objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     [cellSetting performAction];
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return [_settings keyAtIndex:section];
 }
 
 #pragma mark - Setting callback actions
