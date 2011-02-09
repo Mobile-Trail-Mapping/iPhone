@@ -17,7 +17,9 @@
 //#import "application_headers" as required
 #import "InterestPoint.h"
 
-
+/**
+ * Test class for InterestPoint object.
+ */
 @interface InterestPointTest : SenTestCase {
 @private
     

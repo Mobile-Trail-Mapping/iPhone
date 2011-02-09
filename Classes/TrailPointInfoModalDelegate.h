@@ -1,3 +1,10 @@
+
+/**
+ * The protocol for objects which handle modally displayed trail point info
+ * views. Objects implementing this protocol generate instances of 
+ * TrailPointInfoViewController and receive messages from those instances
+ * related to display action callbacks.
+ */
 @protocol TrailPointInfoModalDelegate
 
 /**

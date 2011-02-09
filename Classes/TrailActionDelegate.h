@@ -1,6 +1,11 @@
 @class TrailPoint;
 @class TrailPointAnnotation;
 
+/**
+ * The protocol for view controllers which display information about Trail and
+ * TrailPoint objects. Objects implementing this protocol provide information
+ * about map display artifacts and additional informational view controllers.
+ */
 @protocol TrailActionDelegate
 
 /**

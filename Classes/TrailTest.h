@@ -15,6 +15,9 @@
 #import <SenTestingKit/SenTestingKit.h>
 #import <UIKit/UIKit.h>
 
+/**
+ * Test class for Trail object.
+ */
 @interface TrailTest : SenTestCase {
 
 }

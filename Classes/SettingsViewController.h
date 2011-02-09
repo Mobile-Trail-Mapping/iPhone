@@ -11,6 +11,10 @@
 @class MainViewController;
 @class MutableOrderedDictionary;
 
+/**
+ * View controller for application settings. Displays a table view for the
+ * user to change configuration of the application.
+ */
 @interface SettingsViewController : UITableViewController {
 @private
     MutableOrderedDictionary * _settings;

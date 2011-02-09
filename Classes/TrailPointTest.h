@@ -17,6 +17,9 @@
 //#import "application_headers" as required
 #import "TrailPoint.h"
 
+/**
+ * Test class for TrailPoint object.
+ */
 @interface TrailPointTest : SenTestCase {
 @private
     

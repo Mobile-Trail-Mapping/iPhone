@@ -4,6 +4,12 @@
 
 @class TrailPoint;
 
+/**
+ * Displays information about a particular TrailPoint object. Generally
+ * shown modally or on a navigation stack called from the primary MapView.
+ * Responsible for loading and showing both images and text data about its
+ * trail point.
+ */
 @interface TrailPointInfoViewController : UIViewController {
 @private
     id<TrailPointInfoModalDelegate> _delegate;
