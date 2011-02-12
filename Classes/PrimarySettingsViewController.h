@@ -8,33 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@class MainViewController;
-@class MutableOrderedDictionary;
+#import "SettingsViewController.h"
 
 /**
  * View controller for application settings. Displays a table view for the
  * user to change configuration of the application.
  */
-@interface PrimarySettingsViewController : UITableViewController {
+@interface PrimarySettingsViewController : SettingsViewController {
 @private
-    MutableOrderedDictionary * _settings;
     
-    MainViewController * _primaryViewController;
 }
-
-/**
- * The instance of MainViewController showing this controller modally. Receives
- * "delegate" actions for certain settings operations.
- *
- * This instance is weakly linked; it is technically possible for no
- * primaryViewController to exist for an instance of SettingsViewController.
- */
-@property (nonatomic, assign) MainViewController * primaryViewController;
-
-/**
- * Generate the MutableOrderedDictionary containing the Setting objects
- * which are displayed in this SettingsViewController.
- */
-- (MutableOrderedDictionary *)settings;
 
 @end

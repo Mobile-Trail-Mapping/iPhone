@@ -7,21 +7,8 @@
 //
 
 #import "PrimarySettingsViewController.h"
-#import "Setting.h"
-
-#import "MainViewController.h"
-#import "MutableOrderedDictionary.h"
 
 @implementation PrimarySettingsViewController
-
-@synthesize primaryViewController = _primaryViewController;
-
-- (void)dealloc
-{
-    [_settings release];
-    
-    [super dealloc];
-}
 
 #pragma mark - View lifecycle
 
@@ -37,116 +24,25 @@
     
     self.navigationItem.title = @"Settings";
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(done)] autorelease];
-    
-    _settings = [[self settings] retain];
 }
 
-- (MutableOrderedDictionary *)settings {
-    MutableOrderedDictionary * settings = [[MutableOrderedDictionary alloc] initWithCapacity:10];
+- (void)buildSettings {
+    self.settings = [[[MutableOrderedDictionary alloc] initWithCapacity:10] autorelease];
     
     Setting * usernameSetting = [[[Setting alloc] initWithTitle:@"Username" target:self onValue:NULL onAction:@selector(deselectCellAt:)] autorelease];
     Setting * passwordSetting = [[[Setting alloc] initWithTitle:@"Password" target:self onValue:NULL onAction:@selector(deselectCellAt:)] autorelease];
     usernameSetting.enabled = NO, passwordSetting.enabled = NO;
     NSMutableArray * userSettings = [[[NSMutableArray alloc] initWithObjects:usernameSetting, passwordSetting, nil] autorelease];
-    [settings setObject:userSettings forKey:@"Authentication"];
+    [self.settings setObject:userSettings forKey:@"Authentication"];
     
     Setting * clearImagesSetting = [[[Setting alloc] initWithTitle:@"Clear cached images" target:self onValue:NULL onAction:@selector(clearCachedImages)] autorelease];
     NSMutableArray * cacheSettings = [[[NSMutableArray alloc] initWithObjects:clearImagesSetting, nil] autorelease];
-    [settings setObject:cacheSettings forKey:@"Cache"];
+    [self.settings setObject:cacheSettings forKey:@"Cache"];
     
     Setting * showAdvancedSetting = [[[Setting alloc] initWithTitle:@"Advanced" target:self onValue:NULL onAction:@selector(showAdvancedSettings)] autorelease];
     showAdvancedSetting.enabled = NO;
     NSMutableArray * advancedSettings = [[[NSMutableArray alloc] initWithObjects:showAdvancedSetting, nil] autorelease];
-    [settings setObject:advancedSettings forKey:@"Advanced"];
-    
-    return settings;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return [_settings count];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    return [[_settings objectAtIndex:section] count];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
-    }
-    
-    Setting * cellSetting = [[_settings objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    cell.textLabel.text = cellSetting.title;
-    cell.detailTextLabel.text = [cellSetting value];
-    
-    if(cellSetting.enabled) {
-        cell.textLabel.textColor = [UIColor blackColor];
-        cell.detailTextLabel.textColor = [UIColor blackColor];
-    } else {
-        cell.textLabel.textColor = [UIColor lightGrayColor];
-        cell.detailTextLabel.textColor = [UIColor lightGrayColor];
-    }
-    
-    return cell;
-}
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    return ([[[_settings objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] enabled] ? indexPath : nil);
+    [self.settings setObject:advancedSettings forKey:@"Advanced"];
 }
 
 #pragma mark - Table view delegate
@@ -163,13 +59,13 @@
      */
     
     //[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    Setting * cellSetting = [[_settings objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    Setting * cellSetting = [[self.settings objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
     [cellSetting performAction];
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [_settings keyAtIndex:section];
+    return [self.settings keyAtIndex:section];
 }
 
 #pragma mark - Setting callback actions
