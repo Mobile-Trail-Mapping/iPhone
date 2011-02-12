@@ -55,7 +55,7 @@
     }
     
     self.path = path;
-    CGPathRetain(path);
+    //CGPathRetain(path);
 }
 
 - (void)invalidatePath {

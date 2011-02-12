@@ -26,10 +26,10 @@
 - (id) initWithFrame:(CGRect) frame {
 	self = [super initWithFrame:frame];
 	if (self != nil) {
-		mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-		mapView.showsUserLocation = YES;
-		[mapView setDelegate:self];
-		[self addSubview:mapView];
+		_mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+		_mapView.showsUserLocation = YES;
+		[_mapView setDelegate:self];
+		[self addSubview:_mapView];
         
         self.trails = [[[NSMutableArray alloc] init] autorelease];
         _overlayPathViews = [[[NSMutableDictionary alloc] init] retain];
@@ -46,13 +46,13 @@
     self.trails = [parser parseTrails];
     
     for(Trail * trail in self.trails) {
-        TrailOverlayPathView * overlayPathView = [[TrailOverlayPathView alloc] initWithTrail:trail mapView:mapView];
+        TrailOverlayPathView * overlayPathView = [[TrailOverlayPathView alloc] initWithTrail:trail mapView:_mapView];
         [_overlayPathViews setValue:overlayPathView forKey:[trail name]];
-        [mapView addOverlay:[overlayPathView overlay]];
+        [_mapView addOverlay:[overlayPathView overlay]];
         
         for(TrailPoint * head in trail.trailHeads) {
             TrailPointAnnotation * headAnnotation = [[[TrailPointAnnotation alloc] initWithTrailPoint:head] autorelease];
-            [mapView addAnnotation:headAnnotation];
+            [_mapView addAnnotation:headAnnotation];
         }
     }
     
@@ -98,11 +98,18 @@
     return nil;
 }
 
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
+    NSLog(@"Region did change animated");
+    for(MKOverlayPathView * pathView in [_overlayPathViews allValues]) {
+        [pathView setNeedsDisplayInMapRect:mapView.visibleMapRect];
+    }
+}
+
 #pragma mark -
 #pragma mark Dealloc
 
 - (void)dealloc {
-	[mapView release];
+	[_mapView release];
 	[_overlayPathViews release];
 	
     [super dealloc];

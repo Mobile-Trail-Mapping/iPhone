@@ -31,4 +31,10 @@
  */
 @property (nonatomic, assign) MainViewController * primaryViewController;
 
+/**
+ * Generate the MutableOrderedDictionary containing the Setting objects
+ * which are displayed in this SettingsViewController.
+ */
+- (MutableOrderedDictionary *)settings;
+
 @end

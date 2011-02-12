@@ -15,6 +15,7 @@
 @synthesize target = _target;
 @synthesize valueSelector = _valueSelector;
 @synthesize actionSelector = _actionSelector;
+@synthesize enabled = _enabled;
 
 - (id)initWithTitle:(NSString *)title target:(id)target onValue:(SEL)value onAction:(SEL)action; {
     if((self = [super init])) {
@@ -22,6 +23,9 @@
         self.target = target;
         self.valueSelector = value;
         self.actionSelector = action;
+        
+        // Default values
+        self.enabled = YES;
     }
     return self;
 }

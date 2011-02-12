@@ -20,6 +20,7 @@
     id _target;
     SEL _valueSelector;
     SEL _actionSelector;
+    BOOL _enabled;
 }
 
 /**
@@ -44,6 +45,12 @@
  * view cell is pressed. Must return void.
  */
 @property (nonatomic, assign) SEL actionSelector;
+
+/**
+ * Whether this setting is 'enabled'. A disabled setting will appear but be
+ * inactive.
+ */
+@property (nonatomic, assign) BOOL enabled;
 
 /**
  * Create a new Setting object with the given attributes. This Setting will

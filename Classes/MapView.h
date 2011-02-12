@@ -11,7 +11,7 @@
  */
 @interface MapView : UIView<MKMapViewDelegate> {
 @private
-	MKMapView * mapView;
+	MKMapView * _mapView;
     NSArray * _trails;
     NSMutableDictionary * _overlayPathViews;
     id <TrailActionDelegate> _delegate;
