@@ -30,7 +30,6 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
@@ -80,6 +79,21 @@
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     return ([[[_settings objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] enabled] ? indexPath : nil);
+}
+
+
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Setting * cellSetting = [[self.settings objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+    [cellSetting performAction];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return [self.settings keyAtIndex:section];
 }
 
 @end

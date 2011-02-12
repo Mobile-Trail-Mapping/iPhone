@@ -8,6 +8,8 @@
 
 #import "PrimarySettingsViewController.h"
 
+#import "AdvancedSettingsViewController.h"
+
 @implementation PrimarySettingsViewController
 
 #pragma mark - View lifecycle
@@ -40,38 +42,19 @@
     [self.settings setObject:cacheSettings forKey:@"Cache"];
     
     Setting * showAdvancedSetting = [[[Setting alloc] initWithTitle:@"Advanced" target:self onValue:NULL onAction:@selector(showAdvancedSettings)] autorelease];
-    showAdvancedSetting.enabled = NO;
     NSMutableArray * advancedSettings = [[[NSMutableArray alloc] initWithObjects:showAdvancedSetting, nil] autorelease];
     [self.settings setObject:advancedSettings forKey:@"Advanced"];
-}
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
-    
-    //[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    Setting * cellSetting = [[self.settings objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-    [cellSetting performAction];
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [self.settings keyAtIndex:section];
 }
 
 #pragma mark - Setting callback actions
 
 - (void)clearCachedImages {
     [self.primaryViewController clearCachedImages];
+}
+
+- (void)showAdvancedSettings {
+    AdvancedSettingsViewController * advancedController = [[[AdvancedSettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil] autorelease];
+    [self.navigationController pushViewController:advancedController animated:YES];
 }
 
 #pragma mark -
