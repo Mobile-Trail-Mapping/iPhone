@@ -6,13 +6,13 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "SettingsViewController.h"
+#import "PrimarySettingsViewController.h"
 #import "Setting.h"
 
 #import "MainViewController.h"
 #import "MutableOrderedDictionary.h"
 
-@implementation SettingsViewController
+@implementation PrimarySettingsViewController
 
 @synthesize primaryViewController = _primaryViewController;
 

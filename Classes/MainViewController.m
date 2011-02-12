@@ -2,7 +2,7 @@
 #import "TrailPoint.h"
 #import "MapView.h"
 #import "TrailPointInfoViewController.h"
-#import "SettingsViewController.h"
+#import "PrimarySettingsViewController.h"
 
 @implementation MainViewController
 
@@ -55,7 +55,7 @@
 #pragma mark Settings methods
 
 - (void)showSettings {
-    SettingsViewController * settingsController = [[[SettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil] autorelease];
+    PrimarySettingsViewController * settingsController = [[[PrimarySettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil] autorelease];
     settingsController.primaryViewController = self;
     UINavigationController * navController = [[[UINavigationController alloc] initWithRootViewController:settingsController] autorelease];
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
