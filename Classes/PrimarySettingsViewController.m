@@ -54,6 +54,7 @@
 
 - (void)showAdvancedSettings {
     AdvancedSettingsViewController * advancedController = [[[AdvancedSettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil] autorelease];
+    advancedController.primaryViewController = self.primaryViewController;
     [self.navigationController pushViewController:advancedController animated:YES];
 }
 

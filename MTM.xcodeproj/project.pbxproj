@@ -33,6 +33,8 @@
 		22C635F612EF625100C53C84 /* MainViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C635F512EF625100C53C84 /* MainViewController_iPhone.m */; };
 		22DC0FEE130742CC00D99F22 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 229B73AD13073FD600A9A8BA /* SettingsViewController.m */; };
 		22DC0FF1130743C200D99F22 /* AdvancedSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DC0FF0130743C200D99F22 /* AdvancedSettingsViewController.m */; };
+		22DC0FF71307550F00D99F22 /* ServiceAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DC0FF61307550F00D99F22 /* ServiceAccountManager.m */; };
+		22DC0FFA1307562500D99F22 /* StoredSettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DC0FF91307562500D99F22 /* StoredSettingsManager.m */; };
 		22E80B3A12FA9BD6009CF69F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D94A5912ADC542003BDB1C /* main.m */; };
 		22E80B3B12FA9BD6009CF69F /* MTMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D94A5C12ADC542003BDB1C /* MTMAppDelegate.m */; };
 		22E80B3C12FA9BD6009CF69F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D94A6212ADC542003BDB1C /* MainViewController.m */; };
@@ -152,6 +154,10 @@
 		22C635F512EF625100C53C84 /* MainViewController_iPhone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController_iPhone.m; sourceTree = "<group>"; };
 		22DC0FEF130743C200D99F22 /* AdvancedSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdvancedSettingsViewController.h; sourceTree = "<group>"; };
 		22DC0FF0130743C200D99F22 /* AdvancedSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvancedSettingsViewController.m; sourceTree = "<group>"; };
+		22DC0FF31307550300D99F22 /* ServiceAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceAccountManager.h; sourceTree = "<group>"; };
+		22DC0FF61307550F00D99F22 /* ServiceAccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceAccountManager.m; sourceTree = "<group>"; };
+		22DC0FF81307562500D99F22 /* StoredSettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoredSettingsManager.h; sourceTree = "<group>"; };
+		22DC0FF91307562500D99F22 /* StoredSettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoredSettingsManager.m; sourceTree = "<group>"; };
 		22E3C66612F0CD8000044FB7 /* TrailPointInfoModalDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailPointInfoModalDelegate.h; sourceTree = "<group>"; };
 		22E80AC712FA9744009CF69F /* MTMTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTMTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22E80AC812FA9744009CF69F /* MTMTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MTMTest-Info.plist"; sourceTree = "<group>"; };
@@ -256,6 +262,7 @@
 		229CA36013005FC4001E338E /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				22DC0FF21307537800D99F22 /* Network */,
 				229B73AC13073FD600A9A8BA /* SettingsViewController.h */,
 				229B73AD13073FD600A9A8BA /* SettingsViewController.m */,
 				229CA36113005FDB001E338E /* PrimarySettingsViewController.h */,
@@ -266,6 +273,8 @@
 				2214BB511301CDCD009EC84E /* MutableOrderedDictionary.m */,
 				22DC0FEF130743C200D99F22 /* AdvancedSettingsViewController.h */,
 				22DC0FF0130743C200D99F22 /* AdvancedSettingsViewController.m */,
+				22DC0FF81307562500D99F22 /* StoredSettingsManager.h */,
+				22DC0FF91307562500D99F22 /* StoredSettingsManager.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -321,6 +330,15 @@
 				22C635F212EF624B00C53C84 /* MainViewController_iPad.m */,
 			);
 			name = iPad;
+			sourceTree = "<group>";
+		};
+		22DC0FF21307537800D99F22 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				22DC0FF31307550300D99F22 /* ServiceAccountManager.h */,
+				22DC0FF61307550F00D99F22 /* ServiceAccountManager.m */,
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 		22E80ACC12FA9754009CF69F /* Tests */ = {
@@ -695,6 +713,8 @@
 				229CA36E1301B3F0001E338E /* Setting.m in Sources */,
 				2214BB521301CDCD009EC84E /* MutableOrderedDictionary.m in Sources */,
 				22DC0FF1130743C200D99F22 /* AdvancedSettingsViewController.m in Sources */,
+				22DC0FF71307550F00D99F22 /* ServiceAccountManager.m in Sources */,
+				22DC0FFA1307562500D99F22 /* StoredSettingsManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,7 +6,10 @@
 @synthesize window;
 @synthesize viewController;
 
-- (void)applicationDidFinishLaunching:(UIApplication *)application {    
+- (void)applicationDidFinishLaunching:(UIApplication *)application {
+    // First run?
+    
+    
     [window addSubview:viewController.view];
     [window makeKeyAndVisible];
 }
