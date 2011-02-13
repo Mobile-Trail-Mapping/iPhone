@@ -14,4 +14,6 @@
     
 }
 
++ (ServiceAccountManager *)sharedManager;
+
 @end

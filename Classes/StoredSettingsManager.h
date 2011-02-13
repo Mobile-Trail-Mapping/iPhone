@@ -11,7 +11,11 @@
 
 @interface StoredSettingsManager : NSObject {
 @private
-    
+    BOOL _isFirstRun;
 }
+
+@property (nonatomic, assign) BOOL isFirstRun;
+
++ (StoredSettingsManager *)sharedManager;
 
 @end

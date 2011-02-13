@@ -35,6 +35,7 @@
 		22DC0FF1130743C200D99F22 /* AdvancedSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DC0FF0130743C200D99F22 /* AdvancedSettingsViewController.m */; };
 		22DC0FF71307550F00D99F22 /* ServiceAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DC0FF61307550F00D99F22 /* ServiceAccountManager.m */; };
 		22DC0FFA1307562500D99F22 /* StoredSettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DC0FF91307562500D99F22 /* StoredSettingsManager.m */; };
+		22DC0FFC1307567A00D99F22 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22DC0FFB1307567A00D99F22 /* Settings.plist */; };
 		22E80B3A12FA9BD6009CF69F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D94A5912ADC542003BDB1C /* main.m */; };
 		22E80B3B12FA9BD6009CF69F /* MTMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D94A5C12ADC542003BDB1C /* MTMAppDelegate.m */; };
 		22E80B3C12FA9BD6009CF69F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D94A6212ADC542003BDB1C /* MainViewController.m */; };
@@ -158,6 +159,7 @@
 		22DC0FF61307550F00D99F22 /* ServiceAccountManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceAccountManager.m; sourceTree = "<group>"; };
 		22DC0FF81307562500D99F22 /* StoredSettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoredSettingsManager.h; sourceTree = "<group>"; };
 		22DC0FF91307562500D99F22 /* StoredSettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoredSettingsManager.m; sourceTree = "<group>"; };
+		22DC0FFB1307567A00D99F22 /* Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.plist; sourceTree = "<group>"; };
 		22E3C66612F0CD8000044FB7 /* TrailPointInfoModalDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailPointInfoModalDelegate.h; sourceTree = "<group>"; };
 		22E80AC712FA9744009CF69F /* MTMTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTMTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22E80AC812FA9744009CF69F /* MTMTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MTMTest-Info.plist"; sourceTree = "<group>"; };
@@ -463,6 +465,7 @@
 				A7D94A5E12ADC542003BDB1C /* MainWindow.xib */,
 				A7D94A6412ADC542003BDB1C /* MainViewController.xib */,
 				22C011B212EF85B5000D5C9F /* TrailPointInfoView.xib */,
+				22DC0FFB1307567A00D99F22 /* Settings.plist */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -609,6 +612,7 @@
 				22C011A512EF659D000D5C9F /* MTMLogo_iOS_iPad.png in Resources */,
 				22C011B312EF85B5000D5C9F /* TrailPointInfoView.xib in Resources */,
 				229CA36B13006107001E338E /* SettingsViewController.xib in Resources */,
+				22DC0FFC1307567A00D99F22 /* Settings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
