@@ -44,4 +44,18 @@
  */
 - (ServiceAccount *)activeServiceAccount;
 
+/**
+ * Store the information in the provided ServiceAccount in the keychain.
+ * This method does no deduplication; if the provided account already exists,
+ * it will still be stored separately.
+ */
+- (void)addAccount:(ServiceAccount *)account;
+
+/**
+ * Remove the given ServiceAccount from the keychain and discard its
+ * information. If multiple service accounts exist that match the provided
+ * object, only the first will be discarded.
+ */
+- (void)removeAccount:(ServiceAccount *)account;
+
 @end

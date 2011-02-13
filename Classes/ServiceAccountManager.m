@@ -23,6 +23,14 @@ static ServiceAccountManager * sharedInstance = nil;
     return nil;
 }
 
+- (void)addAccount:(ServiceAccount *)account {
+    
+}
+
+- (void)removeAccount:(ServiceAccount *)account {
+    
+}
+
 #pragma mark - Singleton methods
 
 + (ServiceAccountManager *)sharedManager {

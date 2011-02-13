@@ -2,6 +2,8 @@
 #import "MainViewController.h"
 
 #import "StoredSettingsManager.h"
+#import "ServiceAccount.h"
+#import "ServiceAccountManager.h"
 
 @implementation MTMAppDelegate
 
@@ -15,8 +17,14 @@
     [window makeKeyAndVisible];
     
 #ifdef _MTM_DEBUG_FORCE_FIRST_RUN
+    // Set the "first run" flag in settings
     [[StoredSettingsManager sharedManager] setIsFirstRun:YES];
     [[StoredSettingsManager sharedManager] writeSettingsToFile];
+    
+    // Clear existing service accounts
+    for(ServiceAccount * account in [[ServiceAccountManager sharedManager] serviceAccounts]) {
+        [[ServiceAccountManager sharedManager] removeAccount:account];
+    }
 #endif
 }
 
