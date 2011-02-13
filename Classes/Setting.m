@@ -47,11 +47,14 @@
     if([self.target respondsToSelector:self.valueSelector]) {
         NSString * value = [self.target performSelector:self.valueSelector];
         if(self.secure) {
+            NSMutableString * secureString = [[[NSMutableString alloc] initWithCapacity:[value length]] autorelease];
             for(int i = 0; i < [value length]; i++) {
-                value = [value stringByReplacingCharactersInRange:NSMakeRange(i, i+1) withString:@"•"];
+                [secureString appendString:@"•"];
             }
+            return secureString;
+        } else {
+            return value;
         }
-        return value;
     }
     return nil;
 }

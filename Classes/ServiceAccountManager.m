@@ -17,7 +17,7 @@ static ServiceAccountManager * sharedInstance = nil;
 @implementation ServiceAccountManager
 
 - (NSArray *)serviceAccounts {
-    NSLog(@"SAM: Finding all accounts");
+    //NSLog(@"SAM: Finding all accounts");
     
     NSMutableArray * accounts = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];
     
@@ -25,6 +25,7 @@ static ServiceAccountManager * sharedInstance = nil;
     NSMutableDictionary * keychainQuery = [[[NSMutableDictionary alloc] initWithCapacity:10] autorelease];
     [keychainQuery setValue:(id)kSecClassInternetPassword forKey:(id)kSecClass];
     [keychainQuery setValue:(id)kCFBooleanTrue forKey:(id)kSecReturnAttributes];
+    [keychainQuery setValue:(id)kCFBooleanTrue forKey:(id)kSecReturnData];
     [keychainQuery setValue:(id)kSecMatchLimitAll forKey:(id)kSecMatchLimit];
     
     // Fetch results
@@ -52,18 +53,18 @@ static ServiceAccountManager * sharedInstance = nil;
 }
 
 - (ServiceAccount *)serviceAccountWithUUID:(NSString *)uuid {
-    NSLog(@"SAM: Matching UUID %@", uuid);
+    //NSLog(@"SAM: Matching UUID %@", uuid);
     
     // Basic parameters of the keychain search
     NSMutableDictionary * keychainQuery = [[[NSMutableDictionary alloc] initWithCapacity:10] autorelease];
     [keychainQuery setValue:(id)kSecClassInternetPassword forKey:(id)kSecClass];
     [keychainQuery setValue:(id)kCFBooleanTrue forKey:(id)kSecReturnAttributes];
+    [keychainQuery setValue:(id)kCFBooleanTrue forKey:(id)kSecReturnData];
     [keychainQuery setValue:uuid forKey:(id)kSecAttrComment];
     
     // Fetch results
     NSDictionary * keychainResults = nil;
     OSStatus status = SecItemCopyMatching((CFDictionaryRef)keychainQuery, (CFTypeRef *)(&keychainResults));
-    NSLog(@"    SAM DEBUG: %@", keychainResults);
     ServiceAccount * newAccount = nil;
     if(status == noErr) {
         // Build account instance
@@ -80,16 +81,18 @@ static ServiceAccountManager * sharedInstance = nil;
         NSLog(@"Failed to retrieve accounts: %@", [self errorForOSStatus:status]);
     }
     
-    NSLog(@"    ...found account %@", newAccount);
+    //NSLog(@"    ...found account %@", newAccount);
     return newAccount;
 }
 
 - (ServiceAccount *)serviceAccountMatchingAccount:(ServiceAccount *)account {
-    NSLog(@"SAM: Matching account %@", account);
+    //NSLog(@"SAM: Matching account %@", account);
+    
     // Basic parameters of the keychain search
     NSMutableDictionary * keychainQuery = [[[NSMutableDictionary alloc] initWithCapacity:10] autorelease];
     [keychainQuery setValue:(id)kSecClassInternetPassword forKey:(id)kSecClass];
     [keychainQuery setValue:(id)kCFBooleanTrue forKey:(id)kSecReturnAttributes];
+    [keychainQuery setValue:(id)kCFBooleanTrue forKey:(id)kSecReturnData];
     [keychainQuery setValue:[[account serviceURL] scheme] forKey:(id)kSecAttrProtocol];
     [keychainQuery setValue:[[account serviceURL] host] forKey:(id)kSecAttrServer];
     [keychainQuery setValue:[[account serviceURL] path] forKey:(id)kSecAttrPath];
@@ -115,21 +118,21 @@ static ServiceAccountManager * sharedInstance = nil;
         NSLog(@"Failed to retrieve accounts: %@", [self errorForOSStatus:status]);
     }
     
-    NSLog(@"    ...found account %@", newAccount);
+    //NSLog(@"    ...found account %@", newAccount);
     return newAccount;
 }
 
 - (ServiceAccount *)activeServiceAccount {
-    NSLog(@"SAM: Getting active account");
+    //NSLog(@"SAM: Getting active account");
     
     ServiceAccount * account = [self serviceAccountWithUUID:[[StoredSettingsManager sharedManager] activeServiceAccountUUID]];
-    NSLog(@"    ...found account %@", account);
+    //NSLog(@"    ...found account %@", account);
     
     return account;
 }
 
 - (void)setActiveServiceAccount:(ServiceAccount *)account {
-    NSLog(@"SAM: Setting active account %@", account);
+    //NSLog(@"SAM: Setting active account %@", account);
     
     if(account.keychainUUID == nil) {
         account = [self serviceAccountMatchingAccount:account];
@@ -162,7 +165,7 @@ static ServiceAccountManager * sharedInstance = nil;
 }
 
 - (void)addAccount:(ServiceAccount *)account {
-    NSLog(@"SAM: Adding account %@", account);
+    //NSLog(@"SAM: Adding account %@", account);
     
     // Instantiate new keychain object dictionary
     NSMutableDictionary * keychainQuery = [[[NSMutableDictionary alloc] initWithCapacity:10] autorelease];
@@ -188,7 +191,7 @@ static ServiceAccountManager * sharedInstance = nil;
 }
 
 - (void)removeAccount:(ServiceAccount *)account {
-    NSLog(@"SAM: Removing account %@", account);
+    //NSLog(@"SAM: Removing account %@", account);
     
     // Instantiate query keychain dictionary
     NSMutableDictionary * keychainQuery = [[[NSMutableDictionary alloc] initWithCapacity:10] autorelease];

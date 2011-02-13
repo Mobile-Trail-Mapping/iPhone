@@ -13,6 +13,8 @@
     #import <Foundation/Foundation.h>
 #endif
 
-// Force first run
+// Developer debug variables
 #define _MTM_DEBUG_FORCE_FIRST_RUN 1
 #define _MTM_DEBUG_REALLY_FORCE_IT 1
+
+#define _MTM_DEBUG_SAM_MESSAGES 1

@@ -52,6 +52,7 @@
 #pragma mark - Setting value callback methods
 
 - (NSString *)activeAccountUser {
+    NSLog(@"%@", [[ServiceAccountManager sharedManager] activeServiceAccount]);
     return [[[ServiceAccountManager sharedManager] activeServiceAccount] username];
 }
 
