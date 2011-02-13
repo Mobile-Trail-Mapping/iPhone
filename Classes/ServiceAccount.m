@@ -33,4 +33,8 @@
     [super dealloc];
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"{account <%@>: %@/%@ at %@}", self.keychainUUID, self.username, self.password, [self.serviceURL absoluteString]];
+}
+
 @end

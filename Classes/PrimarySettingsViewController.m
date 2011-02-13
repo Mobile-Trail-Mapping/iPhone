@@ -33,10 +33,9 @@
 - (void)buildSettings {
     self.settings = [[[MutableOrderedDictionary alloc] initWithCapacity:10] autorelease];
     
-    Setting * usernameSetting = [[[Setting alloc] initWithTitle:@"Username" target:self onValue:@selector(activeAccountUser) onAction:@selector(deselectCellAt:)] autorelease];
-    Setting * passwordSetting = [[[Setting alloc] initWithTitle:@"Password" target:self onValue:@selector(activeAccountPass) onAction:@selector(deselectCellAt:)] autorelease];
+    Setting * usernameSetting = [[[Setting alloc] initWithTitle:@"Username" target:self onValue:@selector(activeAccountUser) onAction:NULL] autorelease];
+    Setting * passwordSetting = [[[Setting alloc] initWithTitle:@"Password" target:self onValue:@selector(activeAccountPass) onAction:NULL] autorelease];
     passwordSetting.secure = YES;
-    usernameSetting.enabled = NO, passwordSetting.enabled = NO;
     NSMutableArray * userSettings = [[[NSMutableArray alloc] initWithObjects:usernameSetting, passwordSetting, nil] autorelease];
     [self.settings setObject:userSettings forKey:@"Authentication"];
     

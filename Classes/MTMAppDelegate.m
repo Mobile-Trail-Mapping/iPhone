@@ -35,7 +35,7 @@
     
     // Add default service account
     NSURL * defaultURL = [NSURL URLWithString:@"http://mtmserver.heroku.com/"];
-    ServiceAccount * defaultAccount = [[[ServiceAccount alloc] initWithUsername:@"" password:@"" serviceURL:defaultURL] autorelease];
+    ServiceAccount * defaultAccount = [[[ServiceAccount alloc] initWithUsername:@"testUser" password:@"testPass" serviceURL:defaultURL] autorelease];
     [[ServiceAccountManager sharedManager] addAccount:defaultAccount];
     [[ServiceAccountManager sharedManager] setActiveServiceAccount:defaultAccount];
 #endif
@@ -53,6 +53,8 @@
                            otherButtonTitles:@"OK", nil] autorelease] show];
         [[StoredSettingsManager sharedManager] setIsFirstRun:NO];
     }
+    
+    NSLog(@"Active service account has credentials %@:%@", [[[ServiceAccountManager sharedManager] activeServiceAccount] username], [[[ServiceAccountManager sharedManager] activeServiceAccount] password]);
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
