@@ -53,9 +53,24 @@
 
 /**
  * Remove the given ServiceAccount from the keychain and discard its
- * information. If multiple service accounts exist that match the provided
- * object, only the first will be discarded.
+ * information. This method will remove at most one account at a time,
+ * searching as follows:
+ *
+ *  - If the account has its ServiceAccount#keychainUUID property set to
+ *    a non-nil value, the method will remove the keychain data that matches
+ *    that UUID. If no UUID in the keychain matches, no account is removed.
+ *  - If the account has a nil value for its ServiceAccount#keychainUUID
+ *    property, the method will search for the first keychain data that matches
+ *    all other properties of the account (service URL, username, and
+ *    password), removing the first account that matches all three. If no
+ *    such keychain account exists, no account is removed.
  */
 - (void)removeAccount:(ServiceAccount *)account;
+
+/**
+ * Get a human-readable description of the given OSStatus code. Used primarily
+ * to show results of keychain queries in application logs.
+ */
+- (NSString *)errorForOSStatus:(OSStatus)status;
 
 @end

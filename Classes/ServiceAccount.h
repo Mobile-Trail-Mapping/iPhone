@@ -24,6 +24,7 @@
     NSString * _username;
     NSString * _password;
     NSURL * _serviceURL;
+    NSString * _keychainUUID;
 }
 
 /**
@@ -41,5 +42,16 @@
  * service account.
  */
 @property (nonatomic, retain) NSURL * serviceURL;
+
+/**
+ * The internal UUID that matches this instance of ServiceAccount to its
+ * corresponding entry in the keychain.
+ */
+@property (nonatomic, retain) NSString * keychainUUID;
+
+/**
+ * Create a new service account and populate it with the given arguments.
+ */
+- (id)initWithUsername:(NSString *)username password:(NSString *)password serviceURL:(NSURL *)serviceURL;
 
 @end

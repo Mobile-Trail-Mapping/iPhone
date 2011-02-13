@@ -25,6 +25,19 @@
     for(ServiceAccount * account in [[ServiceAccountManager sharedManager] serviceAccounts]) {
         [[ServiceAccountManager sharedManager] removeAccount:account];
     }
+    
+#ifdef _MTM_DEBUG_REALLY_FORCE_IT
+    NSMutableDictionary * keychainQuery = [[[NSMutableDictionary alloc] initWithCapacity:1] autorelease];
+    [keychainQuery setValue:(id)kSecClassInternetPassword forKey:(id)kSecClass];
+    OSStatus deleteStatus = SecItemDelete((CFDictionaryRef)keychainQuery);
+    NSAssert(deleteStatus == noErr, @"Really forcing it, but still couldn't remove existing keychain accounts");
+#endif
+    
+    // Add default service account
+    NSURL * defaultURL = [NSURL URLWithString:@"http://mtmserver.heroku.com/"];
+    ServiceAccount * defaultAccount = [[[ServiceAccount alloc] initWithUsername:@"" password:@"" serviceURL:defaultURL] autorelease];
+    [[ServiceAccountManager sharedManager] addAccount:defaultAccount];
+    
 #endif
 }
 

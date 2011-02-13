@@ -14,6 +14,7 @@
 @synthesize username = _username;
 @synthesize password = _password;
 @synthesize serviceURL = _serviceURL;
+@synthesize keychainUUID = _keychainUUID;
 
 - (id)initWithUsername:(NSString *)username password:(NSString *)password serviceURL:(NSURL *)serviceURL {
     if((self = [super init])) {

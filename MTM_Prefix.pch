@@ -15,3 +15,4 @@
 
 // Force first run
 #define _MTM_DEBUG_FORCE_FIRST_RUN 1
+#define _MTM_DEBUG_REALLY_FORCE_IT 1
