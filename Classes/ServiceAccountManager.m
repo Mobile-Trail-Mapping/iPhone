@@ -7,17 +7,23 @@
 //
 
 #import "ServiceAccountManager.h"
-
+#import "ServiceAccount.h"
 
 static ServiceAccountManager * sharedInstance = nil;
 
 @implementation ServiceAccountManager
 
-#pragma mark -
-#pragma mark class instance methods
+- (NSArray *)serviceAccounts {
+    NSMutableArray * accounts = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];
+    
+    return accounts;
+}
 
-#pragma mark -
-#pragma mark Singleton methods
+- (ServiceAccount *)activeServiceAccount {
+    return nil;
+}
+
+#pragma mark - Singleton methods
 
 + (ServiceAccountManager *)sharedManager {
     @synchronized(self)
