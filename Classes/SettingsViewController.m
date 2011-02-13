@@ -74,8 +74,13 @@
         cell.detailTextLabel.textColor = [UIColor lightGrayColor];
     }
     
+    if(cellSetting.shouldShowDisclosure) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    
     return cell;
 }
+
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     return ([[[_settings objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] enabled] ? indexPath : nil);

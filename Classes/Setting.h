@@ -21,6 +21,8 @@
     SEL _valueSelector;
     SEL _actionSelector;
     BOOL _enabled;
+    BOOL _secure;
+    BOOL _shouldShowDisclosure;
 }
 
 /**
@@ -51,6 +53,17 @@
  * inactive.
  */
 @property (nonatomic, assign) BOOL enabled;
+
+/**
+ * Whether this setting is secure. A secure setting will have its value
+ * obscured when displayed.
+ */
+@property (nonatomic, assign) BOOL secure;
+
+/**
+ * Whether this setting should show a disclosure indication when displayed.
+ */
+@property (nonatomic, assign) BOOL shouldShowDisclosure;
 
 /**
  * Create a new Setting object with the given attributes. This Setting will

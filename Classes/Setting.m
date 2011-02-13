@@ -16,6 +16,8 @@
 @synthesize valueSelector = _valueSelector;
 @synthesize actionSelector = _actionSelector;
 @synthesize enabled = _enabled;
+@synthesize secure = _secure;
+@synthesize shouldShowDisclosure = _shouldShowDisclosure;
 
 - (id)initWithTitle:(NSString *)title target:(id)target onValue:(SEL)value onAction:(SEL)action; {
     if((self = [super init])) {
@@ -26,6 +28,8 @@
         
         // Default values
         self.enabled = YES;
+        self.secure = NO;
+        self.shouldShowDisclosure = NO;
     }
     return self;
 }
@@ -42,6 +46,11 @@
 - (NSString *)value {
     if([self.target respondsToSelector:self.valueSelector]) {
         NSString * value = [self.target performSelector:self.valueSelector];
+        if(self.secure) {
+            for(int i = 0; i < [value length]; i++) {
+                value = [value stringByReplacingCharactersInRange:NSMakeRange(i, i+1) withString:@"•"];
+            }
+        }
         return value;
     }
     return nil;

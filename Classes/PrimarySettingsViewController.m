@@ -9,6 +9,8 @@
 #import "PrimarySettingsViewController.h"
 
 #import "AdvancedSettingsViewController.h"
+#import "ServiceAccountManager.h"
+#import "ServiceAccount.h"
 
 @implementation PrimarySettingsViewController
 
@@ -31,8 +33,9 @@
 - (void)buildSettings {
     self.settings = [[[MutableOrderedDictionary alloc] initWithCapacity:10] autorelease];
     
-    Setting * usernameSetting = [[[Setting alloc] initWithTitle:@"Username" target:self onValue:NULL onAction:@selector(deselectCellAt:)] autorelease];
-    Setting * passwordSetting = [[[Setting alloc] initWithTitle:@"Password" target:self onValue:NULL onAction:@selector(deselectCellAt:)] autorelease];
+    Setting * usernameSetting = [[[Setting alloc] initWithTitle:@"Username" target:self onValue:@selector(activeAccountUser) onAction:@selector(deselectCellAt:)] autorelease];
+    Setting * passwordSetting = [[[Setting alloc] initWithTitle:@"Password" target:self onValue:@selector(activeAccountPass) onAction:@selector(deselectCellAt:)] autorelease];
+    passwordSetting.secure = YES;
     usernameSetting.enabled = NO, passwordSetting.enabled = NO;
     NSMutableArray * userSettings = [[[NSMutableArray alloc] initWithObjects:usernameSetting, passwordSetting, nil] autorelease];
     [self.settings setObject:userSettings forKey:@"Authentication"];
@@ -42,11 +45,22 @@
     [self.settings setObject:cacheSettings forKey:@"Cache"];
     
     Setting * showAdvancedSetting = [[[Setting alloc] initWithTitle:@"Advanced" target:self onValue:NULL onAction:@selector(showAdvancedSettings)] autorelease];
+    showAdvancedSetting.shouldShowDisclosure = YES;
     NSMutableArray * advancedSettings = [[[NSMutableArray alloc] initWithObjects:showAdvancedSetting, nil] autorelease];
     [self.settings setObject:advancedSettings forKey:@"Advanced"];
 }
 
-#pragma mark - Setting callback actions
+#pragma mark - Setting value callback methods
+
+- (NSString *)activeAccountUser {
+    return [[[ServiceAccountManager sharedManager] activeServiceAccount] username];
+}
+
+- (NSString *)activeAccountPass {
+    return [[[ServiceAccountManager sharedManager] activeServiceAccount] password];
+}
+
+#pragma mark - Setting action callback methods
 
 - (void)clearCachedImages {
     [self.primaryViewController clearCachedImages];

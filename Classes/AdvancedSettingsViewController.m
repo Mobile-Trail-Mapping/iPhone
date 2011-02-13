@@ -14,7 +14,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"Settings";
+    self.navigationItem.title = @"Advanced";
 }
 
 - (void)buildSettings {
