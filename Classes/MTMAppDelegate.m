@@ -8,7 +8,16 @@
 @synthesize window;
 @synthesize viewController;
 
+#pragma mark - App lifecycle
+
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
+    [window addSubview:viewController.view];
+    [window makeKeyAndVisible];
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    [[StoredSettingsManager sharedManager] readSettingsFromFile];
+    
     // First run?
     if([[StoredSettingsManager sharedManager] isFirstRun]) {
         [[[[UIAlertView alloc] initWithTitle:@"Hello world!" 
@@ -16,14 +25,19 @@
                                     delegate:nil 
                            cancelButtonTitle:@"Cancel" 
                            otherButtonTitles:@"OK", nil] autorelease] show];
+        [[StoredSettingsManager sharedManager] setIsFirstRun:NO];
     }
-    
-    [window addSubview:viewController.view];
-    [window makeKeyAndVisible];
 }
 
-#pragma mark -
-#pragma mark Dealloc
+- (void)applicationWillTerminate:(UIApplication *)application {
+    [[StoredSettingsManager sharedManager] writeSettingsToFile];
+}
+
+- (void)applicationWillResignActive:(UIApplication *)application {
+    [[StoredSettingsManager sharedManager] writeSettingsToFile];
+}
+
+#pragma mark - Object lifecycle
 
 - (void)dealloc {
     [viewController release];
