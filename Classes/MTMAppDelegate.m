@@ -37,7 +37,7 @@
     NSURL * defaultURL = [NSURL URLWithString:@"http://mtmserver.heroku.com/"];
     ServiceAccount * defaultAccount = [[[ServiceAccount alloc] initWithUsername:@"" password:@"" serviceURL:defaultURL] autorelease];
     [[ServiceAccountManager sharedManager] addAccount:defaultAccount];
-    
+    [[ServiceAccountManager sharedManager] setActiveServiceAccount:defaultAccount];
 #endif
 }
 

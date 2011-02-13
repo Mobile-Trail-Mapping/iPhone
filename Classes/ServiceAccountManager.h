@@ -37,12 +37,24 @@
 - (NSArray *)serviceAccounts;
 
 /**
+ * Retrieve the service account that matches the given account for all
+ * its properties. This method provides a convenient way to populate the
+ * ServiceAccount#keychainUUID field for a service account.
+ */
+- (ServiceAccount *)serviceAccountMatchingAccount:(ServiceAccount *)account;
+
+/**
  * Retrieve the currently active ServiceAccount. The "active" service
  * account refers to the one whose settings appear in the settings page;
  * its credentials and URL are used for all server interaction, including
  * any authentication that needs to be performed.
  */
 - (ServiceAccount *)activeServiceAccount;
+
+/**
+ * Set the given service account to be active.
+ */
+- (void)setActiveServiceAccount:(ServiceAccount *)account;
 
 /**
  * Store the information in the provided ServiceAccount in the keychain.

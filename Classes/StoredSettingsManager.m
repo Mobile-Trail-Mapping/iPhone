@@ -13,6 +13,7 @@ static StoredSettingsManager * sharedInstance = nil;
 @implementation StoredSettingsManager
 
 @synthesize isFirstRun = _isFirstRun;
+@synthesize activeServiceAccountUUID = _activeServiceAccountUUID;
 
 #pragma mark - Lifecycle
 
@@ -24,8 +25,6 @@ static StoredSettingsManager * sharedInstance = nil;
 }
 
 - (void)readSettingsFromFile {
-    NSLog(@"reading settings from file");
-    
     // Find file path - search app directory first, then bundle if no local copy exists
     NSString * plistPath;
     NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -42,17 +41,18 @@ static StoredSettingsManager * sharedInstance = nil;
     }
     
     // Set properties
-    self.isFirstRun = [[plistData objectForKey:@"IsFirstRun"] boolValue]; NSLog(@"Set property isFirstRun=%@", [plistData objectForKey:@"IsFirstRun"]);
+    self.isFirstRun = [[plistData objectForKey:@"IsFirstRun"] boolValue];
+    self.activeServiceAccountUUID = [plistData objectForKey:@"ActiveServiceAccountUUID"];
 }
 
 - (void)writeSettingsToFile {
-    NSLog(@"writing settings to file");
-    
     // Find file path - always write to app directory
     NSString * rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString * plistPath = [rootPath stringByAppendingPathComponent:@"Settings.plist"];
     
-    NSDictionary * plistDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObject:[NSNumber numberWithBool:self.isFirstRun]] forKeys:[NSArray arrayWithObject:@"IsFirstRun"]];
+    NSMutableDictionary * plistDict = [[[NSMutableDictionary alloc] initWithCapacity:10] autorelease];
+    [plistDict setValue:[NSNumber numberWithBool:self.isFirstRun] forKey:@"IsFirstRun"];
+    [plistDict setValue:self.activeServiceAccountUUID forKey:@"ActiveServiceAccountUUID"];
     NSData * plistData = [NSPropertyListSerialization dataFromPropertyList:plistDict format:NSPropertyListXMLFormat_v1_0 errorDescription:nil];
     if(plistData) {
         [plistData writeToFile:plistPath atomically:YES];

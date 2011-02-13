@@ -10,6 +10,7 @@
 
 #import "ServiceAccountManager.h"
 #import "ServiceAccount.h"
+#import "StoredSettingsManager.h"
 
 static ServiceAccountManager * sharedInstance = nil;
 
@@ -48,8 +49,78 @@ static ServiceAccountManager * sharedInstance = nil;
     return accounts;
 }
 
+- (ServiceAccount *)serviceAccountWithUUID:(NSString *)uuid {
+    // Basic parameters of the keychain search
+    NSMutableDictionary * keychainQuery = [[[NSMutableDictionary alloc] initWithCapacity:10] autorelease];
+    [keychainQuery setValue:(id)kSecClassInternetPassword forKey:(id)kSecClass];
+    [keychainQuery setValue:(id)kCFBooleanTrue forKey:(id)kSecReturnAttributes];
+    [keychainQuery setValue:uuid forKey:(id)kSecAttrComment];
+    
+    // Fetch results
+    NSDictionary * keychainResults = nil;
+    OSStatus status = SecItemCopyMatching((CFDictionaryRef)keychainQuery, (CFTypeRef *)(&keychainResults));
+    ServiceAccount * newAccount = nil;
+    if(status == noErr) {
+        // Build account instance
+        NSString * username = [keychainResults valueForKey:(id)kSecAttrSubject];
+        NSString * password = [[[NSString alloc] initWithData:[keychainResults valueForKey:(id)kSecValueData] encoding:NSUTF8StringEncoding] autorelease];
+        NSString * protocol = [keychainResults valueForKey:(id)kSecAttrProtocol];
+        NSString * server = [keychainResults valueForKey:(id)kSecAttrServer];
+        NSString * path = [keychainResults valueForKey:(id)kSecAttrPath];
+        NSURL * serviceURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@", protocol, server, path]];
+        
+        newAccount = [[[ServiceAccount alloc] initWithUsername:username password:password serviceURL:serviceURL] autorelease];
+        newAccount.keychainUUID = [keychainResults valueForKey:(id)kSecAttrComment];
+    } else {
+        NSLog(@"Failed to retrieve accounts: %@", [self errorForOSStatus:status]);
+    }
+    
+    return newAccount;
+}
+
+- (ServiceAccount *)serviceAccountMatchingAccount:(ServiceAccount *)account {
+    // Basic parameters of the keychain search
+    NSMutableDictionary * keychainQuery = [[[NSMutableDictionary alloc] initWithCapacity:10] autorelease];
+    [keychainQuery setValue:(id)kSecClassInternetPassword forKey:(id)kSecClass];
+    [keychainQuery setValue:(id)kCFBooleanTrue forKey:(id)kSecReturnAttributes];
+    [keychainQuery setValue:[[account serviceURL] scheme] forKey:(id)kSecAttrProtocol];
+    [keychainQuery setValue:[[account serviceURL] host] forKey:(id)kSecAttrServer];
+    [keychainQuery setValue:[[account serviceURL] path] forKey:(id)kSecAttrPath];
+    [keychainQuery setValue:[account username] forKey:(id)kSecAttrAccount];
+    [keychainQuery setValue:[[account password] dataUsingEncoding:NSUTF8StringEncoding] forKey:(id)kSecValueData];
+    
+    // Fetch results
+    NSDictionary * keychainResults = nil;
+    OSStatus status = SecItemCopyMatching((CFDictionaryRef)keychainQuery, (CFTypeRef *)(&keychainResults));
+    ServiceAccount * newAccount = nil;
+    if(status == noErr) {
+        // Build account instance
+        NSString * username = [keychainResults valueForKey:(id)kSecAttrSubject];
+        NSString * password = [[[NSString alloc] initWithData:[keychainResults valueForKey:(id)kSecValueData] encoding:NSUTF8StringEncoding] autorelease];
+        NSString * protocol = [keychainResults valueForKey:(id)kSecAttrProtocol];
+        NSString * server = [keychainResults valueForKey:(id)kSecAttrServer];
+        NSString * path = [keychainResults valueForKey:(id)kSecAttrPath];
+        NSURL * serviceURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@", protocol, server, path]];
+            
+        newAccount = [[[ServiceAccount alloc] initWithUsername:username password:password serviceURL:serviceURL] autorelease];
+        newAccount.keychainUUID = [keychainResults valueForKey:(id)kSecAttrComment];
+    } else {
+        NSLog(@"Failed to retrieve accounts: %@", [self errorForOSStatus:status]);
+    }
+    
+    return newAccount;
+}
+
 - (ServiceAccount *)activeServiceAccount {
-    return nil;
+    return [self serviceAccountWithUUID:[[StoredSettingsManager sharedManager] activeServiceAccountUUID]];
+}
+
+- (void)setActiveServiceAccount:(ServiceAccount *)account {
+    if(account.keychainUUID == nil) {
+        account = [self serviceAccountMatchingAccount:account];
+    }
+    
+    [[StoredSettingsManager sharedManager] setActiveServiceAccountUUID:[account keychainUUID]];
 }
 
 - (NSString *)newUUID {

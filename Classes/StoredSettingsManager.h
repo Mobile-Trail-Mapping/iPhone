@@ -17,6 +17,7 @@
 @interface StoredSettingsManager : NSObject {
 @private
     BOOL _isFirstRun;
+    NSString * _activeServiceAccountUUID;
 }
 
 /**
@@ -27,6 +28,21 @@
  * MTMAppDelegate.
  */
 @property (nonatomic, assign) BOOL isFirstRun;
+
+/**
+ * The UUID of the active ServiceAccount instance currently handling 
+ * credentials and authentication. Service accounts are primarily handled
+ * through the ServiceAccountManager class; this property simply declares
+ * which account to use when a default is needed.
+ *
+ * If no value for this property is set, no service account is currently
+ * active, and no authentication requests will succeed.
+ *
+ * @see ServiceAccount
+ * @see ServiceAccount#keychainUUID
+ * @see ServiceAccountManager
+ */
+@property (nonatomic, retain) NSString * activeServiceAccountUUID;
 
 /**
  * The shared instance of this singleton class. Used to access an instance
