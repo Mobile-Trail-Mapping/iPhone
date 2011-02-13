@@ -13,6 +13,11 @@
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
     [window addSubview:viewController.view];
     [window makeKeyAndVisible];
+    
+#ifdef _MTM_DEBUG_FORCE_FIRST_RUN
+    [[StoredSettingsManager sharedManager] setIsFirstRun:YES];
+    [[StoredSettingsManager sharedManager] writeSettingsToFile];
+#endif
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
