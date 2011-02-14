@@ -17,7 +17,6 @@
 		2237896012EA113800BAF18A /* TrailPointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2237895F12EA113800BAF18A /* TrailPointAnnotation.m */; };
 		22876D7A12FF47DA00BEF630 /* InterestPointTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 22876D7912FF47D900BEF630 /* InterestPointTest.m */; };
 		22876D7D12FF4A1E00BEF630 /* TrailPointTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 22876D7C12FF4A1E00BEF630 /* TrailPointTest.m */; };
-		22876D8612FFBBCF00BEF630 /* redx.png in Resources */ = {isa = PBXBuildFile; fileRef = 22876D8512FFBBCF00BEF630 /* redx.png */; };
 		229B73AE13073FD600A9A8BA /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 229B73AD13073FD600A9A8BA /* SettingsViewController.m */; };
 		229CA36713005FFC001E338E /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 229CA36613005FFC001E338E /* SettingsViewController.xib */; };
 		229CA368130060C9001E338E /* InterestPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A792BE6712C7379E005EFAC6 /* InterestPoint.m */; };
@@ -38,6 +37,7 @@
 		22DC0FFC1307567A00D99F22 /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22DC0FFB1307567A00D99F22 /* Settings.plist */; };
 		22DC0FFF130776B000D99F22 /* ServiceAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DC0FFE130776B000D99F22 /* ServiceAccount.m */; };
 		22DEE785130868E60026CC2C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DEE784130868E60026CC2C /* Security.framework */; };
+		22DEE78B1308E5B40026CC2C /* redx.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 22DEE78A1308E5B40026CC2C /* redx.jpg */; };
 		22E80B3A12FA9BD6009CF69F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D94A5912ADC542003BDB1C /* main.m */; };
 		22E80B3B12FA9BD6009CF69F /* MTMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D94A5C12ADC542003BDB1C /* MTMAppDelegate.m */; };
 		22E80B3C12FA9BD6009CF69F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D94A6212ADC542003BDB1C /* MainViewController.m */; };
@@ -137,7 +137,6 @@
 		22876D7912FF47D900BEF630 /* InterestPointTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterestPointTest.m; sourceTree = "<group>"; };
 		22876D7B12FF4A1E00BEF630 /* TrailPointTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailPointTest.h; sourceTree = "<group>"; };
 		22876D7C12FF4A1E00BEF630 /* TrailPointTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrailPointTest.m; sourceTree = "<group>"; };
-		22876D8512FFBBCF00BEF630 /* redx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redx.png; sourceTree = "<group>"; };
 		229B73AC13073FD600A9A8BA /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		229B73AD13073FD600A9A8BA /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		229CA36113005FDB001E338E /* PrimarySettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrimarySettingsViewController.h; sourceTree = "<group>"; };
@@ -165,6 +164,7 @@
 		22DC0FFD130776B000D99F22 /* ServiceAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceAccount.h; sourceTree = "<group>"; };
 		22DC0FFE130776B000D99F22 /* ServiceAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceAccount.m; sourceTree = "<group>"; };
 		22DEE784130868E60026CC2C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		22DEE78A1308E5B40026CC2C /* redx.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = redx.jpg; sourceTree = "<group>"; };
 		22E3C66612F0CD8000044FB7 /* TrailPointInfoModalDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailPointInfoModalDelegate.h; sourceTree = "<group>"; };
 		22E80AC712FA9744009CF69F /* MTMTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTMTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22E80AC812FA9744009CF69F /* MTMTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MTMTest-Info.plist"; sourceTree = "<group>"; };
@@ -464,8 +464,8 @@
 		A7D94A4512ADC542003BDB1C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				22DEE78A1308E5B40026CC2C /* redx.jpg */,
 				229CA36613005FFC001E338E /* SettingsViewController.xib */,
-				22876D8512FFBBCF00BEF630 /* redx.png */,
 				220CD76512E925EF000804E8 /* MTMLogo_iOS_iPhone.png */,
 				220CD76712E92603000804E8 /* MTMLogo_iOS_iPhone_Retina.png */,
 				A7107A3912DD2F2700B19EBC /* sample.xml */,
@@ -586,7 +586,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22876D8612FFBBCF00BEF630 /* redx.png in Resources */,
 				229CA36713005FFC001E338E /* SettingsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -622,6 +621,7 @@
 				22C011B312EF85B5000D5C9F /* TrailPointInfoView.xib in Resources */,
 				229CA36B13006107001E338E /* SettingsViewController.xib in Resources */,
 				22DC0FFC1307567A00D99F22 /* Settings.plist in Resources */,
+				22DEE78B1308E5B40026CC2C /* redx.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

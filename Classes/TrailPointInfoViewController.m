@@ -84,7 +84,10 @@
 #pragma mark Async image-loading methods
 
 - (void)showFailureImage {
-    [self.imageView setImage:[UIImage imageNamed:@"redx.png"]];
+    NSLog(@"Showing failure image");
+    [self.imageView setAlpha:1.0];
+    [self.imageView setImage:[UIImage imageNamed:@"redx.jpg"]];
+    [self.imageView setNeedsDisplay];
 }
 
 - (void)loadRemoteImage {
@@ -102,7 +105,7 @@
     NSError * error;
     NSString * imageCountString = [[[NSString alloc] initWithContentsOfURL:imageCountURL usedEncoding:&usedEncoding error:&error] autorelease];
     
-    if(imageCountString == nil) {
+    if(imageCountString == nil || [imageCountString isEqualToString:@"0"]) {
         [self showFailureImage];
     } else {
         NSScanner * imageCountScanner = [[[NSScanner alloc] initWithString:imageCountString] autorelease];
@@ -142,7 +145,7 @@
         _imageAnimationTimer = [[NSTimer timerWithTimeInterval:IMAGE_DISPLAY_DURATION target:self selector:@selector(cycleImage) userInfo:nil repeats:YES] retain];
         [[NSRunLoop mainRunLoop] addTimer:_imageAnimationTimer forMode:NSDefaultRunLoopMode];
     } else {
-        self.imageView.image = [UIImage imageNamed:@"redx.png"];
+        [self showFailureImage];
     }
 }
 
