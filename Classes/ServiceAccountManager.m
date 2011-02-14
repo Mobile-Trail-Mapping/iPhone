@@ -9,15 +9,21 @@
 #import <Security/Security.h>
 
 #import "ServiceAccountManager.h"
-//#import "ServiceAccount.h"
 #import "StoredSettingsManager.h"
+
+#import "NetworkOperation.h"
+#import "NetworkOperationManager.h"
+
+#define MTM_SAM_NETWORK_OPERATION_LABEL @"SAM authentication check"
 
 static ServiceAccountManager * sharedInstance = nil;
 
 @implementation ServiceAccountManager
 
+@synthesize activeAccountAuthenticated = _activeAccountAuthenticated;
+
 - (NSArray *)serviceAccounts {
-#ifdef _MTM_DEBUG_SAM_MESSAGES
+#if _MTM_DEBUG_SAM_MESSAGES
     NSLog(@"SAM: Finding all accounts");
 #endif
     
@@ -55,7 +61,7 @@ static ServiceAccountManager * sharedInstance = nil;
 }
 
 - (ServiceAccount *)serviceAccountWithUUID:(NSString *)uuid {
-#ifdef _MTM_DEBUG_SAM_MESSAGES
+#if _MTM_DEBUG_SAM_MESSAGES
     NSLog(@"SAM: Matching UUID %@", uuid);
 #endif
     
@@ -90,7 +96,7 @@ static ServiceAccountManager * sharedInstance = nil;
 }
 
 - (ServiceAccount *)serviceAccountMatchingAccount:(ServiceAccount *)account {
-#ifdef _MTM_DEBUG_SAM_MESSAGES
+#if _MTM_DEBUG_SAM_MESSAGES
     NSLog(@"SAM: Matching account %@", account);
 #endif
     
@@ -124,19 +130,19 @@ static ServiceAccountManager * sharedInstance = nil;
         NSLog(@"Failed to retrieve accounts: %@", [self errorForOSStatus:status]);
     }
     
-#ifdef _MTM_DEBUG_SAM_MESSAGES
+#if _MTM_DEBUG_SAM_MESSAGES
     NSLog(@"    ...found account %@", newAccount);
 #endif
     return newAccount;
 }
 
 - (ServiceAccount *)activeServiceAccount {
-#ifdef _MTM_DEBUG_SAM_MESSAGES
+#if _MTM_DEBUG_SAM_MESSAGES
     NSLog(@"SAM: Getting active account");
 #endif
     
     ServiceAccount * account = [self serviceAccountWithUUID:[[StoredSettingsManager sharedManager] activeServiceAccountUUID]];
-#ifdef _MTM_DEBUG_SAM_MESSAGES
+#if _MTM_DEBUG_SAM_MESSAGES
     NSLog(@"    ...found account %@", account);
 #endif
     
@@ -144,7 +150,7 @@ static ServiceAccountManager * sharedInstance = nil;
 }
 
 - (void)setActiveServiceAccount:(ServiceAccount *)account {
-#ifdef _MTM_DEBUG_SAM_MESSAGES
+#if _MTM_DEBUG_SAM_MESSAGES
     NSLog(@"SAM: Setting active account %@", account);
 #endif
     
@@ -179,7 +185,7 @@ static ServiceAccountManager * sharedInstance = nil;
 }
 
 - (void)addAccount:(ServiceAccount *)account {
-#ifdef _MTM_DEBUG_SAM_MESSAGES
+#if _MTM_DEBUG_SAM_MESSAGES
     NSLog(@"SAM: Adding account %@", account);
 #endif
     
@@ -205,7 +211,7 @@ static ServiceAccountManager * sharedInstance = nil;
 }
 
 - (void)updateAccount:(ServiceAccount *)account {
-#ifdef _MTM_DEBUG_SAM_MESSAGES
+#if _MTM_DEBUG_SAM_MESSAGES
     NSLog(@"SAM: Updating account %@", account);
 #endif
     
@@ -228,13 +234,19 @@ static ServiceAccountManager * sharedInstance = nil;
         if(status != noErr) {
             NSLog(@"Failed to update keychain item: %@", [self errorForOSStatus:status]);
         }
+        
+        // Reauthenticate account if needed
+        if([account isEqualToServiceAccount:[self activeServiceAccount]]) {
+            _activeAccountAuthenticated = NO;
+            [self refreshActiveAuthentication];
+        }
     } else {
         NSLog(@"Cowardly refusing to update keychain item without associated UUID");
     }
 }
 
 - (void)removeAccount:(ServiceAccount *)account {
-#ifdef _MTM_DEBUG_SAM_MESSAGES
+#if _MTM_DEBUG_SAM_MESSAGES
     NSLog(@"SAM: Removing account %@", account);
 #endif
     
@@ -259,6 +271,50 @@ static ServiceAccountManager * sharedInstance = nil;
     OSStatus status = SecItemDelete((CFDictionaryRef)keychainQuery);
     if(status != noErr) {
         NSLog(@"Failed to remove keychain item: %@", [self errorForOSStatus:status]);
+    }
+}
+
+#pragma mark - Active authentication info
+
+- (void)refreshActiveAuthentication {
+#if _MTM_DEBUG_SAM_MESSAGES
+    NSLog(@"SAM: Refreshing active authentication");
+#endif
+    NetworkOperation * authOperation = [[[NetworkOperation alloc] init] autorelease];
+    authOperation.requestType = kNetworkOperationRequestTypePost;
+    authOperation.authenticate = YES;
+    authOperation.endpoint = @"/user/check";
+    authOperation.returnType = kNetworkOperationReturnTypeString;
+    authOperation.label = MTM_SAM_NETWORK_OPERATION_LABEL;
+    [authOperation addDelegate:self];
+    
+    [[NetworkOperationManager sharedManager] enqueueOperation:authOperation];
+}
+
+#pragma mark - NetworkOperationDelegate methods
+
+- (void)operation:(NetworkOperation *)operation completedWithResult:(id)result {
+#if _MTM_DEBUG_SAM_MESSAGES
+    NSLog(@"SAM: operation %@ completed with result", operation.label);
+#endif
+    
+    if([operation.label isEqualToString:MTM_SAM_NETWORK_OPERATION_LABEL]) {
+        NSString * authenticated = (NSString *)result;
+        if([authenticated isEqualToString:@"true"]) {
+            _activeAccountAuthenticated = YES;
+        } else {
+            _activeAccountAuthenticated = NO;
+        }
+    }
+}
+
+- (void)operation:(NetworkOperation *)operation didFailWithError:(NSError *)error {
+#if _MTM_DEBUG_SAM_MESSAGES
+    NSLog(@"SAM: operation failed with error");
+#endif
+    
+    if([operation.label isEqualToString:MTM_SAM_NETWORK_OPERATION_LABEL]) {
+        _activeAccountAuthenticated = NO;
     }
 }
 

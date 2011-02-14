@@ -31,6 +31,12 @@
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(done)] autorelease];
 }
 
+- (void)viewDidUnload {
+    [super viewDidUnload];
+    
+    [[ServiceAccountManager sharedManager] removeObserver:self forKeyPath:@"activeAccountAuthenticated"];
+}
+
 - (void)buildSettings {
     self.settings = [[[MutableOrderedDictionary alloc] initWithCapacity:10] autorelease];
     

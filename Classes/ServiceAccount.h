@@ -60,4 +60,18 @@
  */
 - (id)initWithUsername:(NSString *)username password:(NSString *)password serviceURL:(NSURL *)serviceURL;
 
+/**
+ * Check whether this service account is the same as another service account.
+ * This comparison works as follows:
+ *  1. If this account and the other account share the same non-nil keychain
+ *     UUID, returns YES.
+ *  2. If one account has a nil keychain UUID but the other is non-nil, or
+ *     the two keychain UUIDs are different, returns NO.
+ *  3. If both accounts have a nil keychain UUID, but have all the same
+ *     property values, returns YES.
+ *  4. If both accounts have a nil keychain UUID, but their property values
+ *     differ, returns NO.
+ */
+- (BOOL)isEqualToServiceAccount:(ServiceAccount *)other;
+
 @end

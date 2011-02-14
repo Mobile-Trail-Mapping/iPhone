@@ -35,6 +35,8 @@ static NetworkOperationManager * sharedInstance = nil;
 }
 
 - (void)enqueueOperation:(NetworkOperation *)operation {
+    NSLog(@"NOM: enqueueing operation");
+    
     [_queue addObject:operation];
     
     for(id<NetworkOperationDelegate> delegate in operation.delegates) {
@@ -49,12 +51,17 @@ static NetworkOperationManager * sharedInstance = nil;
 }
 
 - (void)pumpQueue {
+    NSLog(@"NOM: pumping queue");
+    
     if(nil == _activeOperation) {
         if([_queue count] > 0) {
-            NetworkOperation * nextOperation = [_queue objectAtIndex:0];
+            NetworkOperation * nextOperation = [[_queue objectAtIndex:0] retain];
             [_queue removeObjectAtIndex:0];
             
-            _activeOperation = [nextOperation retain];
+            _activeOperation = nextOperation;
+            [_activeOperation execute];
+            
+            NSLog(@"NOM: executed operation");
         }
     }
 }

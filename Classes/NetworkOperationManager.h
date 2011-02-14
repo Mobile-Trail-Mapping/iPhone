@@ -34,6 +34,13 @@
 }
 
 /**
+ * Get the singleton instance of NetworkOperationManager. This method
+ * should be used to obtain a handle of the primary functioning manager
+ * for the entire MTM application.
+ */
++ (NetworkOperationManager *)sharedManager;
+
+/**
  * Get the currently executing NetworkOperation. If no operation is
  * executing, returns nil.
  */

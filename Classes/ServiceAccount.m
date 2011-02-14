@@ -54,4 +54,14 @@
     return [NSString stringWithFormat:@"{account <%@>: %@/%@ at %@}", self.keychainUUID, self.username, self.password, [self.serviceURL absoluteString]];
 }
 
+- (BOOL)isEqualToServiceAccount:(ServiceAccount *)other {
+    if(self.keychainUUID == nil && other.keychainUUID == nil) {
+        return ([self.username isEqualToString:other.username] &&
+                [self.password isEqualToString:other.password] &&
+                [[self.serviceURL absoluteString] isEqualToString:[other.serviceURL absoluteString]]);
+    } else {
+        return [self.keychainUUID isEqualToString:other.keychainUUID];
+    }
+}
+
 @end

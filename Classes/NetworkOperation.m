@@ -7,7 +7,6 @@
 //
 
 #import "NetworkOperation.h"
-#import "NetworkOperationDelegate.h"
 
 #import "ServiceAccountManager.h"
 
@@ -50,6 +49,7 @@
 @synthesize authenticate = _authenticate;
 @synthesize endpoint = _endpoint;
 @synthesize requestData = _requestData;
+@synthesize label = _label;
 
 #pragma mark - Operations
 
@@ -72,8 +72,10 @@
             NSString * username = [[[ServiceAccountManager sharedManager] activeServiceAccount] username];
             NSString * passwordHash = [[[ServiceAccountManager sharedManager] activeServiceAccount] passwordSHA1];
             
-            [self.requestData setValue:username forKey:@"user"];
-            [self.requestData setValue:passwordHash forKey:@"pwhash"];
+            NSLog(@"Using authentication in network operation: %@/%@", username, passwordHash);
+            
+            [self.requestData setValue:(id)username forKey:@"user"];
+            [self.requestData setValue:(id)passwordHash forKey:@"pwhash"];
         }
         
         [_request setHTTPMethod:@"POST"];
@@ -91,8 +93,9 @@
         return;
     }
     
-    NSURLConnection * connection = [[[NSURLConnection alloc] initWithRequest:_request delegate:self] autorelease];
-    _returnData = [[[NSMutableData alloc] initWithCapacity:10] autorelease];
+    NSURLConnection * connection = [[[NSURLConnection alloc] initWithRequest:_request delegate:self startImmediately:NO] autorelease];
+    _returnData = [[[NSMutableData alloc] initWithCapacity:10] retain];
+    [connection scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     [connection start];
 }
 
@@ -121,6 +124,7 @@
 }
 
 - (NSData *)HTTPBodyForPOSTRequestFromDictionary:(NSDictionary *)dict {
+    //TODO implement
     return [NSData data];
 }
 
@@ -131,6 +135,8 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    NSLog(@"connection did fail with error");
+    
     NSDictionary * userInfo = [[[NSDictionary alloc] initWithObjectsAndKeys:error, @"innerError", nil] autorelease];
     NSError * operationError = [[[NSError alloc] initWithDomain:@"MTM-NetworkOperation" code:kNetworkOperationErrorConnectionFailed userInfo:userInfo] autorelease];
     
@@ -145,6 +151,8 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    NSLog(@"connection did finish loading");
+    
     id result = nil;
     
     if(self.returnType == kNetworkOperationReturnTypeData) {
@@ -167,7 +175,9 @@
     }
     
     for(id<NetworkOperationDelegate> delegate in self.delegates) {
+        NSLog(@"Checking delegate %@", delegate);
         if([delegate respondsToSelector:@selector(operation:completedWithResult:)]) {
+            NSLog(@"Notifying delegate %@", delegate);
             [delegate operation:self completedWithResult:result];
         }
     }
@@ -196,7 +206,8 @@
         self.returnType = kNetworkOperationReturnTypeData;
         self.delegates = [[[NSMutableSet alloc] initWithCapacity:2] autorelease];
         self.endpoint = @"";
-        self.requestData = [NSDictionary dictionary];
+        self.requestData = [[[NSMutableDictionary alloc] initWithCapacity:10] autorelease];
+        self.label = nil;
     }
     return self;
 }
@@ -207,6 +218,7 @@
     [_requestData release];
     [_returnData release];
     [_request release];
+    [_label release];
     
     [super dealloc];
 }

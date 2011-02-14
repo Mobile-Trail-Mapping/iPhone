@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "ServiceAccount.h"
+#import "NetworkOperationDelegate.h"
 
 /**
  * Singleton class responsible for handling keychain access, credentials, and
@@ -17,10 +18,17 @@
  * plist file (e.g. first run information, location preferences) or in 
  * core data (e.g. trail cache information).
  */
-@interface ServiceAccountManager : NSObject {
+@interface ServiceAccountManager : NSObject <NetworkOperationDelegate> {
 @private
-    
+    BOOL _activeAccountAuthenticated;
 }
+
+/**
+ * Whether the active service account is currently holding a valid
+ * authentication result from the MTM server. Update this value using
+ * ServiceAccountManager#refreshActiveAuthentication.
+ */
+@property (nonatomic, readonly) BOOL activeAccountAuthenticated;
 
 /**
  * The shared instance of this singleton class. Used to access an instance
@@ -92,5 +100,13 @@
  * to show results of keychain queries in application logs.
  */
 - (NSString *)errorForOSStatus:(OSStatus)status;
+
+/**
+ * Update the manager's information about whether the active service account
+ * is successfully authenticated. Triggers an asynchronous network request
+ * to the MTM server with the current active credentials for a user/pass
+ * check.
+ */
+- (void)refreshActiveAuthentication;
 
 @end

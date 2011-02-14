@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "NetworkOperationDelegate.h"
+
 typedef enum {
     kNetworkOperationRequestTypeUnspecified,
     kNetworkOperationRequestTypeGet,
@@ -43,7 +45,9 @@ typedef enum {
     kNetworkOperationReturnType _returnType;
     BOOL _authenticate;
     NSString * _endpoint;
-    NSDictionary * _requestData;
+    NSMutableDictionary * _requestData;
+    
+    NSString * _label;
     
     NSMutableURLRequest * _request;
     NSMutableData * _returnData;
@@ -91,7 +95,27 @@ typedef enum {
  * be automatically converted to the appropriate format for the specified
  * network operation type.
  */
-@property (nonatomic, retain) NSDictionary * requestData;
+@property (nonatomic, retain) NSMutableDictionary * requestData;
+
+/**
+ * A user- or program-defined label used to identify this operation. Used
+ * to distinguish between multiple operations that may share the same
+ * delegate.
+ */
+@property (nonatomic, retain) NSString * label;
+
+/**
+ * Register the given object as a delegate for this operation. The object
+ * must conform to the NetworkOperationDelegate protocol. If the object is
+ * already a delegate for this operation, no action is taken.
+ */
+- (void)addDelegate:(id<NetworkOperationDelegate>)delegate;
+
+/**
+ * Remove the given object as a delegate for this operation. If the object
+ * is not already a delegate for this operation, no action is taken.
+ */
+- (void)removeDelegate:(id<NetworkOperationDelegate>)delegate;
 
 /**
  * Begin executing this NetworkOperation. Fires off its connection and begins
