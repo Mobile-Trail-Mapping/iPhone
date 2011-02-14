@@ -47,7 +47,11 @@ static ServiceAccountManager * sharedInstance = nil;
             NSString * protocol = [accountDict valueForKey:(id)kSecAttrProtocol];
             NSString * server = [accountDict valueForKey:(id)kSecAttrServer];
             NSString * path = [accountDict valueForKey:(id)kSecAttrPath];
-            NSURL * serviceURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@", protocol, server, path]];
+            NSNumber * port = [accountDict valueForKey:(id)kSecAttrPort];
+            if(port == nil) {
+                port = [NSNumber numberWithInt:80];
+            }
+            NSURL * serviceURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@:%@%@", protocol, server, port, path]];
             
             ServiceAccount * account = [[[ServiceAccount alloc] initWithUsername:username password:password serviceURL:serviceURL] autorelease];
             account.keychainUUID = [accountDict valueForKey:(id)kSecAttrComment];
@@ -83,7 +87,11 @@ static ServiceAccountManager * sharedInstance = nil;
         NSString * protocol = [keychainResults valueForKey:(id)kSecAttrProtocol];
         NSString * server = [keychainResults valueForKey:(id)kSecAttrServer];
         NSString * path = [keychainResults valueForKey:(id)kSecAttrPath];
-        NSURL * serviceURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@", protocol, server, path]];
+        NSNumber * port = [keychainResults valueForKey:(id)kSecAttrPort];
+        if(port == nil) {
+            port = [NSNumber numberWithInt:80];
+        }
+        NSURL * serviceURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@:%@%@", protocol, server, port, path]];
         
         newAccount = [[[ServiceAccount alloc] initWithUsername:username password:password serviceURL:serviceURL] autorelease];
         newAccount.keychainUUID = [keychainResults valueForKey:(id)kSecAttrComment];
@@ -122,7 +130,11 @@ static ServiceAccountManager * sharedInstance = nil;
         NSString * protocol = [keychainResults valueForKey:(id)kSecAttrProtocol];
         NSString * server = [keychainResults valueForKey:(id)kSecAttrServer];
         NSString * path = [keychainResults valueForKey:(id)kSecAttrPath];
-        NSURL * serviceURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@", protocol, server, path]];
+        NSNumber * port = [keychainResults valueForKey:(id)kSecAttrPort];
+        if(port == nil) {
+            port = [NSNumber numberWithInt:80];
+        }
+        NSURL * serviceURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@:%@%@", protocol, server, port, path]];
             
         newAccount = [[[ServiceAccount alloc] initWithUsername:username password:password serviceURL:serviceURL] autorelease];
         newAccount.keychainUUID = [keychainResults valueForKey:(id)kSecAttrComment];
@@ -199,6 +211,10 @@ static ServiceAccountManager * sharedInstance = nil;
     [keychainQuery setValue:[[account serviceURL] scheme] forKey:(id)kSecAttrProtocol];
     [keychainQuery setValue:[[account serviceURL] host] forKey:(id)kSecAttrServer];
     [keychainQuery setValue:[[account serviceURL] path] forKey:(id)kSecAttrPath];
+    [keychainQuery setValue:[[account serviceURL] port] forKey:(id)kSecAttrPort];
+    if(nil == [[account serviceURL] port]) {
+        [keychainQuery setValue:[NSNumber numberWithInt:80] forKey:(id)kSecAttrPort];
+    }
     [keychainQuery setValue:[account username] forKey:(id)kSecAttrAccount];
     [keychainQuery setValue:[[account password] dataUsingEncoding:NSUTF8StringEncoding] forKey:(id)kSecValueData];
     [keychainQuery setValue:[self newUUID] forKey:(id)kSecAttrComment];
@@ -226,6 +242,10 @@ static ServiceAccountManager * sharedInstance = nil;
         [keychainAttributes setValue:[[account serviceURL] scheme] forKey:(id)kSecAttrProtocol];
         [keychainAttributes setValue:[[account serviceURL] host] forKey:(id)kSecAttrServer];
         [keychainAttributes setValue:[[account serviceURL] path] forKey:(id)kSecAttrPath];
+        [keychainQuery setValue:[[account serviceURL] port] forKey:(id)kSecAttrPort];
+        if(nil == [[account serviceURL] port]) {
+            [keychainQuery setValue:[NSNumber numberWithInt:80] forKey:(id)kSecAttrPort];
+        }
         [keychainAttributes setValue:[account username] forKey:(id)kSecAttrAccount];
         [keychainAttributes setValue:[[account password] dataUsingEncoding:NSUTF8StringEncoding] forKey:(id)kSecValueData];
         
@@ -263,6 +283,10 @@ static ServiceAccountManager * sharedInstance = nil;
         [keychainQuery setValue:[[account serviceURL] scheme] forKey:(id)kSecAttrProtocol];
         [keychainQuery setValue:[[account serviceURL] host] forKey:(id)kSecAttrServer];
         [keychainQuery setValue:[[account serviceURL] path] forKey:(id)kSecAttrPath];
+        [keychainQuery setValue:[[account serviceURL] port] forKey:(id)kSecAttrPort];
+        if(nil == [[account serviceURL] port]) {
+            [keychainQuery setValue:[NSNumber numberWithInt:80] forKey:(id)kSecAttrPort];
+        }
         [keychainQuery setValue:[account username] forKey:(id)kSecAttrAccount];
         [keychainQuery setValue:[[account password] dataUsingEncoding:NSUTF8StringEncoding] forKey:(id)kSecValueData];
     }
@@ -295,13 +319,15 @@ static ServiceAccountManager * sharedInstance = nil;
 
 - (void)operation:(NetworkOperation *)operation completedWithResult:(id)result {
 #if _MTM_DEBUG_SAM_MESSAGES
-    NSLog(@"SAM: operation %@ completed with result", operation.label);
+    NSLog(@"SAM: operation %@ completed with result %@", operation.label, result);
 #endif
     
     if([operation.label isEqualToString:MTM_SAM_NETWORK_OPERATION_LABEL]) {
         NSString * authenticated = (NSString *)result;
         if([authenticated isEqualToString:@"true"]) {
             _activeAccountAuthenticated = YES;
+            
+            NSLog(@"Authenticated successfully!");
         } else {
             _activeAccountAuthenticated = NO;
         }
