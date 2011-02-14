@@ -5,6 +5,20 @@
 #import "ServiceAccount.h"
 #import "ServiceAccountManager.h"
 
+#ifdef _MTM_DEBUG_USE_TEST_SERVER
+#define MTM_SERVER_URL_STRING @"http://mtmtest.heroku.com/"
+#else
+#define MTM_SERVER_URL_STRING @"http://mtmserver.heroku.com/"
+#endif
+
+#ifdef _MTM_DEBUG_SHIP_DEFAULT_ADMIN
+#define MTM_SERVER_DEFAULT_ADMIN_USER @"test@brousalis.com"
+#define MTM_SERVER_DEFAULT_ADMIN_PASS @"password"
+#else
+#define MTM_SERVER_DEFAULT_ADMIN_USER @""
+#define MTM_SERVER_DEFAULT_ADMIN_PASS @""
+#endif
+
 @implementation MTMAppDelegate
 
 @synthesize window;
@@ -36,7 +50,7 @@
     // Add default service account
     NSURL * defaultURL = [NSURL URLWithString:MTM_SERVER_URL_STRING];
     NSLog(@"Using server url %@", [defaultURL absoluteString]);
-    ServiceAccount * defaultAccount = [[[ServiceAccount alloc] initWithUsername:@"testUser" password:@"testPass" serviceURL:defaultURL] autorelease];
+    ServiceAccount * defaultAccount = [[[ServiceAccount alloc] initWithUsername:MTM_SERVER_DEFAULT_ADMIN_USER password:MTM_SERVER_DEFAULT_ADMIN_PASS serviceURL:defaultURL] autorelease];
     [[ServiceAccountManager sharedManager] addAccount:defaultAccount];
     [[ServiceAccountManager sharedManager] setActiveServiceAccount:defaultAccount];
 #endif

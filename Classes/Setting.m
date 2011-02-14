@@ -15,16 +15,18 @@
 @synthesize target = _target;
 @synthesize valueSelector = _valueSelector;
 @synthesize actionSelector = _actionSelector;
+@synthesize callbackSelector = _callbackSelector;
 @synthesize enabled = _enabled;
 @synthesize secure = _secure;
 @synthesize shouldShowDisclosure = _shouldShowDisclosure;
 
-- (id)initWithTitle:(NSString *)title target:(id)target onValue:(SEL)value onAction:(SEL)action; {
+- (id)initWithTitle:(NSString *)title target:(id)target onValue:(SEL)value onAction:(SEL)action onChange:(SEL)callback {
     if((self = [super init])) {
         self.title = title;
         self.target = target;
         self.valueSelector = value;
         self.actionSelector = action;
+        self.callbackSelector = callback;
         
         // Default values
         self.enabled = YES;
@@ -38,6 +40,10 @@
     [_title release];
     
     [super dealloc];
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"{Setting: %@ %@}", self.title, [self value]];
 }
 
 #pragma mark -
@@ -59,15 +65,28 @@
     return nil;
 }
 
+- (NSString *)insecureValue {
+    if([self.target respondsToSelector:self.valueSelector]) {
+        return [self.target performSelector:self.valueSelector];
+    }
+    return nil;
+}
+
 - (void)performAction {
     if([self.target respondsToSelector:self.actionSelector]) {
-        [self.target performSelector:self.actionSelector];
+        [self.target performSelector:self.actionSelector withObject:self];
     }
 }
 
 - (void)performActionWithArgument:(id)arg {
     if([self.target respondsToSelector:self.actionSelector]) {
         [self.target performSelector:self.actionSelector withObject:arg];
+    }
+}
+
+- (void)performChangeCallbackWithValue:(NSString *)newValue {
+    if([self.target respondsToSelector:self.callbackSelector]) {
+        [self.target performSelector:self.callbackSelector withObject:newValue];
     }
 }
 

@@ -64,6 +64,14 @@
 - (void)addAccount:(ServiceAccount *)account;
 
 /**
+ * Refresh the information stored in the keychain for the given ServiceAccount
+ * with new data stored in memory. This method relies upon the given account
+ * having its ServiceAccount#keychainUUID property set correctly; without
+ * a UUID, it does no updating.
+ */
+- (void)updateAccount:(ServiceAccount *)account;
+
+/**
  * Remove the given ServiceAccount from the keychain and discard its
  * information. This method will remove at most one account at a time,
  * searching as follows:

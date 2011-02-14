@@ -204,6 +204,35 @@ static ServiceAccountManager * sharedInstance = nil;
     }
 }
 
+- (void)updateAccount:(ServiceAccount *)account {
+#ifdef _MTM_DEBUG_SAM_MESSAGES
+    NSLog(@"SAM: Updating account %@", account);
+#endif
+    
+    if(nil != account.keychainUUID) {
+        // Basic parameters of the keychain search
+        NSMutableDictionary * keychainQuery = [[[NSMutableDictionary alloc] initWithCapacity:10] autorelease];
+        [keychainQuery setValue:(id)kSecClassInternetPassword forKey:(id)kSecClass];
+        [keychainQuery setValue:account.keychainUUID forKey:(id)kSecAttrComment];
+        
+        // Parameters to update
+        NSMutableDictionary * keychainAttributes = [[[NSMutableDictionary alloc] initWithCapacity:10] autorelease];
+        [keychainAttributes setValue:[[account serviceURL] scheme] forKey:(id)kSecAttrProtocol];
+        [keychainAttributes setValue:[[account serviceURL] host] forKey:(id)kSecAttrServer];
+        [keychainAttributes setValue:[[account serviceURL] path] forKey:(id)kSecAttrPath];
+        [keychainAttributes setValue:[account username] forKey:(id)kSecAttrAccount];
+        [keychainAttributes setValue:[[account password] dataUsingEncoding:NSUTF8StringEncoding] forKey:(id)kSecValueData];
+        
+        // Do the update
+        OSStatus status = SecItemUpdate((CFDictionaryRef)keychainQuery, (CFDictionaryRef)keychainAttributes);
+        if(status != noErr) {
+            NSLog(@"Failed to update keychain item: %@", [self errorForOSStatus:status]);
+        }
+    } else {
+        NSLog(@"Cowardly refusing to update keychain item without associated UUID");
+    }
+}
+
 - (void)removeAccount:(ServiceAccount *)account {
 #ifdef _MTM_DEBUG_SAM_MESSAGES
     NSLog(@"SAM: Removing account %@", account);

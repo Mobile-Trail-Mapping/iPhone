@@ -20,6 +20,7 @@
     id _target;
     SEL _valueSelector;
     SEL _actionSelector;
+    SEL _callbackSelector;
     BOOL _enabled;
     BOOL _secure;
     BOOL _shouldShowDisclosure;
@@ -44,9 +45,17 @@
 
 /**
  * The selector to call to get the action to perform when this setting's table 
- * view cell is pressed. Must return void.
+ * view cell is pressed. Must return void; takes an optional id as an
+ * argument.
  */
 @property (nonatomic, assign) SEL actionSelector;
+
+/**
+ * The selector to call when the value associated with this setting is changed,
+ * either in a PropertyEditorViewController or elsewhere. Must return void
+ * and take an NSString as an argument.
+ */
+@property (nonatomic, assign) SEL callbackSelector;
 
 /**
  * Whether this setting is 'enabled'. A disabled setting will appear but be
@@ -70,7 +79,7 @@
  * display the given title and call the given selectors on the target when
  * appropriate actions are performed in the displaying SettingsViewController.
  */
-- (id)initWithTitle:(NSString *)title target:(id)target onValue:(SEL)value onAction:(SEL)action;
+- (id)initWithTitle:(NSString *)title target:(id)target onValue:(SEL)value onAction:(SEL)action onChange:(SEL)callback;
 
 /**
  * Get the value for this setting to display in the setting's table view cell.
@@ -78,6 +87,13 @@
  * @see Setting#valueSelector
  */
 - (NSString *)value;
+
+/**
+ * Get the value for this setting to display in the setting's table view cell,
+ * ignoring the Setting#secure property. This method wraps a call to
+ * valueSelector on the target.
+ */
+- (NSString *)insecureValue;
 
 /**
  * Perform the on-touch action for this setting. This method wraps a call to
@@ -92,5 +108,12 @@
  * @see Setting#actionSelector
  */
 - (void)performActionWithArgument:(id)arg;
+
+/**
+ * Perform the on-change callback action for this setting, passing the new
+ * value to the target. This method wraps a call to callbackSelector on the
+ * target.
+ */
+- (void)performChangeCallbackWithValue:(NSString *)newValue;
 
 @end

@@ -20,7 +20,7 @@
 - (void)buildSettings {
     self.settings = [[[MutableOrderedDictionary alloc] initWithCapacity:10] autorelease];
     
-    Setting * apiLocationSetting = [[[Setting alloc] initWithTitle:@"API Location" target:self onValue:NULL onAction:NULL] autorelease];
+    Setting * apiLocationSetting = [[[Setting alloc] initWithTitle:@"API Location" target:self onValue:NULL onAction:NULL onChange:NULL] autorelease];
     NSMutableArray * networkSettings = [[[NSMutableArray alloc] initWithObjects:apiLocationSetting, nil] autorelease];
     [self.settings setObject:networkSettings forKey:@"Network"];
 }

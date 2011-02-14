@@ -41,15 +41,11 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [_settings count];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [[_settings objectAtIndex:section] count];
 }
 
@@ -85,8 +81,6 @@
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     return ([[[_settings objectAtIndex:indexPath.section] objectAtIndex:indexPath.row] enabled] ? indexPath : nil);
 }
-
-
 
 #pragma mark - Table view delegate
 
