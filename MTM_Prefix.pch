@@ -18,3 +18,12 @@
 #define _MTM_DEBUG_REALLY_FORCE_IT 1
 
 #define _MTM_DEBUG_SAM_MESSAGES 1
+
+#define _MTM_DEBUG_USE_TEST_SERVER 1
+
+// Derived debug variables - do not edit
+#ifdef _MTM_DEBUG_USE_TEST_SERVER
+#define MTM_SERVER_URL_STRING @"http://mtmtest.heroku.com/"
+#else
+#define MTM_SERVER_URL_STRING @"http://mtmserver.heroku.com/"
+#endif

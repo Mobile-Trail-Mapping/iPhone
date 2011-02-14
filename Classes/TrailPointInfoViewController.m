@@ -1,6 +1,9 @@
 #import "TrailPointInfoViewController.h"
 #import "TrailPoint.h"
 
+#import "ServiceAccountManager.h"
+#import "ServiceAccount.h"
+
 @implementation TrailPointInfoViewController
 
 @synthesize delegate = _delegate;
@@ -93,8 +96,8 @@
     
     [self.activityIndicatorView performSelectorOnMainThread:@selector(startAnimating) withObject:nil waitUntilDone:YES];
     
-    NSString * imageCountURLString = [[[NSString alloc] initWithFormat:@"http://mtmserver.heroku.com/image/get/%d", trailPointID] autorelease];
-    NSURL * imageCountURL = [[[NSURL alloc] initWithString:imageCountURLString] autorelease];
+    NSURL * serviceURL = [[[ServiceAccountManager sharedManager] activeServiceAccount] serviceURL];
+    NSURL * imageCountURL = [serviceURL URLByAppendingPathComponent:[NSString stringWithFormat:@"/image/get/%d", trailPointID]];
     NSStringEncoding usedEncoding;
     NSError * error;
     NSString * imageCountString = [[[NSString alloc] initWithContentsOfURL:imageCountURL usedEncoding:&usedEncoding error:&error] autorelease];
@@ -110,8 +113,7 @@
             NSLog(@"Found %d images for trail point with ID %d", imageCount, self.trailPoint.pointID);
             
             for(int i = 0; i < imageCount; i++) {
-                NSString * imageURLString = [[[NSString alloc] initWithFormat:@"http://mtmserver.heroku.com/image/get/%d/%d", trailPointID, i] autorelease];
-                NSURL * imageURL = [[[NSURL alloc] initWithString:imageURLString] autorelease];
+                NSURL * imageURL = [serviceURL URLByAppendingPathComponent:[NSString stringWithFormat:@"/image/get/%d/%d", trailPointID, i]];
                 NSData * data = [[[NSData alloc] initWithContentsOfURL:imageURL] autorelease];
                 if(data != nil) {
                     UIImage * image = [[[UIImage alloc] initWithData:data] autorelease];
@@ -135,9 +137,13 @@
 #pragma mark Image animation methods
 
 - (void)startImageAnimations {
-    self.imageView.image = [self.trailPoint.images objectAtIndex:0];
-    _imageAnimationTimer = [[NSTimer timerWithTimeInterval:IMAGE_DISPLAY_DURATION target:self selector:@selector(cycleImage) userInfo:nil repeats:YES] retain];
-    [[NSRunLoop mainRunLoop] addTimer:_imageAnimationTimer forMode:NSDefaultRunLoopMode];
+    if([self.trailPoint.images count] > 0) {
+        self.imageView.image = [self.trailPoint.images objectAtIndex:0];
+        _imageAnimationTimer = [[NSTimer timerWithTimeInterval:IMAGE_DISPLAY_DURATION target:self selector:@selector(cycleImage) userInfo:nil repeats:YES] retain];
+        [[NSRunLoop mainRunLoop] addTimer:_imageAnimationTimer forMode:NSDefaultRunLoopMode];
+    } else {
+        self.imageView.image = [UIImage imageNamed:@"redx.png"];
+    }
 }
 
 - (void)cycleImage {

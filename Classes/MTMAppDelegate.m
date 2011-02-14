@@ -34,7 +34,8 @@
 #endif
     
     // Add default service account
-    NSURL * defaultURL = [NSURL URLWithString:@"http://mtmserver.heroku.com/"];
+    NSURL * defaultURL = [NSURL URLWithString:MTM_SERVER_URL_STRING];
+    NSLog(@"Using server url %@", [defaultURL absoluteString]);
     ServiceAccount * defaultAccount = [[[ServiceAccount alloc] initWithUsername:@"testUser" password:@"testPass" serviceURL:defaultURL] autorelease];
     [[ServiceAccountManager sharedManager] addAccount:defaultAccount];
     [[ServiceAccountManager sharedManager] setActiveServiceAccount:defaultAccount];
