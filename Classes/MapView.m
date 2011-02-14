@@ -44,7 +44,8 @@
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
     
     NSURL * serviceURL = [[[ServiceAccountManager sharedManager] activeServiceAccount] serviceURL];
-    NSURL * pointXMLURL = [serviceURL URLByAppendingPathComponent:@"/point/get"];
+    NSURL * pointXMLURL = [serviceURL URLByAppendingPathComponent:@"point/get"];
+    NSLog(@"fetching points at URL %@", [pointXMLURL absoluteString]);
     DataParser * parser = [[[DataParser alloc] initWithDataURL:pointXMLURL] autorelease];
     self.trails = [parser parseTrails];
     

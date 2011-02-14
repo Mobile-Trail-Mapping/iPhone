@@ -100,7 +100,7 @@
     [self.activityIndicatorView performSelectorOnMainThread:@selector(startAnimating) withObject:nil waitUntilDone:YES];
     
     NSURL * serviceURL = [[[ServiceAccountManager sharedManager] activeServiceAccount] serviceURL];
-    NSURL * imageCountURL = [serviceURL URLByAppendingPathComponent:[NSString stringWithFormat:@"/image/get/%d", trailPointID]];
+    NSURL * imageCountURL = [serviceURL URLByAppendingPathComponent:[NSString stringWithFormat:@"image/get/%d", trailPointID]];
     NSStringEncoding usedEncoding;
     NSError * error;
     NSString * imageCountString = [[[NSString alloc] initWithContentsOfURL:imageCountURL usedEncoding:&usedEncoding error:&error] autorelease];
@@ -116,7 +116,7 @@
             NSLog(@"Found %d images for trail point with ID %d", imageCount, self.trailPoint.pointID);
             
             for(int i = 0; i < imageCount; i++) {
-                NSURL * imageURL = [serviceURL URLByAppendingPathComponent:[NSString stringWithFormat:@"/image/get/%d/%d", trailPointID, i]];
+                NSURL * imageURL = [serviceURL URLByAppendingPathComponent:[NSString stringWithFormat:@"image/get/%d/%d", trailPointID, i]];
                 NSData * data = [[[NSData alloc] initWithContentsOfURL:imageURL] autorelease];
                 if(data != nil) {
                     UIImage * image = [[[UIImage alloc] initWithData:data] autorelease];

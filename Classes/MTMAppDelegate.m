@@ -5,13 +5,15 @@
 #import "ServiceAccount.h"
 #import "ServiceAccountManager.h"
 
-#ifdef _MTM_DEBUG_USE_TEST_SERVER
+#if _MTM_DEBUG_USE_TEST_SERVER
 #define MTM_SERVER_URL_STRING @"http://mtmtest.heroku.com/"
+#elif _MTM_DEBUG_USE_LOCAL_SERVER
+#define MTM_SERVER_URL_STRING @"http://localhost:4567/"
 #else
 #define MTM_SERVER_URL_STRING @"http://mtmserver.heroku.com/"
 #endif
 
-#ifdef _MTM_DEBUG_SHIP_DEFAULT_ADMIN
+#if _MTM_DEBUG_SHIP_DEFAULT_ADMIN
 #define MTM_SERVER_DEFAULT_ADMIN_USER @"test@brousalis.com"
 #define MTM_SERVER_DEFAULT_ADMIN_PASS @"password"
 #else

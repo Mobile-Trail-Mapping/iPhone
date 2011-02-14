@@ -66,6 +66,30 @@ static NetworkOperationManager * sharedInstance = nil;
     }
 }
 
+#pragma mark - NetworkOperationDelegate methods
+
+- (void)operation:(NetworkOperation *)operation completedWithResult:(id)result {
+    if(operation == _activeOperation) {
+        [_activeOperation release];
+        _activeOperation = nil;
+    }
+}
+
+- (void)operation:(NetworkOperation *)operation didFailWithError:(NSError *)error {
+    if(operation == _activeOperation) {
+        [_activeOperation release];
+        _activeOperation = nil;
+    }
+}
+
+- (void)operationBegan:(NetworkOperation *)operation {
+    
+}
+
+- (void)operationWasQueued:(NetworkOperation *)operation {
+    
+}
+
 #pragma mark - Lifecycle
 
 - (id)init {

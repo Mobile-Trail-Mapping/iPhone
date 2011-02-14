@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "NetworkOperationDelegate.h"
+
 @class NetworkOperation;
 
 /**
@@ -25,7 +27,7 @@
  * Attempts to modify the internal manager threading or to force particular
  * behavior not guaranteed by the manager is likely to go awry.
  */
-@interface NetworkOperationManager : NSObject {
+@interface NetworkOperationManager : NSObject <NetworkOperationDelegate> {
 @private
     NSMutableArray * _queue;
     NetworkOperation * _activeOperation;

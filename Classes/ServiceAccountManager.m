@@ -307,7 +307,7 @@ static ServiceAccountManager * sharedInstance = nil;
     NetworkOperation * authOperation = [[[NetworkOperation alloc] init] autorelease];
     authOperation.requestType = kNetworkOperationRequestTypePost;
     authOperation.authenticate = YES;
-    authOperation.endpoint = @"/user/check";
+    authOperation.endpoint = @"user/check";
     authOperation.returnType = kNetworkOperationReturnTypeString;
     authOperation.label = MTM_SAM_NETWORK_OPERATION_LABEL;
     [authOperation addDelegate:self];

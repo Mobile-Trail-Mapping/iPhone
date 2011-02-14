@@ -8,6 +8,7 @@
 
 #import "NetworkOperation.h"
 
+#import "NetworkOperationManager.h"
 #import "ServiceAccountManager.h"
 
 @interface NetworkOperation()
@@ -37,7 +38,7 @@
  * into the resulting data object using POST multipart formatting and
  * a predefined boundary. No guarantees, though.
  */
-- (NSData *)HTTPBodyForPOSTRequestFromDictionary:(NSDictionary *)dict;
+- (NSData *)HTTPBodyForPOSTRequestFromDictionary:(NSDictionary *)dict multipartBoundary:(NSString *)aBoundary;
 
 @end
 
@@ -59,6 +60,7 @@
             [delegate operationBegan:self];
         }
     }
+    [[NetworkOperationManager sharedManager] operationBegan:self];
     
     NSURL * serviceBase = [[[ServiceAccountManager sharedManager] activeServiceAccount] serviceURL];
     NSURL * URL = [serviceBase URLByAppendingPathComponent:self.endpoint];
@@ -72,14 +74,14 @@
             NSString * username = [[[ServiceAccountManager sharedManager] activeServiceAccount] username];
             NSString * passwordHash = [[[ServiceAccountManager sharedManager] activeServiceAccount] passwordSHA1];
             
-            NSLog(@"Using authentication in network operation: %@/%@", username, passwordHash);
-            
             [self.requestData setValue:(id)username forKey:@"user"];
             [self.requestData setValue:(id)passwordHash forKey:@"pwhash"];
         }
         
+        NSString * boundary = @"POSTRequestBoundary";
         [_request setHTTPMethod:@"POST"];
-        [_request setHTTPBody:[self HTTPBodyForPOSTRequestFromDictionary:self.requestData]];
+        [_request addValue:[NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary] forHTTPHeaderField: @"Content-Type"];
+        [_request setHTTPBody:[self HTTPBodyForPOSTRequestFromDictionary:self.requestData multipartBoundary:boundary]];
     } else {
         NSLog(@"Unknown request type - refusing to execute network operation");
         
@@ -89,6 +91,7 @@
                 [delegate operation:self didFailWithError:operationError];
             }
         }
+        [[NetworkOperationManager sharedManager] operation:self didFailWithError:operationError];
         
         return;
     }
@@ -123,9 +126,32 @@
     return [[self HTTPQueryStringForGETRequestFromDictionary:dict] dataUsingEncoding:NSASCIIStringEncoding];
 }
 
-- (NSData *)HTTPBodyForPOSTRequestFromDictionary:(NSDictionary *)dict {
-    //TODO implement
-    return [NSData data];
+- (NSData *)HTTPBodyForPOSTRequestFromDictionary:(NSDictionary *)dict multipartBoundary:(NSString *)aBoundary {
+    NSMutableData *myData = [NSMutableData dataWithCapacity:1];
+    NSString *myBoundary = [NSString stringWithFormat:@"--%@\r\n", aBoundary];
+    
+    for(id key in dict) {
+        id myValue = [dict valueForKey:key];
+        [myData appendData:[myBoundary dataUsingEncoding:NSUTF8StringEncoding]];
+        //if ([myValue class] == [NSString class]) {
+        if ([myValue isKindOfClass:[NSString class]]) {
+            [myData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
+            [myData appendData:[[NSString stringWithFormat:@"%@", myValue] dataUsingEncoding:NSUTF8StringEncoding]];
+        } else if(([myValue isKindOfClass:[NSURL class]]) && ([myValue isFileURL])) {
+            [myData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", key, [[myValue path] lastPathComponent]] dataUsingEncoding:NSUTF8StringEncoding]];
+            [myData appendData:[[NSString stringWithFormat:@"Content-Type: application/octet-stream\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+            [myData appendData:[NSData dataWithContentsOfFile:[myValue path]]];
+        } else if(([myValue isKindOfClass:[NSData class]])) {
+            [myData appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", key, key] dataUsingEncoding:NSUTF8StringEncoding]];
+            [myData appendData:[[NSString stringWithFormat:@"Content-Type: application/octet-stream\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+            [myData appendData:myValue];
+        } // eof if()
+        
+        [myData appendData:[[NSString stringWithString:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    } // eof for()
+    [myData appendData:[[NSString stringWithFormat:@"--%@--\r\n", aBoundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    return myData;
 }
 
 #pragma mark - NSURLConnectionDelegate methods
@@ -135,8 +161,6 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    NSLog(@"connection did fail with error");
-    
     NSDictionary * userInfo = [[[NSDictionary alloc] initWithObjectsAndKeys:error, @"innerError", nil] autorelease];
     NSError * operationError = [[[NSError alloc] initWithDomain:@"MTM-NetworkOperation" code:kNetworkOperationErrorConnectionFailed userInfo:userInfo] autorelease];
     
@@ -145,14 +169,13 @@
             [delegate operation:self didFailWithError:operationError];
         }
     }
+    [[NetworkOperationManager sharedManager] operation:self didFailWithError:operationError];
     
     [_returnData release];
     _returnData = nil;
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    NSLog(@"connection did finish loading");
-    
     id result = nil;
     
     if(self.returnType == kNetworkOperationReturnTypeData) {
@@ -170,17 +193,17 @@
                 [delegate operation:self didFailWithError:operationError];
             }
         }
+        [[NetworkOperationManager sharedManager] operation:self didFailWithError:operationError];
         
         return;
     }
     
     for(id<NetworkOperationDelegate> delegate in self.delegates) {
-        NSLog(@"Checking delegate %@", delegate);
         if([delegate respondsToSelector:@selector(operation:completedWithResult:)]) {
-            NSLog(@"Notifying delegate %@", delegate);
             [delegate operation:self completedWithResult:result];
         }
     }
+    [[NetworkOperationManager sharedManager] operation:self completedWithResult:result];
     
     [_returnData release];
     _returnData = nil;
