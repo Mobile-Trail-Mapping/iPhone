@@ -20,6 +20,12 @@ typedef enum {
     kNetworkOperationReturnTypeImage
 } kNetworkOperationReturnType;
 
+typedef enum {
+    kNetworkOperationErrorConnectionFailed,
+    kNetworkOperationErrorUnrecognizedRequestType,
+    kNetworkOperationErrorUnrecognizedReturnType
+} kNetworkOperationError;
+
 /**
  * A single encapsulated request to an instance of the MTM server. One network
  * operation always represents one call over the network to exchange data with
@@ -35,8 +41,12 @@ typedef enum {
     NSMutableSet * _delegates;
     kNetworkOperationRequestType _requestType;
     kNetworkOperationReturnType _returnType;
+    BOOL _authenticate;
     NSString * _endpoint;
-    NSDictionary * _data;
+    NSDictionary * _requestData;
+    
+    NSMutableURLRequest * _request;
+    NSMutableData * _returnData;
 }
 
 /**
@@ -59,6 +69,17 @@ typedef enum {
 @property (nonatomic, assign) kNetworkOperationReturnType returnType;
 
 /**
+ * Whether or not to use authentication information when executing this
+ * operation. Authentication is only passed with POST requests (i.e.
+ * kNetworkOperationRequestTypePost).
+ *
+ * Setting this property to YES implies that you're OK with losing whatever
+ * data is in the NetworkOperation#data dictionary that belongs to the
+ * "user" and "pwhash" keys.
+ */
+@property (nonatomic, assign) BOOL authenticate;
+
+/**
  * The RESTful API endpoint to call on the MTM server. Will be appended to the
  * active service account's base URL to form the absolute URL of the MTM
  * server request to make.
@@ -70,7 +91,7 @@ typedef enum {
  * be automatically converted to the appropriate format for the specified
  * network operation type.
  */
-@property (nonatomic, retain) NSDictionary * data;
+@property (nonatomic, retain) NSDictionary * requestData;
 
 /**
  * Begin executing this NetworkOperation. Fires off its connection and begins

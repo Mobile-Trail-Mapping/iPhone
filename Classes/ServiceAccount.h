@@ -50,6 +50,12 @@
 @property (nonatomic, retain) NSString * keychainUUID;
 
 /**
+ * The password for this service account, hashed through a UTF-8 implementation
+ * of SHA-1.
+ */
+- (NSString *)passwordSHA1;
+
+/**
  * Create a new service account and populate it with the given arguments.
  */
 - (id)initWithUsername:(NSString *)username password:(NSString *)password serviceURL:(NSURL *)serviceURL;

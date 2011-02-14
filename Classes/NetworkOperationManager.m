@@ -8,6 +8,7 @@
 
 #import "NetworkOperationManager.h"
 #import "NetworkOperation.h"
+#import "NetworkOperationDelegate.h"
 
 static NetworkOperationManager * sharedInstance = nil;
 
@@ -35,6 +36,12 @@ static NetworkOperationManager * sharedInstance = nil;
 
 - (void)enqueueOperation:(NetworkOperation *)operation {
     [_queue addObject:operation];
+    
+    for(id<NetworkOperationDelegate> delegate in operation.delegates) {
+        if([delegate respondsToSelector:@selector(operationWasQueued:)]) {
+            [delegate operationWasQueued:operation];
+        }
+    }
 }
 
 - (void)cancelOperation:(NetworkOperation *)operation {
