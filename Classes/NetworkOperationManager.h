@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class NetworkOperation;
+
 /**
  * Class responsible for handling a series of network operations. "Network
  * operations" include all requests to an instance of the MTM server, including
@@ -25,7 +27,37 @@
  */
 @interface NetworkOperationManager : NSObject {
 @private
+    NSMutableArray * _queue;
+    NetworkOperation * _activeOperation;
     
+    NSTimer * _pumpTimer;
 }
+
+/**
+ * Get the currently executing NetworkOperation. If no operation is
+ * executing, returns nil.
+ */
+- (NetworkOperation *)activeOperation;
+
+/**
+ * Get the list of queued NetworkOperation objects, in order they will
+ * be executed. If no operations are queued, returns nil. The queue does not
+ * include the actively executing operation.
+ */
+- (NSArray *)queuedOperations;
+
+/**
+ * Place a NetworkOperation in the queue. The operation will be executed
+ * at the next available opportunity; if no other operation is active or
+ * queued, this means immediately.
+ */
+- (void)enqueueOperation:(NetworkOperation *)operation;
+
+/**
+ * Stop any execution of a NetworkOperation and remove it from queue.
+ * Regardless of the state of the operation (queued or executing), it will
+ * deliver a canceled delegate method and stop immediately.
+ */
+- (void)cancelOperation:(NetworkOperation *)operation;
 
 @end

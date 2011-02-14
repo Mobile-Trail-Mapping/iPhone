@@ -14,6 +14,12 @@ typedef enum {
     kNetworkOperationRequestTypePost
 } kNetworkOperationRequestType;
 
+typedef enum {
+    kNetworkOperationReturnTypeData,
+    kNetworkOperationReturnTypeString,
+    kNetworkOperationReturnTypeImage
+} kNetworkOperationReturnType;
+
 /**
  * A single encapsulated request to an instance of the MTM server. One network
  * operation always represents one call over the network to exchange data with
@@ -28,6 +34,7 @@ typedef enum {
 @private
     NSMutableSet * _delegates;
     kNetworkOperationRequestType _requestType;
+    kNetworkOperationReturnType _returnType;
     NSString * _endpoint;
     NSDictionary * _data;
 }
@@ -46,6 +53,12 @@ typedef enum {
 @property (nonatomic, assign) kNetworkOperationRequestType requestType;
 
 /**
+ * The type of data to return. Specifies the class of object that is passed
+ * to the delegates on the completion callback.
+ */
+@property (nonatomic, assign) kNetworkOperationReturnType returnType;
+
+/**
  * The RESTful API endpoint to call on the MTM server. Will be appended to the
  * active service account's base URL to form the absolute URL of the MTM
  * server request to make.
@@ -58,5 +71,17 @@ typedef enum {
  * network operation type.
  */
 @property (nonatomic, retain) NSDictionary * data;
+
+/**
+ * Begin executing this NetworkOperation. Fires off its connection and begins
+ * notifying delegates of its actions.
+ */
+- (void)execute;
+
+/**
+ * Cancel the execution of this NetworkOperation. Has no effect if the
+ * operation is not executing.
+ */
+- (void)cancel;
 
 @end
