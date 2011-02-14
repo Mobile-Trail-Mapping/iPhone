@@ -5,6 +5,7 @@
 #import "TrailOverlayPathView.h"
 #import "TrailPointAnnotation.h"
 #import "DataParser.h"
+#import "ServiceAccountManager.h"
 
 @interface MapView(Parsing)
 /**
@@ -42,7 +43,9 @@
 - (void)beginParse {
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
     
-    DataParser * parser = [[[DataParser alloc] initWithDataAddress:@"http://mtmserver.heroku.com/point/get"] autorelease];
+    NSURL * serviceURL = [[[ServiceAccountManager sharedManager] activeServiceAccount] serviceURL];
+    NSURL * pointXMLURL = [serviceURL URLByAppendingPathComponent:@"/point/get"];
+    DataParser * parser = [[[DataParser alloc] initWithDataURL:pointXMLURL] autorelease];
     self.trails = [parser parseTrails];
     
     for(Trail * trail in self.trails) {

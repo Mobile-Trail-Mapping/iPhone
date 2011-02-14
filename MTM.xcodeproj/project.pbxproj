@@ -40,6 +40,8 @@
 		22DEE78B1308E5B40026CC2C /* redx.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 22DEE78A1308E5B40026CC2C /* redx.jpg */; };
 		22DEE78E1308EA0B0026CC2C /* PropertyEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DEE78D1308EA0B0026CC2C /* PropertyEditorViewController.m */; };
 		22DEE7901308EA4E0026CC2C /* PropertyEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22DEE78F1308EA4E0026CC2C /* PropertyEditorView.xib */; };
+		22DEE7931309404B0026CC2C /* NetworkOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DEE7921309404B0026CC2C /* NetworkOperationManager.m */; };
+		22DEE796130942D60026CC2C /* NetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DEE795130942D60026CC2C /* NetworkOperation.m */; };
 		22E80B3A12FA9BD6009CF69F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D94A5912ADC542003BDB1C /* main.m */; };
 		22E80B3B12FA9BD6009CF69F /* MTMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D94A5C12ADC542003BDB1C /* MTMAppDelegate.m */; };
 		22E80B3C12FA9BD6009CF69F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D94A6212ADC542003BDB1C /* MainViewController.m */; };
@@ -170,6 +172,11 @@
 		22DEE78C1308EA0B0026CC2C /* PropertyEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyEditorViewController.h; sourceTree = "<group>"; };
 		22DEE78D1308EA0B0026CC2C /* PropertyEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyEditorViewController.m; sourceTree = "<group>"; };
 		22DEE78F1308EA4E0026CC2C /* PropertyEditorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PropertyEditorView.xib; sourceTree = "<group>"; };
+		22DEE7911309404B0026CC2C /* NetworkOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkOperationManager.h; sourceTree = "<group>"; };
+		22DEE7921309404B0026CC2C /* NetworkOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkOperationManager.m; sourceTree = "<group>"; };
+		22DEE794130942D60026CC2C /* NetworkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkOperation.h; sourceTree = "<group>"; };
+		22DEE795130942D60026CC2C /* NetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkOperation.m; sourceTree = "<group>"; };
+		22DEE797130943800026CC2C /* NetworkOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkOperationDelegate.h; sourceTree = "<group>"; };
 		22E3C66612F0CD8000044FB7 /* TrailPointInfoModalDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailPointInfoModalDelegate.h; sourceTree = "<group>"; };
 		22E80AC712FA9744009CF69F /* MTMTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTMTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22E80AC812FA9744009CF69F /* MTMTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MTMTest-Info.plist"; sourceTree = "<group>"; };
@@ -354,6 +361,11 @@
 				22DC0FF61307550F00D99F22 /* ServiceAccountManager.m */,
 				22DC0FFD130776B000D99F22 /* ServiceAccount.h */,
 				22DC0FFE130776B000D99F22 /* ServiceAccount.m */,
+				22DEE7911309404B0026CC2C /* NetworkOperationManager.h */,
+				22DEE7921309404B0026CC2C /* NetworkOperationManager.m */,
+				22DEE794130942D60026CC2C /* NetworkOperation.h */,
+				22DEE795130942D60026CC2C /* NetworkOperation.m */,
+				22DEE797130943800026CC2C /* NetworkOperationDelegate.h */,
 			);
 			name = Network;
 			sourceTree = "<group>";
@@ -739,6 +751,8 @@
 				22DC0FFA1307562500D99F22 /* StoredSettingsManager.m in Sources */,
 				22DC0FFF130776B000D99F22 /* ServiceAccount.m in Sources */,
 				22DEE78E1308EA0B0026CC2C /* PropertyEditorViewController.m in Sources */,
+				22DEE7931309404B0026CC2C /* NetworkOperationManager.m in Sources */,
+				22DEE796130942D60026CC2C /* NetworkOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

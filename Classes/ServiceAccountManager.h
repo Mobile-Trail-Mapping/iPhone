@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class ServiceAccount;
+#import "ServiceAccount.h"
 
 /**
  * Singleton class responsible for handling keychain access, credentials, and
