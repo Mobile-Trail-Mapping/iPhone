@@ -44,10 +44,14 @@ static NetworkOperationManager * sharedInstance = nil;
             [delegate operationWasQueued:operation];
         }
     }
+    [self operationWasQueued:operation];
 }
 
 - (void)cancelOperation:(NetworkOperation *)operation {
-    
+    [operation cancel];
+    if(_activeOperation != operation) {
+        [_queue removeObject:operation];
+    }
 }
 
 - (void)pumpQueue {

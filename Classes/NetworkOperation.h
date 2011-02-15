@@ -23,6 +23,7 @@ typedef enum {
 } kNetworkOperationReturnType;
 
 typedef enum {
+    kNetworkOperationErrorCanceled,
     kNetworkOperationErrorConnectionFailed,
     kNetworkOperationErrorUnrecognizedRequestType,
     kNetworkOperationErrorUnrecognizedReturnType
@@ -50,6 +51,7 @@ typedef enum {
     NSString * _label;
     
     NSMutableURLRequest * _request;
+    NSURLConnection * _connection;
     NSMutableData * _returnData;
 }
 

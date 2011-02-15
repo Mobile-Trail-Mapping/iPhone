@@ -96,14 +96,23 @@
         return;
     }
     
-    NSURLConnection * connection = [[[NSURLConnection alloc] initWithRequest:_request delegate:self startImmediately:NO] autorelease];
+    _connection = [[NSURLConnection alloc] initWithRequest:_request delegate:self startImmediately:NO];
     _returnData = [[NSMutableData alloc] initWithCapacity:10];
-    [connection scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-    [connection start];
+    [_connection scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+    [_connection start];
 }
 
 - (void)cancel {
+    [_connection cancel];
     
+    NSError * operationError = [[[NSError alloc] initWithDomain:@"MTM-NetworkOperation" code:kNetworkOperationErrorCanceled userInfo:nil] autorelease];
+    
+    for(id<NetworkOperationDelegate> delegate in self.delegates) {
+        if([delegate respondsToSelector:@selector(operation:didFailWithError:)]) {
+            [delegate operation:self didFailWithError:operationError];
+        }
+    }
+    [[NetworkOperationManager sharedManager] operation:self didFailWithError:operationError];
 }
 
 #pragma mark - Data manipulation
@@ -171,6 +180,8 @@
     }
     [[NetworkOperationManager sharedManager] operation:self didFailWithError:operationError];
     
+    [_connection release];
+    _connection = nil;
     [_returnData release];
     _returnData = nil;
 }
@@ -205,6 +216,8 @@
     }
     [[NetworkOperationManager sharedManager] operation:self completedWithResult:result];
     
+    [_connection release];
+    _connection = nil;
     [_returnData release];
     _returnData = nil;
 }
@@ -241,6 +254,7 @@
     [_requestData release];
     [_returnData release];
     [_request release];
+    [_connection release];
     [_label release];
     
     [super dealloc];
