@@ -25,6 +25,7 @@
 @synthesize pointTitle = _pointTitle;
 @synthesize pointDesc = _pointDesc;
 @synthesize pointTrail = _pointTrail;
+@synthesize pointCategory = _pointCategory;
 
 #pragma mark - Lifecycle
 
@@ -83,7 +84,11 @@
                                                      onValue:@selector(pointTrailString) 
                                                     onAction:@selector(pickProperty:) 
                                                     onChange:@selector(didChangePointTrailName:)] autorelease];
-    Setting * categorySetting = [[[Setting alloc] initWithTitle:@"Category" target:self onValue:NULL onAction:NULL onChange:NULL] autorelease];
+    Setting * categorySetting = [[[Setting alloc] initWithTitle:@"Category" 
+                                                         target:self 
+                                                        onValue:@selector(pointCategory) 
+                                                       onAction:@selector(pickProperty:) 
+                                                       onChange:@selector(didChangePointCategory:)] autorelease];
     NSArray * ownerSettings = [[[NSArray alloc] initWithObjects:trailSetting, categorySetting, nil] autorelease];
     [self.settings setValue:ownerSettings forKey:@"Ownership"];
     
@@ -150,6 +155,8 @@
         for(Trail * trail in trails) {
             [options addObject:trail.name];
         }
+    } else if([setting.title isEqualToString:@"Category"]) {
+        options = [[self.primaryViewController categories] copy];
     }
     
     // Display the controller
@@ -159,16 +166,19 @@
 
 #pragma mark - Change callback methods
 
+- (void)refreshTableDataForSectionTitle:(NSString *)sectionTitle {
+    NSUInteger section = [self.settings indexOfKey:sectionTitle];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
+}
+
 - (void)didChangePointTitle:(NSString *)newTitle {
     self.pointTitle = newTitle;
-    NSUInteger section = [self.settings indexOfKey:@"Info"];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
+    [self refreshTableDataForSectionTitle:@"Info"];
 }
 
 - (void)didChangePointDesc:(NSString *)newDesc {
     self.pointDesc = newDesc;
-    NSUInteger section = [self.settings indexOfKey:@"Info"];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
+    [self refreshTableDataForSectionTitle:@"Info"];
 }
 
 - (void)didChangePointTrailName:(NSString *)newTrailName {
@@ -177,8 +187,12 @@
             self.pointTrail = trail;
         }
     }
-    NSUInteger section = [self.settings indexOfKey:@"Ownership"];
-    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
+    [self refreshTableDataForSectionTitle:@"Ownership"];
+}
+
+- (void)didChangePointCategory:(NSString *)newCategory {
+    self.pointCategory = newCategory;
+    [self refreshTableDataForSectionTitle:@"Ownership"];
 }
 
 @end

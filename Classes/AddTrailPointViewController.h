@@ -23,6 +23,7 @@
     NSString * _pointDesc;
     
     Trail * _pointTrail;
+    NSString * _pointCategory;
 }
 
 /**
@@ -45,5 +46,10 @@
  * The Trail object that will own the new point.
  */
 @property (nonatomic, retain) Trail * pointTrail;
+
+/**
+ * The category string that will be used for the new point.
+ */
+@property (nonatomic, retain) NSString * pointCategory;
 
 @end
