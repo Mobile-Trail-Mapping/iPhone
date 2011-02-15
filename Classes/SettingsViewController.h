@@ -37,7 +37,10 @@
 
 /**
  * Generate the MutableOrderedDictionary containing the Setting objects
- * which are displayed in this SettingsViewController.
+ * which are displayed in this SettingsViewController. Subclasses should
+ * implement this method to show custom sets of settings by creating a new
+ * MutableOrderedDictionary of settings and populating it into the
+ * SettingsViewController#settings property.
  */
 - (void)buildSettings;
 

@@ -3,6 +3,7 @@
 #import "MapView.h"
 #import "TrailPointInfoViewController.h"
 #import "PrimarySettingsViewController.h"
+#import "AddTrailObjectViewController.h"
 
 @implementation MainViewController
 
@@ -17,7 +18,8 @@
     self.view.clipsToBounds = NO;
     self.view.backgroundColor = [UIColor blueColor];
     
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStyleDone target:self action:@selector(showSettings)] autorelease];
+    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStyleDone target:self action:@selector(showSettings)] autorelease];
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showAddDialog)] autorelease];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -64,6 +66,15 @@
 
 - (void)clearCachedImages {
     [self.mapView clearCachedImagesExceptForTrailPoint:nil];
+}
+
+#pragma mark -
+#pragma mark Add methods
+
+- (void)showAddDialog {
+    AddTrailObjectViewController * addController = [[[AddTrailObjectViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil] autorelease];
+    UINavigationController * navController = [[[UINavigationController alloc] initWithRootViewController:addController] autorelease];
+    [self presentModalViewController:navController animated:YES];
 }
 
 @end

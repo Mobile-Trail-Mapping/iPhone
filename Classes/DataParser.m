@@ -82,7 +82,11 @@
                         [pointLinks addObject:[NSNumber numberWithInt:[[[[connectionElement children] objectAtIndex:0] stringValue] intValue]]];
                     }
                 } else {
-                    [pointProperties setValue:[[[propertyElement children] objectAtIndex:0] stringValue] forKey:[propertyElement name]];
+                    NSString * propertyValue = @"";
+                    if([[propertyElement children] count] > 0) {
+                        propertyValue = [[[propertyElement children] objectAtIndex:0] stringValue];
+                    }
+                    [pointProperties setValue:propertyValue forKey:[propertyElement name]];
                 }
             }
             

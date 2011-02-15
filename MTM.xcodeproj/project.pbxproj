@@ -42,6 +42,7 @@
 		22DEE7901308EA4E0026CC2C /* PropertyEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22DEE78F1308EA4E0026CC2C /* PropertyEditorView.xib */; };
 		22DEE7931309404B0026CC2C /* NetworkOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DEE7921309404B0026CC2C /* NetworkOperationManager.m */; };
 		22DEE796130942D60026CC2C /* NetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DEE795130942D60026CC2C /* NetworkOperation.m */; };
+		22DEE79B130A2D390026CC2C /* AddTrailObjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DEE79A130A2D390026CC2C /* AddTrailObjectViewController.m */; };
 		22E80B3A12FA9BD6009CF69F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D94A5912ADC542003BDB1C /* main.m */; };
 		22E80B3B12FA9BD6009CF69F /* MTMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D94A5C12ADC542003BDB1C /* MTMAppDelegate.m */; };
 		22E80B3C12FA9BD6009CF69F /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D94A6212ADC542003BDB1C /* MainViewController.m */; };
@@ -177,6 +178,8 @@
 		22DEE794130942D60026CC2C /* NetworkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkOperation.h; sourceTree = "<group>"; };
 		22DEE795130942D60026CC2C /* NetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkOperation.m; sourceTree = "<group>"; };
 		22DEE797130943800026CC2C /* NetworkOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkOperationDelegate.h; sourceTree = "<group>"; };
+		22DEE799130A2D390026CC2C /* AddTrailObjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTrailObjectViewController.h; sourceTree = "<group>"; };
+		22DEE79A130A2D390026CC2C /* AddTrailObjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTrailObjectViewController.m; sourceTree = "<group>"; };
 		22E3C66612F0CD8000044FB7 /* TrailPointInfoModalDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailPointInfoModalDelegate.h; sourceTree = "<group>"; };
 		22E80AC712FA9744009CF69F /* MTMTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTMTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22E80AC812FA9744009CF69F /* MTMTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MTMTest-Info.plist"; sourceTree = "<group>"; };
@@ -304,6 +307,7 @@
 		22C07D6412E6933900381FE5 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				22DEE798130A2C4B0026CC2C /* Editing */,
 				2237895E12EA113800BAF18A /* TrailPointAnnotation.h */,
 				2237895F12EA113800BAF18A /* TrailPointAnnotation.m */,
 				2233DACF12E8FD260004A33A /* TrailOverlay.h */,
@@ -368,6 +372,15 @@
 				22DEE797130943800026CC2C /* NetworkOperationDelegate.h */,
 			);
 			name = Network;
+			sourceTree = "<group>";
+		};
+		22DEE798130A2C4B0026CC2C /* Editing */ = {
+			isa = PBXGroup;
+			children = (
+				22DEE799130A2D390026CC2C /* AddTrailObjectViewController.h */,
+				22DEE79A130A2D390026CC2C /* AddTrailObjectViewController.m */,
+			);
+			name = Editing;
 			sourceTree = "<group>";
 		};
 		22E80ACC12FA9754009CF69F /* Tests */ = {
@@ -753,6 +766,7 @@
 				22DEE78E1308EA0B0026CC2C /* PropertyEditorViewController.m in Sources */,
 				22DEE7931309404B0026CC2C /* NetworkOperationManager.m in Sources */,
 				22DEE796130942D60026CC2C /* NetworkOperation.m in Sources */,
+				22DEE79B130A2D390026CC2C /* AddTrailObjectViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
