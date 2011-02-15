@@ -332,6 +332,8 @@ static ServiceAccountManager * sharedInstance = nil;
         } else {
             _activeAccountAuthenticated = NO;
         }
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"MTMAuthenticationStatusDidChange" object:nil];
     }
 }
 
@@ -342,6 +344,8 @@ static ServiceAccountManager * sharedInstance = nil;
     
     if([operation.label isEqualToString:MTM_SAM_NETWORK_OPERATION_LABEL]) {
         _activeAccountAuthenticated = NO;
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"MTMAuthenticationStatusDidChange" object:nil];
     }
 }
 

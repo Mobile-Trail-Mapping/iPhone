@@ -5,6 +5,19 @@
 #import "PrimarySettingsViewController.h"
 #import "AddTrailObjectViewController.h"
 
+#import "ServiceAccountManager.h"
+
+@interface MainViewController()
+
+/**
+ * Whether this controller can display administrative portions of the user
+ * interface. Determined by the presence of an authenticated account and
+ * the existence of sufficient trail data.
+ */
+- (BOOL)canShowAdminUI;
+
+@end
+
 @implementation MainViewController
 
 @synthesize mapView = _mapView;
@@ -19,7 +32,12 @@
     self.view.backgroundColor = [UIColor blueColor];
     
     self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStyleDone target:self action:@selector(showSettings)] autorelease];
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showAddDialog)] autorelease];
+    if([self canShowAdminUI]) {
+        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showAddDialog)] autorelease];
+    }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authenticatedStatusDidChange) name:@"MTMAuthenticationStatusDidChange" object:nil];
+    [[ServiceAccountManager sharedManager] refreshActiveAuthentication];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,6 +55,21 @@
 
 - (NSArray *)trails {
     return self.mapView.trails;
+}
+        
+- (BOOL)canShowAdminUI {
+    return [[ServiceAccountManager sharedManager] activeAccountAuthenticated];
+}
+
+- (void)authenticatedStatusDidChange {
+    NSLog(@"notified of changed auth status");
+    if([self canShowAdminUI]) {
+        [self.navigationItem setRightBarButtonItem:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
+                                                                                                  target:self 
+                                                                                                  action:@selector(showAddDialog)] autorelease] animated:YES];
+    } else {
+        [self.navigationItem setRightBarButtonItem:nil animated:YES];
+    }
 }
 
 #pragma mark -
