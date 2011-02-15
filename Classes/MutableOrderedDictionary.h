@@ -45,4 +45,9 @@
  */
 - (id)keyAtIndex:(NSUInteger)index;
 
+/**
+ * Get the index of the given key.
+ */
+- (NSUInteger)indexOfKey:(id)key;
+
 @end

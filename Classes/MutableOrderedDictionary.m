@@ -51,6 +51,10 @@
     return [_data valueForKey:aKey];
 }
 
+- (NSUInteger)indexOfKey:(id)key {
+    return [_keys indexOfObject:key];
+}
+
 #pragma mark - Enumerators
 
 - (NSEnumerator *)keyEnumerator {

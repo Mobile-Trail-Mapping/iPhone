@@ -10,6 +10,8 @@
 
 #import "Setting.h"
 
+#import "AddTrailPointViewController.h"
+
 @implementation AddTrailObjectViewController
 
 #pragma mark - Lifecycle
@@ -21,18 +23,14 @@
     self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel)] autorelease];
 }
 
-- (void)dealloc {
-    [super dealloc];
-}
-
 #pragma mark - SettingsViewController subclass methods
 
 - (void)buildSettings {
     self.settings = [[[MutableOrderedDictionary alloc] initWithCapacity:10] autorelease];
     
     Setting * addTrailSetting = [[[Setting alloc] initWithTitle:@"Trail" target:self onValue:NULL onAction:NULL onChange:NULL] autorelease];
-    Setting * addTrailPointSetting = [[[Setting alloc] initWithTitle:@"Trail point" target:self onValue:NULL onAction:NULL onChange:NULL] autorelease];
-    addTrailSetting.enabled = NO; addTrailPointSetting.enabled = NO;
+    Setting * addTrailPointSetting = [[[Setting alloc] initWithTitle:@"Trail point" target:self onValue:NULL onAction:@selector(showAddTrailPoint) onChange:NULL] autorelease];
+    addTrailSetting.enabled = NO;
     NSArray * trailSettings = [[[NSArray alloc] initWithObjects:addTrailSetting, addTrailPointSetting, nil] autorelease];
     [self.settings setValue:trailSettings forKey:@"Trail objects"];
 }
@@ -41,6 +39,13 @@
 
 - (void)cancel {
     [self dismissModalViewControllerAnimated:YES];
+}
+                                                                                                                                
+#pragma mark - Action callback methods
+
+- (void)showAddTrailPoint {
+    AddTrailPointViewController * addController = [[[AddTrailPointViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil] autorelease];
+    [self.navigationController pushViewController:addController animated:YES];
 }
 
 @end
