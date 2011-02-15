@@ -7,6 +7,9 @@
 #import "DataParser.h"
 #import "ServiceAccountManager.h"
 
+#import "NetworkOperationManager.h"
+#import "NetworkOperation.h"
+
 @interface MapView(Parsing)
 /**
  * Start point for background thread to fetch trails data and add to this
@@ -22,6 +25,8 @@
 @implementation MapView
 
 @synthesize trails = _trails;
+@synthesize categories = _categories;
+
 @synthesize delegate = _delegate;
 
 - (id) initWithFrame:(CGRect) frame {
@@ -35,6 +40,17 @@
         self.trails = [[[NSMutableArray alloc] init] autorelease];
         _overlayPathViews = [[NSMutableDictionary alloc] init];
         
+        // Ask for auxiliary trails information
+        NetworkOperation * categoryFetchOperation = [[[NetworkOperation alloc] init] autorelease];
+        categoryFetchOperation.label = @"MTMCategoryFetchOperation";
+        categoryFetchOperation.endpoint = @"category/get";
+        categoryFetchOperation.requestType = kNetworkOperationRequestTypeGet;
+        categoryFetchOperation.returnType = kNetworkOperationReturnTypeString;
+        [categoryFetchOperation addDelegate:self];
+        [[NetworkOperationManager sharedManager] enqueueOperation:categoryFetchOperation];
+        
+        // Ask for trails
+        //TODO this needs to be refactored into a NetworkOperation
         [self performSelectorInBackground:@selector(beginParse) withObject:nil];
 	}
 	return self;
@@ -48,6 +64,7 @@
     NSLog(@"fetching points at URL %@", [pointXMLURL absoluteString]);
     DataParser * parser = [[[DataParser alloc] initWithDataURL:pointXMLURL] autorelease];
     self.trails = [parser parseTrails];
+    [self.delegate trailObjectsDidChange];
     
     for(Trail * trail in self.trails) {
         TrailOverlayPathView * overlayPathView = [[[TrailOverlayPathView alloc] initWithTrail:trail mapView:_mapView] autorelease];
@@ -106,6 +123,41 @@
     NSLog(@"Region did change animated");
     for(MKOverlayPathView * pathView in [_overlayPathViews allValues]) {
         [pathView setNeedsDisplayInMapRect:mapView.visibleMapRect];
+    }
+}
+
+#pragma mark -
+#pragma mark NetworkOperationDelegate methods
+
+- (void)operationBegan:(NetworkOperation *)operation {
+    
+}
+
+- (void)operationWasQueued:(NetworkOperation *)operation {
+    
+}
+
+- (void)operation:(NetworkOperation *)operation completedWithResult:(id)result {
+    CXMLDocument * doc = [[[CXMLDocument alloc] initWithXMLString:result options:0 error:nil] autorelease];
+    
+    if([operation.label isEqualToString:@"MTMCategoryFetchOperation"]) {
+        NSMutableArray * newCategories = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];
+        
+        NSArray * categoryNameElements = [doc nodesForXPath:@"/categories/category/name" error:nil];
+        for(CXMLElement * categoryNameElement in categoryNameElements) {
+            NSLog(@"Found element %@", [[categoryNameElement childAtIndex:0] stringValue]);
+            
+            [newCategories addObject:[[categoryNameElement childAtIndex:0] stringValue]];
+        }
+        
+        self.categories = newCategories;
+    }
+}
+
+- (void)operation:(NetworkOperation *)operation didFailWithError:(NSError *)error {
+    if([operation.label isEqualToString:@"MTMCategoryFetchOperation"]) {
+        self.categories = [NSArray array];
+        [self.delegate trailObjectsDidChange];
     }
 }
 

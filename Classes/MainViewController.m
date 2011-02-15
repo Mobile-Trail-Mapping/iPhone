@@ -16,6 +16,12 @@
  */
 - (BOOL)canShowAdminUI;
 
+/**
+ * Notification callback of a change in the data that is required to show the
+ * admin interface.
+ */
+- (void)adminDataDidChange;
+
 @end
 
 @implementation MainViewController
@@ -36,7 +42,7 @@
         self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showAddDialog)] autorelease];
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(authenticatedStatusDidChange) name:@"MTMAuthenticationStatusDidChange" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(adminDataDidChange) name:@"MTMAuthenticationStatusDidChange" object:nil];
     [[ServiceAccountManager sharedManager] refreshActiveAuthentication];
 }
 
@@ -56,13 +62,21 @@
 - (NSArray *)trails {
     return self.mapView.trails;
 }
+
+- (NSArray *)categories {
+    return self.mapView.categories;
+}
         
 - (BOOL)canShowAdminUI {
-    return [[ServiceAccountManager sharedManager] activeAccountAuthenticated];
+    BOOL authenticated = [[ServiceAccountManager sharedManager] activeAccountAuthenticated];
+    BOOL haveTrails = ([[self trails] count] > 0);
+    BOOL haveCategories = ([[self categories] count] > 0);
+    
+    return authenticated && haveTrails && haveCategories;
 }
 
-- (void)authenticatedStatusDidChange {
-    NSLog(@"notified of changed auth status");
+- (void)adminDataDidChange {
+    NSLog(@"notified of changed admin data");
     if([self canShowAdminUI]) {
         [self.navigationItem setRightBarButtonItem:[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
                                                                                                   target:self 
@@ -88,6 +102,10 @@
 
 - (UIView *)calloutViewForTrailPointAnnotation:(MKAnnotationView *)annotation {
     return [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+}
+
+- (void)trailObjectsDidChange {
+    [self adminDataDidChange];
 }
 
 #pragma mark -

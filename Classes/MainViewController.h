@@ -33,6 +33,11 @@
 - (NSArray *)trails;
 
 /**
+ * Get the list of categories available in this controller's MapView.
+ */
+- (NSArray *)categories;
+
+/**
  * Inform this controller's MapView to clear all image caches.
  */
 - (void)clearCachedImages;

@@ -22,4 +22,10 @@
  */
 - (void)showInformationForTrailPoint:(TrailPoint *)trailPoint sender:(id)sender;
 
+/**
+ * Notify the delegate that the objects that back the displayed trails have
+ * changed. Usually triggered as a result of network traffic.
+ */
+- (void)trailObjectsDidChange;
+
 @end

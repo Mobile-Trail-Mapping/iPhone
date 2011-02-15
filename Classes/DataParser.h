@@ -5,6 +5,9 @@
  * the MTM server. Instances of DataParser should be created with the
  * URL from which to pull data, then called each time updated data is
  * needed from the server.
+ *
+ * This class is deprecated and intended to have its functionality split
+ * between NetworkOperationManager and MapView.
  */
 @interface DataParser : NSObject {
     

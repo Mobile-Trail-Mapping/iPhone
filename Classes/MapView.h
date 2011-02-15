@@ -1,6 +1,7 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "TrailActionDelegate.h"
+#import "NetworkOperationDelegate.h"
 
 @class TrailPoint;
 
@@ -9,10 +10,13 @@
  * messages from the MKMapView instance in iPhoneViewController and performs
  * operations necessary to display trails on the map.
  */
-@interface MapView : UIView<MKMapViewDelegate> {
+@interface MapView : UIView <MKMapViewDelegate, NetworkOperationDelegate> {
 @private
 	MKMapView * _mapView;
+    
     NSArray * _trails;
+    NSArray * _categories;
+    
     NSMutableDictionary * _overlayPathViews;
     id <TrailActionDelegate> _delegate;
 }
@@ -21,6 +25,11 @@
  * The set of Trail objects to be displayed.
  */
 @property (nonatomic, retain) NSArray * trails;
+
+/**
+ * The set of Category objects available on the server.
+ */
+@property (nonatomic, retain) NSArray * categories;
 
 /**
  * The TrailActionDelegate object which receives informational messages about
