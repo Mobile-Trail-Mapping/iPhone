@@ -45,6 +45,7 @@
 
 - (void)showAddTrailPoint {
     AddTrailPointViewController * addController = [[[AddTrailPointViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil] autorelease];
+    addController.primaryViewController = self.primaryViewController;
     [self.navigationController pushViewController:addController animated:YES];
 }
 

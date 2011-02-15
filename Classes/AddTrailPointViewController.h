@@ -11,6 +11,8 @@
 
 #import "SettingsViewController.h"
 
+@class Trail;
+
 @interface AddTrailPointViewController : SettingsViewController <CLLocationManagerDelegate> {
 @private
     CLLocationManager * _locationManager;
@@ -19,6 +21,8 @@
     
     NSString * _pointTitle;
     NSString * _pointDesc;
+    
+    Trail * _pointTrail;
 }
 
 /**
@@ -36,5 +40,10 @@
  * The description to be used for the new point.
  */
 @property (nonatomic, retain) NSString * pointDesc;
+
+/**
+ * The Trail object that will own the new point.
+ */
+@property (nonatomic, retain) Trail * pointTrail;
 
 @end

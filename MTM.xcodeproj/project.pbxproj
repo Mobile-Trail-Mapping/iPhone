@@ -24,6 +24,8 @@
 		229CA36A130060D6001E338E /* PrimarySettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 229CA36213005FDB001E338E /* PrimarySettingsViewController.m */; };
 		229CA36B13006107001E338E /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 229CA36613005FFC001E338E /* SettingsViewController.xib */; };
 		229CA36E1301B3F0001E338E /* Setting.m in Sources */ = {isa = PBXBuildFile; fileRef = 229CA36D1301B3F0001E338E /* Setting.m */; };
+		22A88355130B1F0C00CB11EF /* PropertyPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A88354130B1F0C00CB11EF /* PropertyPickerViewController.m */; };
+		22A88357130B1F6500CB11EF /* PropertyPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A88356130B1F6500CB11EF /* PropertyPickerView.xib */; };
 		22C011A512EF659D000D5C9F /* MTMLogo_iOS_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 22C011A412EF659D000D5C9F /* MTMLogo_iOS_iPad.png */; };
 		22C011AF12EF851C000D5C9F /* TrailPointInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C011AE12EF851C000D5C9F /* TrailPointInfoViewController.m */; };
 		22C011B312EF85B5000D5C9F /* TrailPointInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C011B212EF85B5000D5C9F /* TrailPointInfoView.xib */; };
@@ -150,6 +152,9 @@
 		229CA36613005FFC001E338E /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		229CA36C1301B3F0001E338E /* Setting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Setting.h; sourceTree = "<group>"; };
 		229CA36D1301B3F0001E338E /* Setting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Setting.m; sourceTree = "<group>"; };
+		22A88353130B1F0C00CB11EF /* PropertyPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyPickerViewController.h; sourceTree = "<group>"; };
+		22A88354130B1F0C00CB11EF /* PropertyPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyPickerViewController.m; sourceTree = "<group>"; };
+		22A88356130B1F6500CB11EF /* PropertyPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PropertyPickerView.xib; sourceTree = "<group>"; };
 		22C011A412EF659D000D5C9F /* MTMLogo_iOS_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MTMLogo_iOS_iPad.png; sourceTree = "<group>"; };
 		22C011A912EF7D18000D5C9F /* TrailActionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailActionDelegate.h; sourceTree = "<group>"; };
 		22C011AD12EF851C000D5C9F /* TrailPointInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailPointInfoViewController.h; sourceTree = "<group>"; };
@@ -288,23 +293,41 @@
 		229CA36013005FC4001E338E /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				22A88358130B211A00CB11EF /* Value editors */,
+				22A88352130B1E2900CB11EF /* Screen subclasses */,
 				22DC0FF21307537800D99F22 /* Network */,
 				229B73AC13073FD600A9A8BA /* SettingsViewController.h */,
 				229B73AD13073FD600A9A8BA /* SettingsViewController.m */,
-				229CA36113005FDB001E338E /* PrimarySettingsViewController.h */,
-				229CA36213005FDB001E338E /* PrimarySettingsViewController.m */,
 				229CA36C1301B3F0001E338E /* Setting.h */,
 				229CA36D1301B3F0001E338E /* Setting.m */,
 				2214BB501301CDCD009EC84E /* MutableOrderedDictionary.h */,
 				2214BB511301CDCD009EC84E /* MutableOrderedDictionary.m */,
-				22DC0FEF130743C200D99F22 /* AdvancedSettingsViewController.h */,
-				22DC0FF0130743C200D99F22 /* AdvancedSettingsViewController.m */,
 				22DC0FF81307562500D99F22 /* StoredSettingsManager.h */,
 				22DC0FF91307562500D99F22 /* StoredSettingsManager.m */,
-				22DEE78C1308EA0B0026CC2C /* PropertyEditorViewController.h */,
-				22DEE78D1308EA0B0026CC2C /* PropertyEditorViewController.m */,
 			);
 			name = Settings;
+			sourceTree = "<group>";
+		};
+		22A88352130B1E2900CB11EF /* Screen subclasses */ = {
+			isa = PBXGroup;
+			children = (
+				229CA36113005FDB001E338E /* PrimarySettingsViewController.h */,
+				229CA36213005FDB001E338E /* PrimarySettingsViewController.m */,
+				22DC0FEF130743C200D99F22 /* AdvancedSettingsViewController.h */,
+				22DC0FF0130743C200D99F22 /* AdvancedSettingsViewController.m */,
+			);
+			name = "Screen subclasses";
+			sourceTree = "<group>";
+		};
+		22A88358130B211A00CB11EF /* Value editors */ = {
+			isa = PBXGroup;
+			children = (
+				22DEE78C1308EA0B0026CC2C /* PropertyEditorViewController.h */,
+				22DEE78D1308EA0B0026CC2C /* PropertyEditorViewController.m */,
+				22A88353130B1F0C00CB11EF /* PropertyPickerViewController.h */,
+				22A88354130B1F0C00CB11EF /* PropertyPickerViewController.m */,
+			);
+			name = "Value editors";
 			sourceTree = "<group>";
 		};
 		22C07D6412E6933900381FE5 /* Map */ = {
@@ -513,6 +536,7 @@
 				22C011B212EF85B5000D5C9F /* TrailPointInfoView.xib */,
 				22DC0FFB1307567A00D99F22 /* Settings.plist */,
 				22DEE78F1308EA4E0026CC2C /* PropertyEditorView.xib */,
+				22A88356130B1F6500CB11EF /* PropertyPickerView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -661,6 +685,7 @@
 				22DC0FFC1307567A00D99F22 /* Settings.plist in Resources */,
 				22DEE78B1308E5B40026CC2C /* redx.jpg in Resources */,
 				22DEE7901308EA4E0026CC2C /* PropertyEditorView.xib in Resources */,
+				22A88357130B1F6500CB11EF /* PropertyPickerView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -773,6 +798,7 @@
 				22DEE796130942D60026CC2C /* NetworkOperation.m in Sources */,
 				22DEE79B130A2D390026CC2C /* AddTrailObjectViewController.m in Sources */,
 				22DEE79E130A37C90026CC2C /* AddTrailPointViewController.m in Sources */,
+				22A88355130B1F0C00CB11EF /* PropertyPickerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

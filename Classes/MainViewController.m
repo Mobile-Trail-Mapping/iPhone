@@ -35,6 +35,10 @@
     [super dealloc];
 }
 
+- (NSArray *)trails {
+    return self.mapView.trails;
+}
+
 #pragma mark -
 #pragma mark Rotation methods
 
@@ -73,6 +77,7 @@
 
 - (void)showAddDialog {
     AddTrailObjectViewController * addController = [[[AddTrailObjectViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil] autorelease];
+    addController.primaryViewController = self;
     UINavigationController * navController = [[[UINavigationController alloc] initWithRootViewController:addController] autorelease];
     [self presentModalViewController:navController animated:YES];
 }

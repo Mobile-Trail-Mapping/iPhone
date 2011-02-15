@@ -28,6 +28,11 @@
 - (void)showSettings;
 
 /**
+ * Get the list of trails being displayed by this controller's MapView.
+ */
+- (NSArray *)trails;
+
+/**
  * Inform this controller's MapView to clear all image caches.
  */
 - (void)clearCachedImages;
