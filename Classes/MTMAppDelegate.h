@@ -17,13 +17,13 @@
 /**
  * The primary window for the application.
  */
-@property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, retain) IBOutlet UIWindow * window;
 
 /**
  * The main view controller for the MTM application. An instance of
  * MainViewController.
  */
-@property (nonatomic, retain) IBOutlet UIViewController *viewController;
+@property (nonatomic, retain) IBOutlet UIViewController * viewController;
 
 @end
 

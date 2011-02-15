@@ -13,8 +13,8 @@
 
 - (id)initWithCapacity:(NSUInteger)capacity {
     if((self = [super init])) {
-        _data = [[[NSMutableDictionary alloc] initWithCapacity:capacity] retain];
-        _keys = [[[NSMutableArray alloc] initWithCapacity:capacity] retain];
+        _data = [[NSMutableDictionary alloc] initWithCapacity:capacity];
+        _keys = [[NSMutableArray alloc] initWithCapacity:capacity];
     }
     return self;
 }

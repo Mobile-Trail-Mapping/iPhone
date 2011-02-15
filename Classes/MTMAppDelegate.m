@@ -63,12 +63,15 @@
     
     // First run?
     if([[StoredSettingsManager sharedManager] isFirstRun]) {
+        /*
         [[[[UIAlertView alloc] initWithTitle:@"Hello world!" 
                                      message:@"This is the first run of the MTM application!" 
                                     delegate:nil 
                            cancelButtonTitle:@"Cancel" 
                            otherButtonTitles:@"OK", nil] autorelease] show];
         [[StoredSettingsManager sharedManager] setIsFirstRun:NO];
+         */
+        NSLog(@"First run!");
     }
     
     NSLog(@"Active service account has credentials %@:%@", [[[ServiceAccountManager sharedManager] activeServiceAccount] username], [[[ServiceAccountManager sharedManager] activeServiceAccount] password]);
@@ -85,8 +88,8 @@
 #pragma mark - Object lifecycle
 
 - (void)dealloc {
-    [viewController release];
-    [window release];
+    [_viewController release];
+    [_window release];
     [super dealloc];
 }
 

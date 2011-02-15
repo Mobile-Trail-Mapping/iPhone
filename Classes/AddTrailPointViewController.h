@@ -16,7 +16,6 @@
     CLLocationManager * _locationManager;
     
     CLLocationCoordinate2D _currentLocation;
-    BOOL _usingLocationManager;
     
     NSString * _pointTitle;
     NSString * _pointDesc;

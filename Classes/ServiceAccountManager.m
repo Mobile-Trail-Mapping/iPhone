@@ -177,7 +177,7 @@ static ServiceAccountManager * sharedInstance = nil;
     CFUUIDRef uuidObj = CFUUIDCreate(nil);
     NSString * uuidString = (NSString *)CFUUIDCreateString(nil, uuidObj);
     CFRelease(uuidObj);
-    return [uuidString autorelease];
+    return uuidString;
 }
 
 - (NSString *)errorForOSStatus:(OSStatus)status {
@@ -217,7 +217,8 @@ static ServiceAccountManager * sharedInstance = nil;
     }
     [keychainQuery setValue:[account username] forKey:(id)kSecAttrAccount];
     [keychainQuery setValue:[[account password] dataUsingEncoding:NSUTF8StringEncoding] forKey:(id)kSecValueData];
-    [keychainQuery setValue:[self newUUID] forKey:(id)kSecAttrComment];
+    NSString * uuid = [[self newUUID] autorelease];
+    [keychainQuery setValue:uuid forKey:(id)kSecAttrComment];
     
     // Save the account in the keychain
     OSStatus status = SecItemAdd((CFDictionaryRef)keychainQuery, NULL);

@@ -55,11 +55,16 @@ static NetworkOperationManager * sharedInstance = nil;
     
     if(nil == _activeOperation) {
         if([_queue count] > 0) {
-            NetworkOperation * nextOperation = [[_queue objectAtIndex:0] retain];
-            [_queue removeObjectAtIndex:0];
+            // Note: if you're making changes, be careful with the garbage 
+            // collector here. It likes to be sneaky and eat nextOperation 
+            // if it's not retained properly.
             
-            _activeOperation = nextOperation;
+            NetworkOperation * nextOperation = [_queue objectAtIndex:0];
+            
+            _activeOperation = [nextOperation retain];
             [_activeOperation execute];
+            
+            [_queue removeObjectAtIndex:0];
             
             NSLog(@"NOM: executed operation");
         }

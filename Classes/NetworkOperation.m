@@ -65,7 +65,7 @@
     NSURL * serviceBase = [[[ServiceAccountManager sharedManager] activeServiceAccount] serviceURL];
     NSURL * URL = [serviceBase URLByAppendingPathComponent:self.endpoint];
     
-    _request = [[[NSMutableURLRequest alloc] initWithURL:URL] retain];
+    _request = [[NSMutableURLRequest alloc] initWithURL:URL];
     if(self.requestType == kNetworkOperationRequestTypeGet) {
         [_request setHTTPMethod:@"GET"];
         [_request setHTTPBody:[self HTTPBodyForGETRequestFromDictionary:self.requestData]];
@@ -97,7 +97,7 @@
     }
     
     NSURLConnection * connection = [[[NSURLConnection alloc] initWithRequest:_request delegate:self startImmediately:NO] autorelease];
-    _returnData = [[[NSMutableData alloc] initWithCapacity:10] retain];
+    _returnData = [[NSMutableData alloc] initWithCapacity:10];
     [connection scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     [connection start];
 }

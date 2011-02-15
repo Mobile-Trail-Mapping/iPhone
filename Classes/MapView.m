@@ -33,7 +33,7 @@
 		[self addSubview:_mapView];
         
         self.trails = [[[NSMutableArray alloc] init] autorelease];
-        _overlayPathViews = [[[NSMutableDictionary alloc] init] retain];
+        _overlayPathViews = [[NSMutableDictionary alloc] init];
         
         [self performSelectorInBackground:@selector(beginParse) withObject:nil];
 	}
@@ -50,7 +50,7 @@
     self.trails = [parser parseTrails];
     
     for(Trail * trail in self.trails) {
-        TrailOverlayPathView * overlayPathView = [[TrailOverlayPathView alloc] initWithTrail:trail mapView:_mapView];
+        TrailOverlayPathView * overlayPathView = [[[TrailOverlayPathView alloc] initWithTrail:trail mapView:_mapView] autorelease];
         [_overlayPathViews setValue:overlayPathView forKey:[trail name]];
         [_mapView addOverlay:[overlayPathView overlay]];
         

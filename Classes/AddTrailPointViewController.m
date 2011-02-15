@@ -11,6 +11,8 @@
 #import "Setting.h"
 #import "MutableOrderedDictionary.h"
 
+#import "PropertyEditorViewController.h"
+
 @implementation AddTrailPointViewController
 
 @synthesize currentLocation = _currentLocation;
@@ -23,10 +25,9 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"Add object";
-    _locationManager = [[[CLLocationManager alloc] init] retain];
+    _locationManager = [[CLLocationManager alloc] init];
     _locationManager.delegate = self;
     [_locationManager startUpdatingLocation];
-    _usingLocationManager = YES;
     
     self.pointTitle = @"Point";
     self.pointDesc = @"";
@@ -41,6 +42,9 @@
 - (void)dealloc {
     [_locationManager release];
     
+    [_pointDesc release];
+    [_pointTitle release];
+    
     [super dealloc];
 }
 
@@ -49,13 +53,16 @@
 - (void)buildSettings {
     self.settings = [[[MutableOrderedDictionary alloc] initWithCapacity:10] autorelease];
     
-    Setting * latitudeSetting = [[[Setting alloc] initWithTitle:@"Latitude" target:self onValue:@selector(latitudeString) onAction:NULL onChange:NULL] autorelease];
-    Setting * longitudeSetting = [[[Setting alloc] initWithTitle:@"Longitude" target:self onValue:@selector(longitudeString) onAction:NULL onChange:NULL] autorelease];
-    NSArray * locationSettings = [[[NSArray alloc] initWithObjects:latitudeSetting, longitudeSetting, nil] autorelease];
-    [self.settings setValue:locationSettings forKey:@"Location"];
-    
-    Setting * titleSetting = [[[Setting alloc] initWithTitle:@"Title" target:self onValue:@selector(pointTitle) onAction:NULL onChange:NULL] autorelease];
-    Setting * descSetting = [[[Setting alloc] initWithTitle:@"Description" target:self onValue:@selector(pointDesc) onAction:NULL onChange:NULL] autorelease];
+    Setting * titleSetting = [[[Setting alloc] initWithTitle:@"Title" 
+                                                      target:self 
+                                                     onValue:@selector(pointTitle) 
+                                                    onAction:@selector(editProperty:) 
+                                                    onChange:@selector(didChangePointTitle:)] autorelease];
+    Setting * descSetting = [[[Setting alloc] initWithTitle:@"Description" 
+                                                     target:self 
+                                                    onValue:@selector(pointDesc) 
+                                                   onAction:@selector(editProperty:)  
+                                                   onChange:@selector(didChangePointDesc:)] autorelease];
     Setting * conditionSetting = [[[Setting alloc] initWithTitle:@"Condition" target:self onValue:NULL onAction:NULL onChange:NULL] autorelease];
     NSArray * infoSettings = [[[NSArray alloc] initWithObjects:titleSetting, descSetting, conditionSetting, nil] autorelease];
     [self.settings setValue:infoSettings forKey:@"Info"];
@@ -64,15 +71,34 @@
     Setting * categorySetting = [[[Setting alloc] initWithTitle:@"Category" target:self onValue:NULL onAction:NULL onChange:NULL] autorelease];
     NSArray * ownerSettings = [[[NSArray alloc] initWithObjects:trailSetting, categorySetting, nil] autorelease];
     [self.settings setValue:ownerSettings forKey:@"Ownership"];
+    
+    Setting * finishSetting = [[[Setting alloc] initWithTitle:@"Save point" target:self onValue:NULL onAction:NULL onChange:NULL] autorelease];
+    NSArray * actionSettings = [[[NSArray alloc] initWithObjects:finishSetting, nil] autorelease];
+    [self.settings setValue:actionSettings forKey:@""];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell * cell = [super tableView:tableView cellForRowAtIndexPath:indexPath];
+    
+    if(indexPath.section == self.settings.count - 1) {
+        NSLog(@"doing black magic to center text");
+        cell.textLabel.alpha = 0.0f;
+        
+        UILabel * actualTextLabel = [[[UILabel alloc] initWithFrame:cell.contentView.bounds] autorelease];
+        actualTextLabel.text = cell.textLabel.text;
+        actualTextLabel.textAlignment = UITextAlignmentCenter;
+        actualTextLabel.backgroundColor = [UIColor clearColor];
+        actualTextLabel.font = [UIFont boldSystemFontOfSize:17.0];
+        [cell.contentView addSubview:actualTextLabel];
+    }
+    
+    return cell;
 }
 
 #pragma mark - CLLocationManagerDelegate methods
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-    if(_usingLocationManager) {
-        self.currentLocation = [newLocation coordinate];
-        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:[self.settings indexOfKey:@"Location"]] withRowAnimation:UITableViewRowAnimationFade];
-    }
+    self.currentLocation = [newLocation coordinate];
 }
 
 #pragma mark - Value callback methods
@@ -83,6 +109,27 @@
 
 - (NSString *)longitudeString {
     return [NSString stringWithFormat:@"%f", self.currentLocation.longitude];
+}
+
+#pragma mark - Action callback methods
+
+- (void)editProperty:(id)sender {
+    PropertyEditorViewController * editController = [[[PropertyEditorViewController alloc] initWithSetting:sender] autorelease];
+    [self.navigationController pushViewController:editController animated:YES];
+}
+
+#pragma mark - Change callback methods
+
+- (void)didChangePointTitle:(NSString *)newTitle {
+    self.pointTitle = newTitle;
+    NSUInteger section = [self.settings indexOfKey:@"Info"];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (void)didChangePointDesc:(NSString *)newDesc {
+    self.pointDesc = newDesc;
+    NSUInteger section = [self.settings indexOfKey:@"Info"];
+    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:section] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 @end
