@@ -15,7 +15,11 @@
 #import "PropertyPickerViewController.h"
 
 #import "MainViewController.h"
+#import "MapView.h"
 #import "Trail.h"
+
+#import "NetworkOperationManager.h"
+#import "NetworkOperation.h"
 
 #define MTM_CENTERED_LABEL_TAG 3141
 
@@ -76,6 +80,7 @@
                                                          onValue:NULL 
                                                         onAction:NULL 
                                                         onChange:NULL] autorelease];
+    conditionSetting.enabled = NO;
     NSArray * infoSettings = [[[NSArray alloc] initWithObjects:titleSetting, descSetting, conditionSetting, nil] autorelease];
     [self.settings setValue:infoSettings forKey:@"Info"];
     
@@ -92,7 +97,7 @@
     NSArray * ownerSettings = [[[NSArray alloc] initWithObjects:trailSetting, categorySetting, nil] autorelease];
     [self.settings setValue:ownerSettings forKey:@"Ownership"];
     
-    Setting * finishSetting = [[[Setting alloc] initWithTitle:@"Save point" target:self onValue:NULL onAction:NULL onChange:NULL] autorelease];
+    Setting * finishSetting = [[[Setting alloc] initWithTitle:@"Save point" target:self onValue:NULL onAction:@selector(addPoint) onChange:NULL] autorelease];
     NSArray * actionSettings = [[[NSArray alloc] initWithObjects:finishSetting, nil] autorelease];
     [self.settings setValue:actionSettings forKey:@""];
 }
@@ -162,6 +167,29 @@
     // Display the controller
     PropertyPickerViewController * pickController = [[[PropertyPickerViewController alloc] initWithSetting:setting options:options] autorelease];
     [self.navigationController pushViewController:pickController animated:YES];
+}
+
+- (void)addPoint {
+    NetworkOperation * pointOperation = [[[NetworkOperation alloc] init] autorelease];
+    pointOperation.label = @"MTMAddPointOperation";
+    pointOperation.requestType = kNetworkOperationRequestTypePost;
+    pointOperation.returnType = kNetworkOperationReturnTypeString;
+    pointOperation.endpoint = @"point/add";
+    pointOperation.authenticate = YES;
+    
+    NSMutableDictionary * requestData = [[[NSMutableDictionary alloc] initWithCapacity:10] autorelease];
+    [requestData setValue:self.pointTrail.name forKey:@"trail"];
+    [requestData setValue:self.pointTitle forKey:@"title"];
+    [requestData setValue:self.pointDesc forKey:@"desc"];
+    [requestData setValue:@"" forKey:@"condition"];
+    [requestData setValue:self.pointCategory forKey:@"category"];
+    [requestData setValue:@"" forKey:@"connections"];
+    [requestData setValue:[NSString stringWithFormat:@"%f", self.currentLocation.latitude] forKey:@"lat"];
+    [requestData setValue:[NSString stringWithFormat:@"%f", self.currentLocation.longitude] forKey:@"long"];
+    pointOperation.requestData = requestData;
+    
+    [pointOperation addDelegate:self.primaryViewController.mapView];
+    [[NetworkOperationManager sharedManager] enqueueOperation:pointOperation];
 }
 
 #pragma mark - Change callback methods

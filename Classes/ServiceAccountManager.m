@@ -171,6 +171,7 @@ static ServiceAccountManager * sharedInstance = nil;
     }
     
     [[StoredSettingsManager sharedManager] setActiveServiceAccountUUID:[account keychainUUID]];
+    [[StoredSettingsManager sharedManager] writeSettingsToFile];
 }
 
 - (NSString *)newUUID {

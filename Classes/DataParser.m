@@ -101,7 +101,7 @@
             currentPoint.condition = [pointProperties valueForKey:@"condition"];
             currentPoint.unresolvableLinks = pointLinks;
             [currentTrail.trailPoints addObject:currentPoint];
-            if([currentPoint.category isEqualToString:@"Trailhead"]) {
+            if(![currentPoint.category isEqualToString:@"Trail"]) {
                 [currentTrail.trailHeads addObject:currentPoint];
             }
         }

@@ -29,9 +29,6 @@
 #pragma mark - App lifecycle
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
-    [window addSubview:viewController.view];
-    [window makeKeyAndVisible];
-    
 #ifdef _MTM_DEBUG_FORCE_FIRST_RUN
     // Set the "first run" flag in settings
     [[StoredSettingsManager sharedManager] setIsFirstRun:YES];
@@ -52,10 +49,16 @@
     // Add default service account
     NSURL * defaultURL = [NSURL URLWithString:MTM_SERVER_URL_STRING];
     NSLog(@"Using server url %@", [defaultURL absoluteString]);
-    ServiceAccount * defaultAccount = [[[ServiceAccount alloc] initWithUsername:MTM_SERVER_DEFAULT_ADMIN_USER password:MTM_SERVER_DEFAULT_ADMIN_PASS serviceURL:defaultURL] autorelease];
+    ServiceAccount * defaultAccount = [[[ServiceAccount alloc] initWithUsername:MTM_SERVER_DEFAULT_ADMIN_USER 
+                                                                       password:MTM_SERVER_DEFAULT_ADMIN_PASS 
+                                                                     serviceURL:defaultURL] autorelease];
+    NSLog(@"Creating new default account %@", defaultAccount);
     [[ServiceAccountManager sharedManager] addAccount:defaultAccount];
     [[ServiceAccountManager sharedManager] setActiveServiceAccount:defaultAccount];
 #endif
+    
+    [window addSubview:viewController.view];
+    [window makeKeyAndVisible];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -64,12 +67,12 @@
     // First run?
     if([[StoredSettingsManager sharedManager] isFirstRun]) {
         /*
-        [[[[UIAlertView alloc] initWithTitle:@"Hello world!" 
-                                     message:@"This is the first run of the MTM application!" 
-                                    delegate:nil 
-                           cancelButtonTitle:@"Cancel" 
-                           otherButtonTitles:@"OK", nil] autorelease] show];
-        [[StoredSettingsManager sharedManager] setIsFirstRun:NO];
+         [[[[UIAlertView alloc] initWithTitle:@"Hello world!" 
+         message:@"This is the first run of the MTM application!" 
+         delegate:nil 
+         cancelButtonTitle:@"Cancel" 
+         otherButtonTitles:@"OK", nil] autorelease] show];
+         [[StoredSettingsManager sharedManager] setIsFirstRun:NO];
          */
         NSLog(@"First run!");
     }

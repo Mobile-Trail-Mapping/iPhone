@@ -12,6 +12,12 @@
 
 @interface MapView(Parsing)
 /**
+ * Request that this class begin the process of getting network information
+ * from the active instance of the MTM server.
+ */
+- (void)fetchNetworkInfo;
+
+/**
  * Start point for background thread to fetch trails data and add to this
  * object's instance of MKMapView. Handles its own autorelease pool and
  * dispatches an instance of DataParser.
@@ -40,6 +46,13 @@
         self.trails = [[[NSMutableArray alloc] init] autorelease];
         _overlayPathViews = [[NSMutableDictionary alloc] init];
         
+        [self fetchNetworkInfo];
+	}
+	return self;
+}
+
+- (void)fetchNetworkInfo {
+    if([[ServiceAccountManager sharedManager] activeServiceAccount] != nil) {
         // Ask for auxiliary trails information
         NetworkOperation * categoryFetchOperation = [[[NetworkOperation alloc] init] autorelease];
         categoryFetchOperation.label = @"MTMCategoryFetchOperation";
@@ -52,8 +65,9 @@
         // Ask for trails
         //TODO this needs to be refactored into a NetworkOperation
         [self performSelectorInBackground:@selector(beginParse) withObject:nil];
-	}
-	return self;
+    } else {
+        [self performSelector:@selector(fetchNetworkInfo) withObject:nil afterDelay:0.5];
+    }
 }
 
 - (void)beginParse {
@@ -151,6 +165,41 @@
         }
         
         self.categories = newCategories;
+    } else if([operation.label isEqualToString:@"MTMAddPointOperation"]) {
+        NSLog(@"Added point!");
+        
+        Trail * owningTrail = nil;
+        for(Trail * trail in self.trails) {
+            if([trail.name isEqualToString:[operation.requestData valueForKey:@"trail"]]) {
+                owningTrail = trail;
+            }
+        }
+        
+        NSString * newIDString = (NSString *)result;
+        NSInteger newID = [newIDString integerValue];
+        
+        float newLat = [[operation.requestData valueForKey:@"lat"] floatValue];
+        float newLong = [[operation.requestData valueForKey:@"long"] floatValue];
+        CLLocationCoordinate2D newLocation = CLLocationCoordinate2DMake(newLat, newLong);
+        
+        NSMutableSet * newConnections = [[[NSMutableSet alloc] initWithCapacity:10] autorelease];
+        NSArray * connectionIDs = [[operation.requestData valueForKey:@"connections"] componentsSeparatedByString:@","];
+        for(NSString * connectionIDString in connectionIDs) {
+            NSInteger connectionID = [connectionIDString integerValue];
+            for(TrailPoint * point in [owningTrail trailPoints]) {
+                if(point.pointID == connectionID) {
+                    [newConnections addObject:point];
+                }
+            }
+        }
+        
+        TrailPoint * newPoint = [[[TrailPoint alloc] initWithID:newID 
+                                                       location:newLocation 
+                                                       category:[operation.requestData valueForKey:@"category"] 
+                                                          title:[operation.requestData valueForKey:@"title"] 
+                                                           desc:[operation.requestData valueForKey:@"desc"] 
+                                                    connections:newConnections] autorelease];
+        [owningTrail.trailPoints addObject:newPoint];
     }
 }
 
@@ -158,6 +207,8 @@
     if([operation.label isEqualToString:@"MTMCategoryFetchOperation"]) {
         self.categories = [NSArray array];
         [self.delegate trailObjectsDidChange];
+    } else if([operation.label isEqualToString:@"MTMAddPointOperation"]) {
+        NSLog(@"Warning: failed to add point.");
     }
 }
 
