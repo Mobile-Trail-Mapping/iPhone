@@ -10,6 +10,8 @@
 
 - (id)initWithTrail:(Trail *)trail mapView:(MKMapView *)mapView {
     if((self = [super initWithOverlay:[[[TrailOverlay alloc] initWithTrail:trail] autorelease]])) {
+        NSLog(@"Creating overlay for trail %@ with %d points", [trail name], [[trail trailPoints] count]);
+        
         self.trail = trail;
         self.mapView = mapView;
         
@@ -33,7 +35,7 @@
 - (void)createPath {
     // Note that [super createPath] has an empty implementation, so no call needed
     
-    //NSLog(@"creating path");
+    //NSLog(@"creating path in overlay for trail %@", [self.trail name]);
     
     CGMutablePathRef path = CGPathCreateMutable();
     

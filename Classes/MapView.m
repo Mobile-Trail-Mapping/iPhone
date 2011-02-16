@@ -157,7 +157,7 @@
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated {
     NSLog(@"Region did change animated");
     for(MKOverlayPathView * pathView in [_overlayPathViews allValues]) {
-        [pathView setNeedsDisplayInMapRect:mapView.visibleMapRect];
+        //[pathView setNeedsDisplayInMapRect:mapView.visibleMapRect];
     }
 }
 

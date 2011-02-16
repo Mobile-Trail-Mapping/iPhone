@@ -13,7 +13,7 @@
         _name = name;
         _trailPoints = [[NSMutableArray alloc] init];
         _trailHeads = [[NSMutableArray alloc] init];
-        _trailPaint = [UIColor yellowColor];
+        _trailPaint = [UIColor redColor];
 	}
 	return self;
 }
