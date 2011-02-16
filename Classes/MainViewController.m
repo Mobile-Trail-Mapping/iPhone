@@ -66,13 +66,18 @@
 - (NSArray *)categories {
     return self.mapView.categories;
 }
+
+- (NSArray *)conditions {
+    return self.mapView.conditions;
+}
         
 - (BOOL)canShowAdminUI {
     BOOL authenticated = [[ServiceAccountManager sharedManager] activeAccountAuthenticated];
     BOOL haveTrails = ([[self trails] count] > 0);
     BOOL haveCategories = ([[self categories] count] > 0);
+    BOOL haveConditions = ([[self conditions] count] > 0);
     
-    return authenticated && haveTrails && haveCategories;
+    return authenticated && haveTrails && haveCategories && haveConditions;
 }
 
 - (void)adminDataDidChange {

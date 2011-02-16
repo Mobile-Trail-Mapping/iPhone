@@ -12,6 +12,7 @@
 #import "SettingsViewController.h"
 
 @class Trail;
+@class Condition;
 
 @interface AddTrailPointViewController : SettingsViewController <CLLocationManagerDelegate> {
 @private
@@ -21,6 +22,7 @@
     
     NSString * _pointTitle;
     NSString * _pointDesc;
+    Condition * _pointCondition;
     
     Trail * _pointTrail;
     NSString * _pointCategory;
@@ -41,6 +43,11 @@
  * The description to be used for the new point.
  */
 @property (nonatomic, retain) NSString * pointDesc;
+
+/**
+ * The condition to be used for the new point.
+ */
+@property (nonatomic, retain) Condition * pointCondition;
 
 /**
  * The Trail object that will own the new point.

@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+
 #import "TrailActionDelegate.h"
 #import "NetworkOperationDelegate.h"
 
@@ -16,6 +17,7 @@
     
     NSArray * _trails;
     NSArray * _categories;
+    NSArray * _conditions;
     
     NSMutableDictionary * _overlayPathViews;
     id <TrailActionDelegate> _delegate;
@@ -32,6 +34,11 @@
 @property (nonatomic, retain) NSArray * categories;
 
 /**
+ * The set of Condition objects available on the server.
+ */
+@property (nonatomic, retain) NSArray * conditions;
+
+/**
  * The TrailActionDelegate object which receives informational messages about
  * the behavior of this MapView.
  */
@@ -43,5 +50,10 @@
  * from the device.
  */
 - (void)clearCachedImagesExceptForTrailPoint:(TrailPoint *)point;
+
+/**
+ * Clear and redraw all overlay and annotation objects on the map.
+ */
+- (void)redrawMapObjects;
 
 @end

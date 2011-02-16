@@ -38,6 +38,11 @@
 - (NSArray *)categories;
 
 /**
+ * Get the list of conditions available in this controller's MapView.
+ */
+- (NSArray *)conditions;
+
+/**
  * Inform this controller's MapView to clear all image caches.
  */
 - (void)clearCachedImages;

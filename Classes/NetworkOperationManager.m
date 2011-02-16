@@ -35,7 +35,9 @@ static NetworkOperationManager * sharedInstance = nil;
 }
 
 - (void)enqueueOperation:(NetworkOperation *)operation {
-    NSLog(@"NOM: enqueueing operation");
+#if _MTM_DEBUG_NOM_MESSAGES
+    NSLog(@"NOM: enqueueing operation %@", operation.label);
+#endif
     
     [_queue addObject:operation];
     
@@ -55,7 +57,9 @@ static NetworkOperationManager * sharedInstance = nil;
 }
 
 - (void)pumpQueue {
+#if _MTM_DEBUG_NOM_MESSAGES
     NSLog(@"NOM: pumping queue");
+#endif
     
     if(nil == _activeOperation) {
         if([_queue count] > 0) {
@@ -70,7 +74,9 @@ static NetworkOperationManager * sharedInstance = nil;
             
             [_queue removeObjectAtIndex:0];
             
-            NSLog(@"NOM: executed operation");
+#if _MTM_DEBUG_NOM_MESSAGES
+            NSLog(@"NOM: executed operation %@", _activeOperation.label);
+#endif
         }
     }
 }

@@ -1,6 +1,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+@class TrailPoint;
+
 /**
  * A representation of a single trail. A trail includes:
  *
@@ -47,5 +49,12 @@
  * Create a new trail with the specified name.
  */
 - (id)initWithName:(NSString *)name;
+
+/**
+ * Add a new point to this trail. This method handles the definition of a
+ * "trail head" automatically and adds the point to the trailHeads list
+ * automatically.
+ */
+- (void)addTrailPoint:(TrailPoint *)point;
 
 @end

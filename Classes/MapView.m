@@ -1,6 +1,7 @@
 #import "MapView.h"
 #import "TouchXML.h"
 #import "TrailPoint.h"
+#import "Condition.h"
 #import "TrailOverlay.h"
 #import "TrailOverlayPathView.h"
 #import "TrailPointAnnotation.h"
@@ -32,6 +33,7 @@
 
 @synthesize trails = _trails;
 @synthesize categories = _categories;
+@synthesize conditions = _conditions;
 
 @synthesize delegate = _delegate;
 
@@ -62,6 +64,14 @@
         [categoryFetchOperation addDelegate:self];
         [[NetworkOperationManager sharedManager] enqueueOperation:categoryFetchOperation];
         
+        NetworkOperation * conditionFetchOperation = [[[NetworkOperation alloc] init] autorelease];
+        conditionFetchOperation.label = @"MTMConditionFetchOperation";
+        conditionFetchOperation.endpoint = @"condition/get";
+        conditionFetchOperation.requestType = kNetworkOperationRequestTypeGet;
+        conditionFetchOperation.returnType = kNetworkOperationReturnTypeString;
+        [conditionFetchOperation addDelegate:self];
+        [[NetworkOperationManager sharedManager] enqueueOperation:conditionFetchOperation];
+        
         // Ask for trails
         //TODO this needs to be refactored into a NetworkOperation
         [self performSelectorInBackground:@selector(beginParse) withObject:nil];
@@ -80,6 +90,19 @@
     self.trails = [parser parseTrails];
     [self.delegate trailObjectsDidChange];
     
+    [self performSelectorOnMainThread:@selector(redrawMapObjects) withObject:nil waitUntilDone:YES];
+    
+    [pool drain];
+}
+
+- (void)redrawMapObjects {
+    for(id<MKAnnotation> annotation in [_mapView annotations]) {
+        if([annotation isKindOfClass:[TrailPointAnnotation class]]) {
+            [_mapView removeAnnotation:annotation];
+        }
+    }
+    [_mapView removeOverlays:[_mapView overlays]];
+    
     for(Trail * trail in self.trails) {
         TrailOverlayPathView * overlayPathView = [[[TrailOverlayPathView alloc] initWithTrail:trail mapView:_mapView] autorelease];
         [_overlayPathViews setValue:overlayPathView forKey:[trail name]];
@@ -90,8 +113,6 @@
             [_mapView addAnnotation:headAnnotation];
         }
     }
-    
-    [pool drain];
 }
 
 - (void)clearCachedImagesExceptForTrailPoint:(TrailPoint *)exceptPoint {
@@ -159,12 +180,31 @@
         
         NSArray * categoryNameElements = [doc nodesForXPath:@"/categories/category/name" error:nil];
         for(CXMLElement * categoryNameElement in categoryNameElements) {
-            NSLog(@"Found element %@", [[categoryNameElement childAtIndex:0] stringValue]);
-            
             [newCategories addObject:[[categoryNameElement childAtIndex:0] stringValue]];
         }
         
         self.categories = newCategories;
+    } else if([operation.label isEqualToString:@"MTMConditionFetchOperation"]) {
+        NSMutableArray * newConditions = [[[NSMutableArray alloc] initWithCapacity:10] autorelease];
+        
+        NSArray * conditionElements = [doc nodesForXPath:@"/conditions/condition" error:nil];
+        for(CXMLElement * conditionElement in conditionElements) {
+            NSUInteger newID;
+            NSString * newDesc;
+            
+            for(CXMLElement * conditionChild in [conditionElement children]) {
+                if([[conditionChild name] isEqualToString:@"condition"]) {
+                    newID = [[[conditionChild childAtIndex:0] stringValue] integerValue];
+                } else if([[conditionChild name] isEqualToString:@"desc"]) {
+                    newDesc = [[conditionChild childAtIndex:0] stringValue];
+                }
+            }
+            
+            Condition * newCondition = [[[Condition alloc] initWithID:newID desc:newDesc] autorelease];
+            [newConditions addObject:newCondition];
+        }
+        
+        self.conditions = newConditions;
     } else if([operation.label isEqualToString:@"MTMAddPointOperation"]) {
         NSLog(@"Added point!");
         
@@ -199,8 +239,12 @@
                                                           title:[operation.requestData valueForKey:@"title"] 
                                                            desc:[operation.requestData valueForKey:@"desc"] 
                                                     connections:newConnections] autorelease];
-        [owningTrail.trailPoints addObject:newPoint];
+        [owningTrail addTrailPoint:newPoint];
+        
+        [self redrawMapObjects];
     }
+    
+    [self.delegate trailObjectsDidChange];
 }
 
 - (void)operation:(NetworkOperation *)operation didFailWithError:(NSError *)error {

@@ -1,4 +1,5 @@
 #import "Trail.h"
+#import "TrailPoint.h"
 
 @implementation Trail
 
@@ -23,6 +24,13 @@
     [_trailHeads release];
     [_trailPaint release];
 	[super dealloc];
+}
+
+- (void)addTrailPoint:(TrailPoint *)point {
+    [self.trailPoints addObject:point];
+    if(![point.category isEqualToString:@"Trail"]) {
+        [self.trailHeads addObject:point];
+    }
 }
 
 @end

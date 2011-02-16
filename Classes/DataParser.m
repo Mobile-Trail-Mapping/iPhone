@@ -100,10 +100,7 @@
                                                             connections:nil] autorelease];
             currentPoint.condition = [pointProperties valueForKey:@"condition"];
             currentPoint.unresolvableLinks = pointLinks;
-            [currentTrail.trailPoints addObject:currentPoint];
-            if(![currentPoint.category isEqualToString:@"Trail"]) {
-                [currentTrail.trailHeads addObject:currentPoint];
-            }
+            [currentTrail addTrailPoint:currentPoint];
         }
         
         [trails addObject:currentTrail];

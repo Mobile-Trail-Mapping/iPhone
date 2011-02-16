@@ -17,6 +17,7 @@
 #import "MainViewController.h"
 #import "MapView.h"
 #import "Trail.h"
+#import "Condition.h"
 
 #import "NetworkOperationManager.h"
 #import "NetworkOperation.h"
@@ -28,6 +29,7 @@
 @synthesize currentLocation = _currentLocation;
 @synthesize pointTitle = _pointTitle;
 @synthesize pointDesc = _pointDesc;
+@synthesize pointCondition = _pointCondition;
 @synthesize pointTrail = _pointTrail;
 @synthesize pointCategory = _pointCategory;
 
@@ -37,12 +39,16 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"Add object";
+    
     _locationManager = [[CLLocationManager alloc] init];
     _locationManager.delegate = self;
     [_locationManager startUpdatingLocation];
     
     self.pointTitle = @"Point";
     self.pointDesc = @"";
+    self.pointCondition = [[self.primaryViewController conditions] objectAtIndex:0];
+    self.pointTrail = [[self.primaryViewController trails] objectAtIndex:0];
+    self.pointCategory = @"";
 }
 
 - (void)viewDidUnload {
@@ -56,6 +62,10 @@
     
     [_pointDesc release];
     [_pointTitle release];
+    [_pointCondition release];
+    
+    [_pointTrail release];
+    [_pointCategory release];
     
     [super dealloc];
 }
@@ -77,10 +87,9 @@
                                                    onChange:@selector(didChangePointDesc:)] autorelease];
     Setting * conditionSetting = [[[Setting alloc] initWithTitle:@"Condition" 
                                                           target:self 
-                                                         onValue:NULL 
-                                                        onAction:NULL 
-                                                        onChange:NULL] autorelease];
-    conditionSetting.enabled = NO;
+                                                         onValue:@selector(pointConditionString) 
+                                                        onAction:@selector(pickProperty:) 
+                                                        onChange:@selector(didChangePointConditionDesc:)] autorelease];
     NSArray * infoSettings = [[[NSArray alloc] initWithObjects:titleSetting, descSetting, conditionSetting, nil] autorelease];
     [self.settings setValue:infoSettings forKey:@"Info"];
     
@@ -126,6 +135,7 @@
 #pragma mark - CLLocationManagerDelegate methods
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    NSLog(@"updating to location (%f,%f)", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
     self.currentLocation = [newLocation coordinate];
 }
 
@@ -143,6 +153,10 @@
     return self.pointTrail.name;
 }
 
+- (NSString *)pointConditionString {
+    return self.pointCondition.desc;
+}
+
 #pragma mark - Action callback methods
 
 - (void)editProperty:(id)sender {
@@ -156,12 +170,16 @@
     Setting * setting = (Setting *)sender;
     if([setting.title isEqualToString:@"Trail"]) {
         NSArray * trails = [self.primaryViewController trails];
-        NSLog(@"main view controller has %d trails", [trails count]);
         for(Trail * trail in trails) {
             [options addObject:trail.name];
         }
     } else if([setting.title isEqualToString:@"Category"]) {
         options = [[self.primaryViewController categories] copy];
+    } else if([setting.title isEqualToString:@"Condition"]) {
+        NSArray * conditions = [self.primaryViewController conditions];
+        for(Condition * condition in conditions) {
+            [options addObject:condition.desc];
+        }
     }
     
     // Display the controller
@@ -181,15 +199,17 @@
     [requestData setValue:self.pointTrail.name forKey:@"trail"];
     [requestData setValue:self.pointTitle forKey:@"title"];
     [requestData setValue:self.pointDesc forKey:@"desc"];
-    [requestData setValue:@"" forKey:@"condition"];
+    [requestData setValue:self.pointCondition.desc forKey:@"condition"];
     [requestData setValue:self.pointCategory forKey:@"category"];
-    [requestData setValue:@"" forKey:@"connections"];
+    //[requestData setValue:@"" forKey:@"connections"]; // No connections for now - TODO?
     [requestData setValue:[NSString stringWithFormat:@"%f", self.currentLocation.latitude] forKey:@"lat"];
     [requestData setValue:[NSString stringWithFormat:@"%f", self.currentLocation.longitude] forKey:@"long"];
     pointOperation.requestData = requestData;
     
     [pointOperation addDelegate:self.primaryViewController.mapView];
     [[NetworkOperationManager sharedManager] enqueueOperation:pointOperation];
+    
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - Change callback methods
@@ -206,6 +226,15 @@
 
 - (void)didChangePointDesc:(NSString *)newDesc {
     self.pointDesc = newDesc;
+    [self refreshTableDataForSectionTitle:@"Info"];
+}
+
+- (void)didChangePointConditionDesc:(NSString *)newConditionDesc {
+    for(Condition * condition in [self.primaryViewController conditions]) {
+        if([condition.desc isEqualToString:newConditionDesc]) {
+            self.pointCondition = condition;
+        }
+    }
     [self refreshTableDataForSectionTitle:@"Info"];
 }
 
