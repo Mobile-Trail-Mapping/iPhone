@@ -46,7 +46,7 @@
 
 - (void)testInitWithConnections {
     NSSet * connections = [NSSet setWithObject:[[[TrailPoint alloc] initWithID:10 location:CLLocationCoordinate2DMake(20.0f, 30.0f) category:@"40" title:@"50" desc:@"60" connections:nil] autorelease]];
-    TrailPoint * target = [[[TrailPoint alloc] initWithID:20 location:CLLocationCoordinate2DMake(30.0f, 40.0f) category:@"50" title:@"60" desc:@"70" connections:connections] autorelease];
+    TrailPoint * target = [[[TrailPoint alloc] initWithID:20 location:CLLocationCoordinate2DMake(30.0f, 40.0f) category:@"50" title:@"60" desc:@"70" connections:[connections mutableCopy]] autorelease];
     
     STAssertNotNil(target, @"Did not create a TrailPoint object");
     

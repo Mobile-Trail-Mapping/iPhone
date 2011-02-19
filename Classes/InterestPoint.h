@@ -9,7 +9,7 @@
  * passes (defining the path of the trail) to representing full-blown
  * locations of historical interest.
  */
-@interface InterestPoint : NSObject {
+@interface InterestPoint : NSObject <MKAnnotation> {
 
 @private
     NSInteger _pointID;

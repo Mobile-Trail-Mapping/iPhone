@@ -32,7 +32,7 @@
     
     STAssertEquals(20, target.pointID, @"Did not store point ID");
     STAssertEquals(CLLocationCoordinate2DMake(30.0f, 40.0f), target.location, @"Did not store location");
-    STAssertEquals(CLLocationCoordinate2DMake(30.0f, 40.0f), target.coordinate, @"Did not provide location as coordinate (for MKAnnotation use)");
+    STAssertEquals(CLLocationCoordinate2DMake(30.0f, 40.0f), [target coordinate], @"Did not provide location as coordinate (for MKAnnotation use)");
     STAssertEquals(@"50", target.category, @"Did not store category");
     STAssertEquals(@"60", target.title, @"Did not store title");
     STAssertEquals(@"70", target.description, @"Did not store description");

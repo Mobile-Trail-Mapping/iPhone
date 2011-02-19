@@ -9,7 +9,9 @@
 #import "PrimarySettingsViewController.h"
 
 #import "AdvancedSettingsViewController.h"
+#import "AboutViewController.h"
 #import "PropertyEditorViewController.h"
+
 #import "ServiceAccountManager.h"
 #import "ServiceAccount.h"
 
@@ -54,6 +56,12 @@
     NSMutableArray * userSettings = [[[NSMutableArray alloc] initWithObjects:usernameSetting, passwordSetting, nil] autorelease];
     [self.settings setObject:userSettings forKey:@"Authentication"];
     
+    Setting * mapTypeSetting = [[[Setting alloc] initWithTitle:@"Map type" target:self onValue:NULL onAction:NULL onChange:NULL] autorelease];
+    Setting * zoomToUserSetting = [[[Setting alloc] initWithTitle:@"Zoom to user" target:self onValue:NULL onAction:NULL onChange:NULL] autorelease];
+    mapTypeSetting.enabled = zoomToUserSetting.enabled = NO;
+    NSMutableArray * mapSettings = [[[NSMutableArray alloc] initWithObjects:mapTypeSetting, zoomToUserSetting, nil] autorelease];
+    [self.settings setObject:mapSettings forKey:@"Map"];
+    
     Setting * clearImagesSetting = [[[Setting alloc] initWithTitle:@"Clear cached images" 
                                                             target:self 
                                                            onValue:NULL 
@@ -61,15 +69,17 @@
                                                           onChange:NULL] autorelease];
     NSMutableArray * cacheSettings = [[[NSMutableArray alloc] initWithObjects:clearImagesSetting, nil] autorelease];
     [self.settings setObject:cacheSettings forKey:@"Cache"];
-    
-    Setting * showAdvancedSetting = [[[Setting alloc] initWithTitle:@"Advanced" 
-                                                             target:self 
-                                                            onValue:NULL 
-                                                           onAction:@selector(showAdvancedSettings)
-                                                           onChange:NULL] autorelease];
-    showAdvancedSetting.shouldShowDisclosure = YES;
+
+    Setting * showAboutSetting = [[[Setting alloc] initWithTitle:@"About" target:self onValue:NULL onAction:@selector(showAboutSettings) onChange:NULL] autorelease];
+    Setting * showAdvancedSetting = [[[Setting alloc] initWithTitle:@"Advanced" target:self onValue:NULL onAction:@selector(showAdvancedSettings) onChange:NULL] autorelease];
+    showAdvancedSetting.shouldShowDisclosure = showAboutSetting.shouldShowDisclosure = YES;
     NSMutableArray * advancedSettings = [[[NSMutableArray alloc] initWithObjects:showAdvancedSetting, nil] autorelease];
     [self.settings setObject:advancedSettings forKey:@"Advanced"];
+    
+
+    
+    NSMutableArray * aboutSettings = [[[NSMutableArray alloc] initWithObjects:showAboutSetting, nil] autorelease];
+    [self.settings setObject:aboutSettings forKey:@"About"];
 }
 
 #pragma mark - Setting value callback methods
@@ -103,6 +113,11 @@
     AdvancedSettingsViewController * advancedController = [[[AdvancedSettingsViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil] autorelease];
     advancedController.primaryViewController = self.primaryViewController;
     [self.navigationController pushViewController:advancedController animated:YES];
+}
+
+- (void)showAboutSettings {
+    AboutViewController * aboutController = [[[AboutViewController alloc] initWithNibName:@"AboutView" bundle:nil] autorelease];
+    [self.navigationController pushViewController:aboutController animated:YES];
 }
 
 #pragma mark - Setting change callback methods

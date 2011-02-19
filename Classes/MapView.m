@@ -42,6 +42,7 @@
 	if (self != nil) {
 		_mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
 		_mapView.showsUserLocation = YES;
+        _mapView.mapType = MKMapTypeSatellite;
 		[_mapView setDelegate:self];
 		[self addSubview:_mapView];
         
