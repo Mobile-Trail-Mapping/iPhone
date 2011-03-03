@@ -43,6 +43,14 @@
 		22DEE79E130A37C90026CC2C /* AddTrailPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DEE79D130A37C90026CC2C /* AddTrailPointViewController.m */; };
 		22E80B8A12FA9CC4009CF69F /* TrailTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E80ACE12FA9771009CF69F /* TrailTest.m */; };
 		22E80B9D12FA9D42009CF69F /* Trail.m in Sources */ = {isa = PBXBuildFile; fileRef = A739508812D6AD850079EA7F /* Trail.m */; };
+		22FD3312131F883F0087111F /* PropertyEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FD330F131F883F0087111F /* PropertyEditorViewController.m */; };
+		22FD3313131F883F0087111F /* PropertyPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FD3311131F883F0087111F /* PropertyPickerViewController.m */; };
+		22FD3323131F88600087111F /* MutableOrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FD331E131F885F0087111F /* MutableOrderedDictionary.m */; };
+		22FD3324131F88600087111F /* Setting.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FD3320131F88600087111F /* Setting.m */; };
+		22FD3325131F88600087111F /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FD3322131F88600087111F /* SettingsViewController.m */; };
+		22FD3329131F886F0087111F /* PropertyEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22FD3326131F886F0087111F /* PropertyEditorView.xib */; };
+		22FD332A131F886F0087111F /* PropertyPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22FD3327131F886F0087111F /* PropertyPickerView.xib */; };
+		22FD332B131F886F0087111F /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22FD3328131F886F0087111F /* SettingsViewController.xib */; };
 		A71079DD12DD2C5C00B19EBC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71079DC12DD2C5C00B19EBC /* MapKit.framework */; };
 		A7107A2612DD2D0500B19EBC /* CXMLDocument_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7107A0D12DD2D0500B19EBC /* CXMLDocument_CreationExtensions.m */; };
 		A7107A2712DD2D0500B19EBC /* CXMLNode_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = A7107A0F12DD2D0500B19EBC /* CXMLNode_CreationExtensions.m */; };
@@ -132,6 +140,19 @@
 		22E80AC812FA9744009CF69F /* MTMTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MTMTest-Info.plist"; sourceTree = "<group>"; };
 		22E80ACD12FA9771009CF69F /* TrailTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailTest.h; sourceTree = "<group>"; };
 		22E80ACE12FA9771009CF69F /* TrailTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrailTest.m; sourceTree = "<group>"; };
+		22FD330E131F883F0087111F /* PropertyEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PropertyEditorViewController.h; path = SettingsViewController/PropertyEditorViewController.h; sourceTree = SOURCE_ROOT; };
+		22FD330F131F883F0087111F /* PropertyEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PropertyEditorViewController.m; path = SettingsViewController/PropertyEditorViewController.m; sourceTree = SOURCE_ROOT; };
+		22FD3310131F883F0087111F /* PropertyPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PropertyPickerViewController.h; path = SettingsViewController/PropertyPickerViewController.h; sourceTree = SOURCE_ROOT; };
+		22FD3311131F883F0087111F /* PropertyPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PropertyPickerViewController.m; path = SettingsViewController/PropertyPickerViewController.m; sourceTree = SOURCE_ROOT; };
+		22FD331D131F885F0087111F /* MutableOrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MutableOrderedDictionary.h; path = SettingsViewController/MutableOrderedDictionary.h; sourceTree = SOURCE_ROOT; };
+		22FD331E131F885F0087111F /* MutableOrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MutableOrderedDictionary.m; path = SettingsViewController/MutableOrderedDictionary.m; sourceTree = SOURCE_ROOT; };
+		22FD331F131F885F0087111F /* Setting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Setting.h; path = SettingsViewController/Setting.h; sourceTree = SOURCE_ROOT; };
+		22FD3320131F88600087111F /* Setting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Setting.m; path = SettingsViewController/Setting.m; sourceTree = SOURCE_ROOT; };
+		22FD3321131F88600087111F /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = SettingsViewController/SettingsViewController.h; sourceTree = SOURCE_ROOT; };
+		22FD3322131F88600087111F /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = SettingsViewController/SettingsViewController.m; sourceTree = SOURCE_ROOT; };
+		22FD3326131F886F0087111F /* PropertyEditorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PropertyEditorView.xib; path = SettingsViewController/PropertyEditorView.xib; sourceTree = "<group>"; };
+		22FD3327131F886F0087111F /* PropertyPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PropertyPickerView.xib; path = SettingsViewController/PropertyPickerView.xib; sourceTree = "<group>"; };
+		22FD3328131F886F0087111F /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingsViewController.xib; path = SettingsViewController/SettingsViewController.xib; sourceTree = "<group>"; };
 		A71079DC12DD2C5C00B19EBC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = Libs/MapKit.framework; sourceTree = "<group>"; };
 		A7107A0C12DD2D0500B19EBC /* CXMLDocument_CreationExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLDocument_CreationExtensions.h; sourceTree = "<group>"; };
 		A7107A0D12DD2D0500B19EBC /* CXMLDocument_CreationExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMLDocument_CreationExtensions.m; sourceTree = "<group>"; };
@@ -219,6 +240,12 @@
 		229CA36013005FC4001E338E /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				22FD331D131F885F0087111F /* MutableOrderedDictionary.h */,
+				22FD331E131F885F0087111F /* MutableOrderedDictionary.m */,
+				22FD331F131F885F0087111F /* Setting.h */,
+				22FD3320131F88600087111F /* Setting.m */,
+				22FD3321131F88600087111F /* SettingsViewController.h */,
+				22FD3322131F88600087111F /* SettingsViewController.m */,
 				22A88358130B211A00CB11EF /* Value editors */,
 				22A88352130B1E2900CB11EF /* Screen subclasses */,
 				22DC0FF21307537800D99F22 /* Network */,
@@ -246,6 +273,10 @@
 		22A88358130B211A00CB11EF /* Value editors */ = {
 			isa = PBXGroup;
 			children = (
+				22FD330E131F883F0087111F /* PropertyEditorViewController.h */,
+				22FD330F131F883F0087111F /* PropertyEditorViewController.m */,
+				22FD3310131F883F0087111F /* PropertyPickerViewController.h */,
+				22FD3311131F883F0087111F /* PropertyPickerViewController.m */,
 			);
 			name = "Value editors";
 			sourceTree = "<group>";
@@ -446,6 +477,9 @@
 		A7D94A4512ADC542003BDB1C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				22FD3326131F886F0087111F /* PropertyEditorView.xib */,
+				22FD3327131F886F0087111F /* PropertyPickerView.xib */,
+				22FD3328131F886F0087111F /* SettingsViewController.xib */,
 				22DEE78A1308E5B40026CC2C /* redx.jpg */,
 				220CD76512E925EF000804E8 /* MTMLogo_iOS_iPhone.png */,
 				220CD76712E92603000804E8 /* MTMLogo_iOS_iPhone_Retina.png */,
@@ -567,6 +601,9 @@
 				22DC0FFC1307567A00D99F22 /* Settings.plist in Resources */,
 				22DEE78B1308E5B40026CC2C /* redx.jpg in Resources */,
 				22CC0C12130D8DDD00370B1B /* AboutView.xib in Resources */,
+				22FD3329131F886F0087111F /* PropertyEditorView.xib in Resources */,
+				22FD332A131F886F0087111F /* PropertyPickerView.xib in Resources */,
+				22FD332B131F886F0087111F /* SettingsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -645,6 +682,11 @@
 				221DFC1E130B8010006225DD /* Condition.m in Sources */,
 				22CC0C10130D8D1800370B1B /* AboutViewController.m in Sources */,
 				22A39B05131F73E200D4F115 /* MTMSettingsViewController.m in Sources */,
+				22FD3312131F883F0087111F /* PropertyEditorViewController.m in Sources */,
+				22FD3313131F883F0087111F /* PropertyPickerViewController.m in Sources */,
+				22FD3323131F88600087111F /* MutableOrderedDictionary.m in Sources */,
+				22FD3324131F88600087111F /* Setting.m in Sources */,
+				22FD3325131F88600087111F /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
