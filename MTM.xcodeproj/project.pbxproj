@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		220CD76612E925EF000804E8 /* MTMLogo_iOS_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 220CD76512E925EF000804E8 /* MTMLogo_iOS_iPhone.png */; };
 		220CD76812E92603000804E8 /* MTMLogo_iOS_iPhone_Retina.png in Resources */ = {isa = PBXBuildFile; fileRef = 220CD76712E92603000804E8 /* MTMLogo_iOS_iPhone_Retina.png */; };
-		2214BB521301CDCD009EC84E /* MutableOrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 2214BB511301CDCD009EC84E /* MutableOrderedDictionary.m */; };
 		221DFC1E130B8010006225DD /* Condition.m in Sources */ = {isa = PBXBuildFile; fileRef = 221DFC1D130B8010006225DD /* Condition.m */; };
 		221DFC1F130B8010006225DD /* Condition.m in Sources */ = {isa = PBXBuildFile; fileRef = 221DFC1D130B8010006225DD /* Condition.m */; };
 		2233DACD12E8FA0E0004A33A /* TrailOverlayPathView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2233DACC12E8FA0E0004A33A /* TrailOverlayPathView.m */; };
@@ -19,16 +18,10 @@
 		2237896012EA113800BAF18A /* TrailPointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2237895F12EA113800BAF18A /* TrailPointAnnotation.m */; };
 		22876D7A12FF47DA00BEF630 /* InterestPointTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 22876D7912FF47D900BEF630 /* InterestPointTest.m */; };
 		22876D7D12FF4A1E00BEF630 /* TrailPointTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 22876D7C12FF4A1E00BEF630 /* TrailPointTest.m */; };
-		229B73AE13073FD600A9A8BA /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 229B73AD13073FD600A9A8BA /* SettingsViewController.m */; };
-		229CA36713005FFC001E338E /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 229CA36613005FFC001E338E /* SettingsViewController.xib */; };
 		229CA368130060C9001E338E /* InterestPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A792BE6712C7379E005EFAC6 /* InterestPoint.m */; };
 		229CA369130060CC001E338E /* TrailPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A7306D6E12B6F8AA0099C0C2 /* TrailPoint.m */; };
 		229CA36A130060D6001E338E /* PrimarySettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 229CA36213005FDB001E338E /* PrimarySettingsViewController.m */; };
-		229CA36B13006107001E338E /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 229CA36613005FFC001E338E /* SettingsViewController.xib */; };
-		229CA36E1301B3F0001E338E /* Setting.m in Sources */ = {isa = PBXBuildFile; fileRef = 229CA36D1301B3F0001E338E /* Setting.m */; };
 		22A39B05131F73E200D4F115 /* MTMSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A39B04131F73E100D4F115 /* MTMSettingsViewController.m */; };
-		22A88355130B1F0C00CB11EF /* PropertyPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A88354130B1F0C00CB11EF /* PropertyPickerViewController.m */; };
-		22A88357130B1F6500CB11EF /* PropertyPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A88356130B1F6500CB11EF /* PropertyPickerView.xib */; };
 		22C011A512EF659D000D5C9F /* MTMLogo_iOS_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 22C011A412EF659D000D5C9F /* MTMLogo_iOS_iPad.png */; };
 		22C011AF12EF851C000D5C9F /* TrailPointInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C011AE12EF851C000D5C9F /* TrailPointInfoViewController.m */; };
 		22C011B312EF85B5000D5C9F /* TrailPointInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C011B212EF85B5000D5C9F /* TrailPointInfoView.xib */; };
@@ -37,7 +30,6 @@
 		22C635F612EF625100C53C84 /* MainViewController_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C635F512EF625100C53C84 /* MainViewController_iPhone.m */; };
 		22CC0C10130D8D1800370B1B /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22CC0C0F130D8D1800370B1B /* AboutViewController.m */; };
 		22CC0C12130D8DDD00370B1B /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22CC0C11130D8DDD00370B1B /* AboutView.xib */; };
-		22DC0FEE130742CC00D99F22 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 229B73AD13073FD600A9A8BA /* SettingsViewController.m */; };
 		22DC0FF1130743C200D99F22 /* AdvancedSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DC0FF0130743C200D99F22 /* AdvancedSettingsViewController.m */; };
 		22DC0FF71307550F00D99F22 /* ServiceAccountManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DC0FF61307550F00D99F22 /* ServiceAccountManager.m */; };
 		22DC0FFA1307562500D99F22 /* StoredSettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DC0FF91307562500D99F22 /* StoredSettingsManager.m */; };
@@ -45,13 +37,10 @@
 		22DC0FFF130776B000D99F22 /* ServiceAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DC0FFE130776B000D99F22 /* ServiceAccount.m */; };
 		22DEE785130868E60026CC2C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22DEE784130868E60026CC2C /* Security.framework */; };
 		22DEE78B1308E5B40026CC2C /* redx.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 22DEE78A1308E5B40026CC2C /* redx.jpg */; };
-		22DEE78E1308EA0B0026CC2C /* PropertyEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DEE78D1308EA0B0026CC2C /* PropertyEditorViewController.m */; };
-		22DEE7901308EA4E0026CC2C /* PropertyEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22DEE78F1308EA4E0026CC2C /* PropertyEditorView.xib */; };
 		22DEE7931309404B0026CC2C /* NetworkOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DEE7921309404B0026CC2C /* NetworkOperationManager.m */; };
 		22DEE796130942D60026CC2C /* NetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DEE795130942D60026CC2C /* NetworkOperation.m */; };
 		22DEE79B130A2D390026CC2C /* AddTrailObjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DEE79A130A2D390026CC2C /* AddTrailObjectViewController.m */; };
 		22DEE79E130A37C90026CC2C /* AddTrailPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DEE79D130A37C90026CC2C /* AddTrailPointViewController.m */; };
-		22E42EC4130C7E5900C189A2 /* MutableOrderedDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 2214BB511301CDCD009EC84E /* MutableOrderedDictionary.m */; };
 		22E80B8A12FA9CC4009CF69F /* TrailTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E80ACE12FA9771009CF69F /* TrailTest.m */; };
 		22E80B9D12FA9D42009CF69F /* Trail.m in Sources */ = {isa = PBXBuildFile; fileRef = A739508812D6AD850079EA7F /* Trail.m */; };
 		A71079DD12DD2C5C00B19EBC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A71079DC12DD2C5C00B19EBC /* MapKit.framework */; };
@@ -86,8 +75,6 @@
 /* Begin PBXFileReference section */
 		220CD76512E925EF000804E8 /* MTMLogo_iOS_iPhone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MTMLogo_iOS_iPhone.png; sourceTree = "<group>"; };
 		220CD76712E92603000804E8 /* MTMLogo_iOS_iPhone_Retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MTMLogo_iOS_iPhone_Retina.png; sourceTree = "<group>"; };
-		2214BB501301CDCD009EC84E /* MutableOrderedDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MutableOrderedDictionary.h; sourceTree = "<group>"; };
-		2214BB511301CDCD009EC84E /* MutableOrderedDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MutableOrderedDictionary.m; sourceTree = "<group>"; };
 		221DFC1C130B8010006225DD /* Condition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Condition.h; sourceTree = "<group>"; };
 		221DFC1D130B8010006225DD /* Condition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Condition.m; sourceTree = "<group>"; };
 		2233DACB12E8FA0E0004A33A /* TrailOverlayPathView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailOverlayPathView.h; sourceTree = "<group>"; };
@@ -103,18 +90,10 @@
 		22876D7912FF47D900BEF630 /* InterestPointTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterestPointTest.m; sourceTree = "<group>"; };
 		22876D7B12FF4A1E00BEF630 /* TrailPointTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailPointTest.h; sourceTree = "<group>"; };
 		22876D7C12FF4A1E00BEF630 /* TrailPointTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrailPointTest.m; sourceTree = "<group>"; };
-		229B73AC13073FD600A9A8BA /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
-		229B73AD13073FD600A9A8BA /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		229CA36113005FDB001E338E /* PrimarySettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrimarySettingsViewController.h; sourceTree = "<group>"; };
 		229CA36213005FDB001E338E /* PrimarySettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrimarySettingsViewController.m; sourceTree = "<group>"; };
-		229CA36613005FFC001E338E /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
-		229CA36C1301B3F0001E338E /* Setting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Setting.h; sourceTree = "<group>"; };
-		229CA36D1301B3F0001E338E /* Setting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Setting.m; sourceTree = "<group>"; };
 		22A39B03131F73E100D4F115 /* MTMSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMSettingsViewController.h; sourceTree = "<group>"; };
 		22A39B04131F73E100D4F115 /* MTMSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMSettingsViewController.m; sourceTree = "<group>"; };
-		22A88353130B1F0C00CB11EF /* PropertyPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyPickerViewController.h; sourceTree = "<group>"; };
-		22A88354130B1F0C00CB11EF /* PropertyPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyPickerViewController.m; sourceTree = "<group>"; };
-		22A88356130B1F6500CB11EF /* PropertyPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PropertyPickerView.xib; sourceTree = "<group>"; };
 		22C011A412EF659D000D5C9F /* MTMLogo_iOS_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MTMLogo_iOS_iPad.png; sourceTree = "<group>"; };
 		22C011A912EF7D18000D5C9F /* TrailActionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailActionDelegate.h; sourceTree = "<group>"; };
 		22C011AD12EF851C000D5C9F /* TrailPointInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailPointInfoViewController.h; sourceTree = "<group>"; };
@@ -139,9 +118,6 @@
 		22DC0FFE130776B000D99F22 /* ServiceAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceAccount.m; sourceTree = "<group>"; };
 		22DEE784130868E60026CC2C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		22DEE78A1308E5B40026CC2C /* redx.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = redx.jpg; sourceTree = "<group>"; };
-		22DEE78C1308EA0B0026CC2C /* PropertyEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyEditorViewController.h; sourceTree = "<group>"; };
-		22DEE78D1308EA0B0026CC2C /* PropertyEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyEditorViewController.m; sourceTree = "<group>"; };
-		22DEE78F1308EA4E0026CC2C /* PropertyEditorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PropertyEditorView.xib; sourceTree = "<group>"; };
 		22DEE7911309404B0026CC2C /* NetworkOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkOperationManager.h; sourceTree = "<group>"; };
 		22DEE7921309404B0026CC2C /* NetworkOperationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkOperationManager.m; sourceTree = "<group>"; };
 		22DEE794130942D60026CC2C /* NetworkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkOperation.h; sourceTree = "<group>"; };
@@ -246,12 +222,6 @@
 				22A88358130B211A00CB11EF /* Value editors */,
 				22A88352130B1E2900CB11EF /* Screen subclasses */,
 				22DC0FF21307537800D99F22 /* Network */,
-				229B73AC13073FD600A9A8BA /* SettingsViewController.h */,
-				229B73AD13073FD600A9A8BA /* SettingsViewController.m */,
-				229CA36C1301B3F0001E338E /* Setting.h */,
-				229CA36D1301B3F0001E338E /* Setting.m */,
-				2214BB501301CDCD009EC84E /* MutableOrderedDictionary.h */,
-				2214BB511301CDCD009EC84E /* MutableOrderedDictionary.m */,
 				22DC0FF81307562500D99F22 /* StoredSettingsManager.h */,
 				22DC0FF91307562500D99F22 /* StoredSettingsManager.m */,
 			);
@@ -276,10 +246,6 @@
 		22A88358130B211A00CB11EF /* Value editors */ = {
 			isa = PBXGroup;
 			children = (
-				22DEE78C1308EA0B0026CC2C /* PropertyEditorViewController.h */,
-				22DEE78D1308EA0B0026CC2C /* PropertyEditorViewController.m */,
-				22A88353130B1F0C00CB11EF /* PropertyPickerViewController.h */,
-				22A88354130B1F0C00CB11EF /* PropertyPickerViewController.m */,
 			);
 			name = "Value editors";
 			sourceTree = "<group>";
@@ -481,7 +447,6 @@
 			isa = PBXGroup;
 			children = (
 				22DEE78A1308E5B40026CC2C /* redx.jpg */,
-				229CA36613005FFC001E338E /* SettingsViewController.xib */,
 				220CD76512E925EF000804E8 /* MTMLogo_iOS_iPhone.png */,
 				220CD76712E92603000804E8 /* MTMLogo_iOS_iPhone_Retina.png */,
 				A7107A3912DD2F2700B19EBC /* sample.xml */,
@@ -491,8 +456,6 @@
 				A7D94A6412ADC542003BDB1C /* MainViewController.xib */,
 				22C011B212EF85B5000D5C9F /* TrailPointInfoView.xib */,
 				22DC0FFB1307567A00D99F22 /* Settings.plist */,
-				22DEE78F1308EA4E0026CC2C /* PropertyEditorView.xib */,
-				22A88356130B1F6500CB11EF /* PropertyPickerView.xib */,
 				22CC0C11130D8DDD00370B1B /* AboutView.xib */,
 			);
 			name = Resources;
@@ -585,7 +548,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				229CA36713005FFC001E338E /* SettingsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,11 +564,8 @@
 				2236E44712EAA9EE00297F28 /* MainWindow-iPad.xib in Resources */,
 				22C011A512EF659D000D5C9F /* MTMLogo_iOS_iPad.png in Resources */,
 				22C011B312EF85B5000D5C9F /* TrailPointInfoView.xib in Resources */,
-				229CA36B13006107001E338E /* SettingsViewController.xib in Resources */,
 				22DC0FFC1307567A00D99F22 /* Settings.plist in Resources */,
 				22DEE78B1308E5B40026CC2C /* redx.jpg in Resources */,
-				22DEE7901308EA4E0026CC2C /* PropertyEditorView.xib in Resources */,
-				22A88357130B1F6500CB11EF /* PropertyPickerView.xib in Resources */,
 				22CC0C12130D8DDD00370B1B /* AboutView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -640,8 +599,6 @@
 				22876D7A12FF47DA00BEF630 /* InterestPointTest.m in Sources */,
 				229CA369130060CC001E338E /* TrailPoint.m in Sources */,
 				22876D7D12FF4A1E00BEF630 /* TrailPointTest.m in Sources */,
-				229B73AE13073FD600A9A8BA /* SettingsViewController.m in Sources */,
-				22E42EC4130C7E5900C189A2 /* MutableOrderedDictionary.m in Sources */,
 				221DFC1F130B8010006225DD /* Condition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -674,22 +631,17 @@
 				2233DAD112E8FD260004A33A /* TrailOverlay.m in Sources */,
 				2237895D12EA0BDA00BAF18A /* DataParser.m in Sources */,
 				2237896012EA113800BAF18A /* TrailPointAnnotation.m in Sources */,
-				22DC0FEE130742CC00D99F22 /* SettingsViewController.m in Sources */,
 				22C635F312EF624B00C53C84 /* MainViewController_iPad.m in Sources */,
 				22C635F612EF625100C53C84 /* MainViewController_iPhone.m in Sources */,
 				22C011AF12EF851C000D5C9F /* TrailPointInfoViewController.m in Sources */,
-				229CA36E1301B3F0001E338E /* Setting.m in Sources */,
-				2214BB521301CDCD009EC84E /* MutableOrderedDictionary.m in Sources */,
 				22DC0FF1130743C200D99F22 /* AdvancedSettingsViewController.m in Sources */,
 				22DC0FF71307550F00D99F22 /* ServiceAccountManager.m in Sources */,
 				22DC0FFA1307562500D99F22 /* StoredSettingsManager.m in Sources */,
 				22DC0FFF130776B000D99F22 /* ServiceAccount.m in Sources */,
-				22DEE78E1308EA0B0026CC2C /* PropertyEditorViewController.m in Sources */,
 				22DEE7931309404B0026CC2C /* NetworkOperationManager.m in Sources */,
 				22DEE796130942D60026CC2C /* NetworkOperation.m in Sources */,
 				22DEE79B130A2D390026CC2C /* AddTrailObjectViewController.m in Sources */,
 				22DEE79E130A37C90026CC2C /* AddTrailPointViewController.m in Sources */,
-				22A88355130B1F0C00CB11EF /* PropertyPickerViewController.m in Sources */,
 				221DFC1E130B8010006225DD /* Condition.m in Sources */,
 				22CC0C10130D8D1800370B1B /* AboutViewController.m in Sources */,
 				22A39B05131F73E200D4F115 /* MTMSettingsViewController.m in Sources */,
