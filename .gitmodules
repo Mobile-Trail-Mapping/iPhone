@@ -1,0 +1,3 @@
+[submodule "SettingsViewController"]
+	path = SettingsViewController
+	url = git@github.com:lithium3141/SettingsViewController.git
