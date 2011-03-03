@@ -1,1 +1,12 @@
-42
+This repository contains the iOS application for the Mobile Trail Mapping
+system. For full documentation on the system, see:
+
+https://github.com/Mobile-Trail-Mapping/Architecture/wiki
+
+A (very brief) rundown of how to build the project:
+
+$ git clone https://github.com/Mobile-Trail-Mapping/iPhone.git
+$ cd Mobile-Trail-Mapping
+$ git submodule init
+$ git submodule update
+$ xcodebuild
