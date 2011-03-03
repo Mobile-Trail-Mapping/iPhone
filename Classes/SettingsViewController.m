@@ -10,7 +10,6 @@
 
 @implementation SettingsViewController
 
-@synthesize primaryViewController = _primaryViewController;
 @synthesize settings = _settings;
 
 #pragma mark - Lifecycle

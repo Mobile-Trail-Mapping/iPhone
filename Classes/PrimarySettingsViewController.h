@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-#import "SettingsViewController.h"
+#import "MTMSettingsViewController.h"
 
 /**
  * View controller for application settings. Displays a table view for the
  * user to change configuration of the application.
  */
-@interface PrimarySettingsViewController : SettingsViewController {
+@interface PrimarySettingsViewController : MTMSettingsViewController {
 @private
     
 }

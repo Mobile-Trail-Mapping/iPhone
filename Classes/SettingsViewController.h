@@ -16,18 +16,7 @@
 @interface SettingsViewController : UITableViewController {
 @private
     MutableOrderedDictionary * _settings;
-    
-    MainViewController * _primaryViewController;
 }
-
-/**
- * The instance of MainViewController showing this controller modally. Receives
- * "delegate" actions for certain settings operations.
- *
- * This instance is weakly linked; it is technically possible for no
- * primaryViewController to exist for an instance of SettingsViewController.
- */
-@property (nonatomic, assign) MainViewController * primaryViewController;
 
 /**
  * The MutableOrderedDictionary of Setting objects used as display objects

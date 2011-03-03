@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SettingsViewController.h"
+#import "MTMSettingsViewController.h"
 
 /**
  * View controller for more advanced settings.
  */
-@interface AdvancedSettingsViewController : SettingsViewController {
+@interface AdvancedSettingsViewController : MTMSettingsViewController {
 @private
     
 }

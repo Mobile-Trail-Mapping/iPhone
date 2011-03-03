@@ -26,6 +26,7 @@
 		229CA36A130060D6001E338E /* PrimarySettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 229CA36213005FDB001E338E /* PrimarySettingsViewController.m */; };
 		229CA36B13006107001E338E /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 229CA36613005FFC001E338E /* SettingsViewController.xib */; };
 		229CA36E1301B3F0001E338E /* Setting.m in Sources */ = {isa = PBXBuildFile; fileRef = 229CA36D1301B3F0001E338E /* Setting.m */; };
+		22A39B05131F73E200D4F115 /* MTMSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A39B04131F73E100D4F115 /* MTMSettingsViewController.m */; };
 		22A88355130B1F0C00CB11EF /* PropertyPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A88354130B1F0C00CB11EF /* PropertyPickerViewController.m */; };
 		22A88357130B1F6500CB11EF /* PropertyPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A88356130B1F6500CB11EF /* PropertyPickerView.xib */; };
 		22C011A512EF659D000D5C9F /* MTMLogo_iOS_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 22C011A412EF659D000D5C9F /* MTMLogo_iOS_iPad.png */; };
@@ -109,6 +110,8 @@
 		229CA36613005FFC001E338E /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		229CA36C1301B3F0001E338E /* Setting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Setting.h; sourceTree = "<group>"; };
 		229CA36D1301B3F0001E338E /* Setting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Setting.m; sourceTree = "<group>"; };
+		22A39B03131F73E100D4F115 /* MTMSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMSettingsViewController.h; sourceTree = "<group>"; };
+		22A39B04131F73E100D4F115 /* MTMSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMSettingsViewController.m; sourceTree = "<group>"; };
 		22A88353130B1F0C00CB11EF /* PropertyPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyPickerViewController.h; sourceTree = "<group>"; };
 		22A88354130B1F0C00CB11EF /* PropertyPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyPickerViewController.m; sourceTree = "<group>"; };
 		22A88356130B1F6500CB11EF /* PropertyPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PropertyPickerView.xib; sourceTree = "<group>"; };
@@ -264,6 +267,8 @@
 				22DC0FF0130743C200D99F22 /* AdvancedSettingsViewController.m */,
 				22CC0C0E130D8D1800370B1B /* AboutViewController.h */,
 				22CC0C0F130D8D1800370B1B /* AboutViewController.m */,
+				22A39B03131F73E100D4F115 /* MTMSettingsViewController.h */,
+				22A39B04131F73E100D4F115 /* MTMSettingsViewController.m */,
 			);
 			name = "Screen subclasses";
 			sourceTree = "<group>";
@@ -687,6 +692,7 @@
 				22A88355130B1F0C00CB11EF /* PropertyPickerViewController.m in Sources */,
 				221DFC1E130B8010006225DD /* Condition.m in Sources */,
 				22CC0C10130D8D1800370B1B /* AboutViewController.m in Sources */,
+				22A39B05131F73E200D4F115 /* MTMSettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

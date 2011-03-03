@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-#import "SettingsViewController.h"
+#import "MTMSettingsViewController.h"
 
 /**
  * View controller for adding trail objects. Displays a table view for users
  * to begin the add-object process. Supports adding Trail and TrailPoint
  * objects.
  */
-@interface AddTrailObjectViewController : SettingsViewController {
+@interface AddTrailObjectViewController : MTMSettingsViewController {
 @private
     
 }

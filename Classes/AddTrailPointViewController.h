@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-#import "SettingsViewController.h"
+#import "MTMSettingsViewController.h"
 
 @class Trail;
 @class Condition;
 
-@interface AddTrailPointViewController : SettingsViewController <CLLocationManagerDelegate> {
+@interface AddTrailPointViewController : MTMSettingsViewController <CLLocationManagerDelegate> {
 @private
     CLLocationManager * _locationManager;
     
