@@ -56,4 +56,9 @@
  */
 - (void)redrawMapObjects;
 
+/**
+ * Force the underlying MKMapView to update its properties.
+ */
+- (void)redrawMap;
+
 @end

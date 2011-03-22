@@ -46,6 +46,12 @@
     [[ServiceAccountManager sharedManager] refreshActiveAuthentication];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.mapView redrawMap];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     

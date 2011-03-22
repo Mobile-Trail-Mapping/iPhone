@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MapKit/MapKit.h>
 
 /**
  * Singleton class responsible for storing and providing access to application
@@ -18,6 +19,7 @@
 @private
     BOOL _isFirstRun;
     NSString * _activeServiceAccountUUID;
+    MKMapType _mapType;
 }
 
 /**
@@ -43,6 +45,11 @@
  * @see ServiceAccountManager
  */
 @property (nonatomic, retain) NSString * activeServiceAccountUUID;
+
+/**
+ * The type of map to show the user on the primary map screen.
+ */
+@property (nonatomic, assign) MKMapType mapType;
 
 /**
  * The shared instance of this singleton class. Used to access an instance

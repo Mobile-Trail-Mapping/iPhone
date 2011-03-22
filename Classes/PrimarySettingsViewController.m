@@ -11,9 +11,12 @@
 #import "AdvancedSettingsViewController.h"
 #import "AboutViewController.h"
 #import "PropertyEditorViewController.h"
+#import "PropertyPickerViewController.h"
 
 #import "ServiceAccountManager.h"
 #import "ServiceAccount.h"
+
+#import "StoredSettingsManager.h"
 
 @implementation PrimarySettingsViewController
 
@@ -56,9 +59,13 @@
     NSMutableArray * userSettings = [[[NSMutableArray alloc] initWithObjects:usernameSetting, passwordSetting, nil] autorelease];
     [self.settings setObject:userSettings forKey:@"Authentication"];
     
-    Setting * mapTypeSetting = [[[Setting alloc] initWithTitle:@"Map type" target:self onValue:NULL onAction:NULL onChange:NULL] autorelease];
+    Setting * mapTypeSetting = [[[Setting alloc] initWithTitle:@"Map type" 
+                                                        target:self 
+                                                       onValue:@selector(mapType) 
+                                                      onAction:@selector(editMapType:) 
+                                                      onChange:@selector(didChangeMapType:)] autorelease];
     Setting * zoomToUserSetting = [[[Setting alloc] initWithTitle:@"Zoom to user" target:self onValue:NULL onAction:NULL onChange:NULL] autorelease];
-    mapTypeSetting.enabled = zoomToUserSetting.enabled = NO;
+    zoomToUserSetting.enabled = NO;
     NSMutableArray * mapSettings = [[[NSMutableArray alloc] initWithObjects:mapTypeSetting, zoomToUserSetting, nil] autorelease];
     [self.settings setObject:mapSettings forKey:@"Map"];
     
@@ -93,6 +100,15 @@
     return [[[ServiceAccountManager sharedManager] activeServiceAccount] password];
 }
 
+- (NSString *)mapType {
+    switch([[StoredSettingsManager sharedManager] mapType]) {
+        case MKMapTypeStandard: return @"Standard"; break;
+        case MKMapTypeSatellite: return @"Satellite"; break;
+        case MKMapTypeHybrid: return @"Hybrid"; break;
+        default: return @"Standard"; break;
+    }
+}
+
 #pragma mark - Setting action callback methods
 
 - (void)editActiveAccountUser:(id)sender {
@@ -102,6 +118,12 @@
 
 - (void)editActiveAccountPass:(id)sender {
     PropertyEditorViewController * propertyController = [[[PropertyEditorViewController alloc] initWithSetting:sender] autorelease];
+    [self.navigationController pushViewController:propertyController animated:YES];
+}
+
+- (void)editMapType:(id)sender {
+    NSArray * options = [[[NSArray alloc] initWithObjects:@"Standard", @"Satellite", @"Hybrid", nil] autorelease];
+    PropertyPickerViewController * propertyController = [[[PropertyPickerViewController alloc] initWithSetting:sender options:options] autorelease];
     [self.navigationController pushViewController:propertyController animated:YES];
 }
 
@@ -133,6 +155,19 @@
     ServiceAccount * activeAccount = [[ServiceAccountManager sharedManager] activeServiceAccount];
     activeAccount.password = pass;
     [[ServiceAccountManager sharedManager] updateAccount:activeAccount];
+    [self.tableView reloadData];
+}
+
+- (void)didChangeMapType:(NSString *)newTypeString {
+    MKMapType newType = MKMapTypeStandard;
+    if([newTypeString isEqualToString:@"Standard"]) {
+        newType = MKMapTypeStandard;
+    } else if([newTypeString isEqualToString:@"Satellite"]) {
+        newType = MKMapTypeSatellite;
+    } else if([newTypeString isEqualToString:@"Hybrid"]) {
+        newType = MKMapTypeHybrid;
+    }
+    [[StoredSettingsManager sharedManager] setMapType:newType];
     [self.tableView reloadData];
 }
 

@@ -14,6 +14,7 @@ static StoredSettingsManager * sharedInstance = nil;
 
 @synthesize isFirstRun = _isFirstRun;
 @synthesize activeServiceAccountUUID = _activeServiceAccountUUID;
+@synthesize mapType = _mapType;
 
 #pragma mark - Lifecycle
 
@@ -43,6 +44,7 @@ static StoredSettingsManager * sharedInstance = nil;
     // Set properties
     self.isFirstRun = [[plistData objectForKey:@"IsFirstRun"] boolValue];
     self.activeServiceAccountUUID = [plistData objectForKey:@"ActiveServiceAccountUUID"];
+    self.mapType = (MKMapType)[[plistData objectForKey:@"MapType"] unsignedIntegerValue];
 }
 
 - (void)writeSettingsToFile {
@@ -51,8 +53,13 @@ static StoredSettingsManager * sharedInstance = nil;
     NSString * plistPath = [rootPath stringByAppendingPathComponent:@"Settings.plist"];
     
     NSMutableDictionary * plistDict = [[[NSMutableDictionary alloc] initWithCapacity:10] autorelease];
+    
+    // Set properties
     [plistDict setValue:[NSNumber numberWithBool:self.isFirstRun] forKey:@"IsFirstRun"];
     [plistDict setValue:self.activeServiceAccountUUID forKey:@"ActiveServiceAccountUUID"];
+    [plistDict setValue:[NSNumber numberWithUnsignedInteger:self.mapType] forKey:@"MapType"];
+    
+    // Write
     NSData * plistData = [NSPropertyListSerialization dataFromPropertyList:plistDict format:NSPropertyListXMLFormat_v1_0 errorDescription:nil];
     if(plistData) {
         [plistData writeToFile:plistPath atomically:YES];

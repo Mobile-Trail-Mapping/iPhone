@@ -1,12 +1,18 @@
 #import "MapView.h"
+
 #import "TouchXML.h"
+
 #import "TrailPoint.h"
 #import "Condition.h"
+
 #import "TrailOverlay.h"
 #import "TrailOverlayPathView.h"
 #import "TrailPointAnnotation.h"
+
 #import "DataParser.h"
+
 #import "ServiceAccountManager.h"
+#import "StoredSettingsManager.h"
 
 #import "NetworkOperationManager.h"
 #import "NetworkOperation.h"
@@ -114,6 +120,11 @@
             [_mapView addAnnotation:headAnnotation];
         }
     }
+}
+
+- (void)redrawMap {
+    _mapView.mapType = [[StoredSettingsManager sharedManager] mapType];
+    [_mapView setNeedsDisplay];
 }
 
 - (void)clearCachedImagesExceptForTrailPoint:(TrailPoint *)exceptPoint {
