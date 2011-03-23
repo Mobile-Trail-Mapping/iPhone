@@ -33,6 +33,11 @@
     addTrailSetting.enabled = NO;
     NSArray * trailSettings = [[[NSArray alloc] initWithObjects:addTrailSetting, addTrailPointSetting, nil] autorelease];
     [self.settings setValue:trailSettings forKey:@"Trail objects"];
+    
+    Setting * addProblemReportSetting = [[[Setting alloc] initWithTitle:@"Problem report" target:self onValue:NULL onAction:NULL onChange:NULL] autorelease];
+    addProblemReportSetting.enabled = NO;
+    NSArray * problemSettings = [[[NSArray alloc] initWithObjects:addProblemReportSetting, nil] autorelease];
+    [self.settings setValue:problemSettings forKey:@"Problems"];
 }
 
 #pragma mark - Button response methods
