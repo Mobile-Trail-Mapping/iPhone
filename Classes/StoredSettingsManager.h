@@ -20,6 +20,7 @@
     BOOL _isFirstRun;
     NSString * _activeServiceAccountUUID;
     MKMapType _mapType;
+    BOOL _mapZoomsToUserLocation;
 }
 
 /**
@@ -50,6 +51,12 @@
  * The type of map to show the user on the primary map screen.
  */
 @property (nonatomic, assign) MKMapType mapType;
+
+/**
+ * Whether or not the primary map view zooms to user location on application
+ * startup.
+ */
+@property (nonatomic, assign) BOOL mapZoomsToUserLocation;
 
 /**
  * The shared instance of this singleton class. Used to access an instance

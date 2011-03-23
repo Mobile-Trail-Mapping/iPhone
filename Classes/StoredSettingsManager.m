@@ -15,6 +15,7 @@ static StoredSettingsManager * sharedInstance = nil;
 @synthesize isFirstRun = _isFirstRun;
 @synthesize activeServiceAccountUUID = _activeServiceAccountUUID;
 @synthesize mapType = _mapType;
+@synthesize mapZoomsToUserLocation = _mapZoomsToUserLocation;
 
 #pragma mark - Lifecycle
 
@@ -45,6 +46,7 @@ static StoredSettingsManager * sharedInstance = nil;
     self.isFirstRun = [[plistData objectForKey:@"IsFirstRun"] boolValue];
     self.activeServiceAccountUUID = [plistData objectForKey:@"ActiveServiceAccountUUID"];
     self.mapType = (MKMapType)[[plistData objectForKey:@"MapType"] unsignedIntegerValue];
+    self.mapZoomsToUserLocation = [[plistData objectForKey:@"MapZoomsToUserLocation"] boolValue];
 }
 
 - (void)writeSettingsToFile {
@@ -58,6 +60,7 @@ static StoredSettingsManager * sharedInstance = nil;
     [plistDict setValue:[NSNumber numberWithBool:self.isFirstRun] forKey:@"IsFirstRun"];
     [plistDict setValue:self.activeServiceAccountUUID forKey:@"ActiveServiceAccountUUID"];
     [plistDict setValue:[NSNumber numberWithUnsignedInteger:self.mapType] forKey:@"MapType"];
+    [plistDict setValue:[NSNumber numberWithBool:self.mapZoomsToUserLocation] forKey:@"MapZoomsToUserLocation"];
     
     // Write
     NSData * plistData = [NSPropertyListSerialization dataFromPropertyList:plistDict format:NSPropertyListXMLFormat_v1_0 errorDescription:nil];

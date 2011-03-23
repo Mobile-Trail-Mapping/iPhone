@@ -64,8 +64,11 @@
                                                        onValue:@selector(mapType) 
                                                       onAction:@selector(editMapType:) 
                                                       onChange:@selector(didChangeMapType:)] autorelease];
-    Setting * zoomToUserSetting = [[[Setting alloc] initWithTitle:@"Zoom to user" target:self onValue:NULL onAction:NULL onChange:NULL] autorelease];
-    zoomToUserSetting.enabled = NO;
+    Setting * zoomToUserSetting = [[[Setting alloc] initWithTitle:@"Zoom to user" 
+                                                           target:self 
+                                                          onValue:@selector(mapZoomsToUserLocation)
+                                                         onAction:@selector(toggleMapZoomsToUserLocation:)
+                                                         onChange:NULL] autorelease];
     NSMutableArray * mapSettings = [[[NSMutableArray alloc] initWithObjects:mapTypeSetting, zoomToUserSetting, nil] autorelease];
     [self.settings setObject:mapSettings forKey:@"Map"];
     
@@ -109,6 +112,10 @@
     }
 }
 
+- (NSString *)mapZoomsToUserLocation {
+    return ([[StoredSettingsManager sharedManager] mapZoomsToUserLocation] ? @"Yes" : @"No");
+}
+
 #pragma mark - Setting action callback methods
 
 - (void)editActiveAccountUser:(id)sender {
@@ -125,6 +132,11 @@
     NSArray * options = [[[NSArray alloc] initWithObjects:@"Standard", @"Satellite", @"Hybrid", nil] autorelease];
     PropertyPickerViewController * propertyController = [[[PropertyPickerViewController alloc] initWithSetting:sender options:options] autorelease];
     [self.navigationController pushViewController:propertyController animated:YES];
+}
+
+- (void)toggleMapZoomsToUserLocation:(id)sender {
+    [[StoredSettingsManager sharedManager] setMapZoomsToUserLocation:![[StoredSettingsManager sharedManager] mapZoomsToUserLocation]];
+    [self.tableView reloadData];
 }
 
 - (void)clearCachedImages {

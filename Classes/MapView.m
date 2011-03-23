@@ -143,7 +143,26 @@
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
     for(MKAnnotationView * view in views) {
         view.rightCalloutAccessoryView = [self.delegate calloutViewForTrailPointAnnotation:view];
+        
         [view setNeedsDisplay];
+    }
+    
+    if([[StoredSettingsManager sharedManager] mapZoomsToUserLocation]) {
+        MKCoordinateRegion region;
+        MKCoordinateSpan span;
+        
+        span.latitudeDelta = 0.05;
+        span.longitudeDelta = 0.05;
+        
+        CLLocationCoordinate2D location = mapView.userLocation.coordinate;
+        
+        location = mapView.userLocation.location.coordinate;
+        
+        region.span = span;
+        region.center = location;
+        
+        [mapView setRegion:region animated:TRUE];
+        [mapView regionThatFits:region];
     }
 }
 
