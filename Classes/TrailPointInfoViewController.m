@@ -23,6 +23,17 @@
     return self;
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    UIView * bgView = [[[UIView alloc] initWithFrame:self.imageView.frame] autorelease];
+    bgView.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.8f];
+    [self.view addSubview:bgView];
+    [self.view sendSubviewToBack:bgView];
+    
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -158,6 +169,7 @@
     _transitionImageView = [[[UIImageView alloc] initWithFrame:self.imageView.frame] retain];
     _transitionImageView.alpha = 0.0f;
     _transitionImageView.image = [self.trailPoint.images objectAtIndex:nextIndex];
+    _transitionImageView.contentMode = UIViewContentModeScaleAspectFit;
     _transitionImageView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_transitionImageView];
     
@@ -167,6 +179,7 @@
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
     [_transitionImageView setAlpha:1.0f];
+    [self.imageView setAlpha:0.0f];
     [UIView commitAnimations];
 }
 
@@ -174,6 +187,8 @@
      NSInteger currentIndex = [self.trailPoint.images indexOfObject:self.imageView.image];
      NSInteger nextIndex = (currentIndex + 1) % self.trailPoint.images.count;
      self.imageView.image = [self.trailPoint.images objectAtIndex:nextIndex];
+     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+     self.imageView.alpha = 1.0f;
      
      [_transitionImageView removeFromSuperview];
      [_transitionImageView release];
