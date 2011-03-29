@@ -15,6 +15,7 @@
     id<TrailPointInfoModalDelegate> _delegate;
     TrailPoint * _trailPoint;
     
+    UIView * _bgView;
     UIImageView * _imageView;
     UIImageView * _transitionImageView;
     UILabel * _conditionLabel;
@@ -22,6 +23,8 @@
     UIActivityIndicatorView * _activityIndicatorView;
     
     NSTimer * _imageAnimationTimer;
+    
+    BOOL _performedFailAnimation;
 }
 
 /**
@@ -36,6 +39,12 @@
  * is being displayed and will update information as necessary.
  */
 @property (nonatomic, retain) TrailPoint * trailPoint;
+
+/**
+ * The background view that provides shading and framing to trail point
+ * images.
+ */
+@property (nonatomic, retain) UIView * bgView;
 
 /**
  * The on-screen view which displays images associated with this controller's

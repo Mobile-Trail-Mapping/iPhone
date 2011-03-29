@@ -9,6 +9,7 @@
 @synthesize delegate = _delegate;
 @synthesize trailPoint = _trailPoint;
 
+@synthesize bgView = _bgView;
 @synthesize imageView = _imageView;
 @synthesize conditionLabel = _conditionLabel;
 @synthesize descLabel = _descLabel;
@@ -26,12 +27,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIView * bgView = [[[UIView alloc] initWithFrame:self.imageView.frame] autorelease];
-    bgView.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.8f];
-    [self.view addSubview:bgView];
-    [self.view sendSubviewToBack:bgView];
+    self.bgView = [[[UIView alloc] initWithFrame:self.imageView.frame] autorelease];
+    self.bgView.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.8f];
+    [self.view addSubview:self.bgView];
+    [self.view sendSubviewToBack:self.bgView];
     
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    
+    _performedFailAnimation = NO;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -63,6 +66,7 @@
     [self removeObserver:self forKeyPath:@"trailPoint"];
     
     [_trailPoint release];
+    [_bgView release];
     [_imageView release];
     [_conditionLabel release];
     [_descLabel release];
@@ -96,9 +100,31 @@
 
 - (void)showFailureImage {
     NSLog(@"Showing failure image");
-    [self.imageView setAlpha:1.0];
-    [self.imageView setImage:[UIImage imageNamed:@"redx.jpg"]];
-    [self.imageView setNeedsDisplay];
+    //[self.imageView setAlpha:1.0];
+    //[self.imageView setImage:[UIImage imageNamed:@"redx.jpg"]];
+    //[self.imageView setNeedsDisplay];
+    if(!_performedFailAnimation) {
+        CGFloat height = self.imageView.frame.size.height;
+        NSLog(@"    animating up %fpx", height);
+        
+        [self.imageView removeFromSuperview];
+        [self.bgView removeFromSuperview];
+        
+        [UIView beginAnimations:@"UILabel transitions" context:NULL];
+        [UIView setAnimationDuration:0.5f];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+        CGRect conditionFrame = self.conditionLabel.frame;
+        conditionFrame.origin.y -= height;
+        self.conditionLabel.frame = conditionFrame;
+        
+        CGRect descFrame = self.descLabel.frame;
+        descFrame.origin.y -= height;
+        descFrame.size.height += height;
+        self.descLabel.frame = descFrame;
+        [UIView commitAnimations];
+        
+        _performedFailAnimation = YES;
+    }
 }
 
 - (void)loadRemoteImage {
