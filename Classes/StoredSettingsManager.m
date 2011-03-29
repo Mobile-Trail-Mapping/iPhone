@@ -16,6 +16,7 @@ static StoredSettingsManager * sharedInstance = nil;
 @synthesize activeServiceAccountUUID = _activeServiceAccountUUID;
 @synthesize mapType = _mapType;
 @synthesize mapZoomsToUserLocation = _mapZoomsToUserLocation;
+@synthesize APIURL = _APIURL;
 
 #pragma mark - Lifecycle
 
@@ -47,6 +48,7 @@ static StoredSettingsManager * sharedInstance = nil;
     self.activeServiceAccountUUID = [plistData objectForKey:@"ActiveServiceAccountUUID"];
     self.mapType = (MKMapType)[[plistData objectForKey:@"MapType"] unsignedIntegerValue];
     self.mapZoomsToUserLocation = [[plistData objectForKey:@"MapZoomsToUserLocation"] boolValue];
+    self.APIURL = [NSURL URLWithString:[plistData objectForKey:@"APIURL"]];
 }
 
 - (void)writeSettingsToFile {
@@ -61,6 +63,7 @@ static StoredSettingsManager * sharedInstance = nil;
     [plistDict setValue:self.activeServiceAccountUUID forKey:@"ActiveServiceAccountUUID"];
     [plistDict setValue:[NSNumber numberWithUnsignedInteger:self.mapType] forKey:@"MapType"];
     [plistDict setValue:[NSNumber numberWithBool:self.mapZoomsToUserLocation] forKey:@"MapZoomsToUserLocation"];
+    [plistDict setValue:[self.APIURL absoluteString] forKey:@"APIURL"];
     
     // Write
     NSData * plistData = [NSPropertyListSerialization dataFromPropertyList:plistDict format:NSPropertyListXMLFormat_v1_0 errorDescription:nil];

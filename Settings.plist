@@ -10,5 +10,7 @@
 	<integer>0</integer>
 	<key>MapZoomsToUserLocation</key>
 	<false/>
+	<key>APIURL</key>
+	<string>http://mtmtest.heroku.com</string>
 </dict>
 </plist>

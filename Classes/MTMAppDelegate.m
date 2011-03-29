@@ -10,7 +10,7 @@
 #elif _MTM_DEBUG_USE_LOCAL_SERVER
 #define MTM_SERVER_URL_STRING @"http://localhost:4567/"
 #else
-#define MTM_SERVER_URL_STRING @"http://mtmserver.heroku.com/"
+#define MTM_SERVER_URL_STRING [[StoredSettingsManager sharedManager] APIURL];
 #endif
 
 #if _MTM_DEBUG_SHIP_DEFAULT_ADMIN

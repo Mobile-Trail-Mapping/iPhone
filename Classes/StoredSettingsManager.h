@@ -21,6 +21,7 @@
     NSString * _activeServiceAccountUUID;
     MKMapType _mapType;
     BOOL _mapZoomsToUserLocation;
+    NSURL * _APIURL;
 }
 
 /**
@@ -57,6 +58,12 @@
  * startup.
  */
 @property (nonatomic, assign) BOOL mapZoomsToUserLocation;
+
+/**
+ * An NSString representation of the URL used for remote requests to the
+ * MTM server.
+ */
+@property (nonatomic, retain) NSURL * APIURL;
 
 /**
  * The shared instance of this singleton class. Used to access an instance
