@@ -11,7 +11,11 @@
 #import "NetworkOperationManager.h"
 #import "ServiceAccountManager.h"
 
-@interface NetworkOperation()
+/**
+ * Private methods used for data conversion when constructing or interfacing
+ * with a NetworkOperation.
+ */
+@interface NetworkOperation(Conversions)
 
 /**
  * Convert the given data dictionary to a URL-encoded query string suitable

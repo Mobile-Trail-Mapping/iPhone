@@ -3,6 +3,10 @@
 #import "Trail.h"
 #import "TrailPoint.h"
 
+/**
+ * Methods used to log parts of an XML document or element. Used primarily
+ * for internal debugging within the MTM application.
+ */
 @interface DataParser(Logging)
 
 /**

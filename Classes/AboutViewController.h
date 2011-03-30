@@ -13,6 +13,7 @@
  * MTM application.
  */
 @interface AboutViewController : UIViewController {
+@private
     UITextView * _textView;
     
     CGFloat _textFrameHeight;

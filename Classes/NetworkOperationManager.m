@@ -12,6 +12,10 @@
 
 static NetworkOperationManager * sharedInstance = nil;
 
+/**
+ * Methods used by the internal implementation of a NetworkOperationManager.
+ * Primarily used to hide implementation details from the end user.
+ */
 @interface NetworkOperationManager(Internal)
 
 /**

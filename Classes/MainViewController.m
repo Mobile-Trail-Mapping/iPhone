@@ -7,6 +7,9 @@
 
 #import "ServiceAccountManager.h"
 
+/**
+ * Private methods used to track state of this view controller.
+ */
 @interface MainViewController()
 
 /**

@@ -17,6 +17,10 @@
 #import "NetworkOperationManager.h"
 #import "NetworkOperation.h"
 
+/**
+ * Private methods allowing this class to perform parsing of network
+ * information received from an instance of the MTM server.
+ */
 @interface MapView(Parsing)
 /**
  * Request that this class begin the process of getting network information
