@@ -202,8 +202,8 @@
     [requestData setValue:self.pointCondition.desc forKey:@"condition"];
     [requestData setValue:self.pointCategory forKey:@"category"];
     //[requestData setValue:@"" forKey:@"connections"]; // No connections for now - TODO?
-    [requestData setValue:[NSString stringWithFormat:@"%f", self.currentLocation.latitude] forKey:@"lat"];
-    [requestData setValue:[NSString stringWithFormat:@"%f", self.currentLocation.longitude] forKey:@"long"];
+    [requestData setValue:[self latitudeString] forKey:@"lat"];
+    [requestData setValue:[self longitudeString] forKey:@"long"];
     pointOperation.requestData = requestData;
     
     [pointOperation addDelegate:self.primaryViewController.mapView];

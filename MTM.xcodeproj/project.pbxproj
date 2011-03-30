@@ -10,6 +10,7 @@
 		220CD76612E925EF000804E8 /* MTMLogo_iOS_iPhone.png in Resources */ = {isa = PBXBuildFile; fileRef = 220CD76512E925EF000804E8 /* MTMLogo_iOS_iPhone.png */; };
 		220CD76812E92603000804E8 /* MTMLogo_iOS_iPhone_Retina.png in Resources */ = {isa = PBXBuildFile; fileRef = 220CD76712E92603000804E8 /* MTMLogo_iOS_iPhone_Retina.png */; };
 		22105F361342B2E200980B51 /* AddProblemReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22105F351342B2E200980B51 /* AddProblemReportViewController.m */; };
+		22105F381342C6CC00980B51 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22105F371342C6CC00980B51 /* MobileCoreServices.framework */; };
 		221DFC1E130B8010006225DD /* Condition.m in Sources */ = {isa = PBXBuildFile; fileRef = 221DFC1D130B8010006225DD /* Condition.m */; };
 		221DFC1F130B8010006225DD /* Condition.m in Sources */ = {isa = PBXBuildFile; fileRef = 221DFC1D130B8010006225DD /* Condition.m */; };
 		2233DACD12E8FA0E0004A33A /* TrailOverlayPathView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2233DACC12E8FA0E0004A33A /* TrailOverlayPathView.m */; };
@@ -86,6 +87,7 @@
 		220CD76712E92603000804E8 /* MTMLogo_iOS_iPhone_Retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MTMLogo_iOS_iPhone_Retina.png; sourceTree = "<group>"; };
 		22105F341342B2E200980B51 /* AddProblemReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddProblemReportViewController.h; sourceTree = "<group>"; };
 		22105F351342B2E200980B51 /* AddProblemReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddProblemReportViewController.m; sourceTree = "<group>"; };
+		22105F371342C6CC00980B51 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		221DFC1C130B8010006225DD /* Condition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Condition.h; sourceTree = "<group>"; };
 		221DFC1D130B8010006225DD /* Condition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Condition.m; sourceTree = "<group>"; };
 		2233DACB12E8FA0E0004A33A /* TrailOverlayPathView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailOverlayPathView.h; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22105F381342C6CC00980B51 /* MobileCoreServices.framework in Frameworks */,
 				22DEE785130868E60026CC2C /* Security.framework in Frameworks */,
 				22C07D6212E6896500381FE5 /* CoreLocation.framework in Frameworks */,
 				A71079DD12DD2C5C00B19EBC /* MapKit.framework in Frameworks */,
@@ -448,6 +451,7 @@
 		A7D94A3C12ADC542003BDB1C = {
 			isa = PBXGroup;
 			children = (
+				22105F371342C6CC00980B51 /* MobileCoreServices.framework */,
 				22DEE784130868E60026CC2C /* Security.framework */,
 				22C07D6112E6896500381FE5 /* CoreLocation.framework */,
 				A7D94A4312ADC542003BDB1C /* Classes */,

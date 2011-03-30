@@ -61,7 +61,11 @@
     UINavigationController * navController = (UINavigationController *)(self.modalViewController);
     TrailPointInfoViewController * activeInfoController = (TrailPointInfoViewController *)([navController.viewControllers objectAtIndex:0]);
     
-    [self.mapView clearCachedImagesExceptForTrailPoint:activeInfoController.trailPoint];
+    if([activeInfoController isKindOfClass:[TrailPointInfoViewController class]]) {
+        [self.mapView clearCachedImagesExceptForTrailPoint:activeInfoController.trailPoint];
+    } else {
+        [self.mapView clearCachedImagesExceptForTrailPoint:nil];
+    }
 }
 
 - (void)dealloc {
