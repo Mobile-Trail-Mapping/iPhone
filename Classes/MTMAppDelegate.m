@@ -8,7 +8,7 @@
 #if _MTM_DEBUG_USE_TEST_SERVER
 #define MTM_SERVER_URL_STRING @"http://mtmtest.heroku.com/"
 #elif _MTM_DEBUG_USE_LOCAL_SERVER
-#define MTM_SERVER_URL_STRING @"http://localhost:4567/"
+#define MTM_SERVER_URL_STRING @"http://mossberg.wlan.rose-hulman.edu:4567/"
 #else
 #define MTM_SERVER_URL_STRING [[StoredSettingsManager sharedManager] APIURL];
 #endif

@@ -12,6 +12,8 @@
 #import "MTMSettingsViewController.h"
 #import "NetworkOperationDelegate.h"
 
+@class NetworkOperation;
+
 /**
  * Custom subclass of MTMSettingsViewController used to gather details and
  * submit a problem report for a trail. Allows for users to enter a problem
@@ -28,6 +30,8 @@
     
     UIImage * _problemPhoto;
     NSDate * _problemPhotoDate;
+    
+    NetworkOperation * _submitOperation;
 }
 
 /**
@@ -40,5 +44,12 @@
 @property (nonatomic, retain) NSString * problemDesc;
 
 @property (nonatomic, retain) UIImage * problemPhoto;
+
+/**
+ * Attempt to enable the "Submit" button in the problem report view controller.
+ * A successful attempt requires a filled-out title, description, photo,
+ * user information, and position.
+ */
+- (void)tryEnableSubmit;
 
 @end

@@ -85,12 +85,16 @@
 }
         
 - (BOOL)canShowAdminUI {
+#if _MTM_DEBUG_ALWAYS_ALLOW_ADD
+    return YES;
+#else
     BOOL authenticated = [[ServiceAccountManager sharedManager] activeAccountAuthenticated];
     BOOL haveTrails = ([[self trails] count] > 0);
     BOOL haveCategories = ([[self categories] count] > 0);
     BOOL haveConditions = ([[self conditions] count] > 0);
     
     return authenticated && haveTrails && haveCategories && haveConditions;
+#endif
 }
 
 - (void)adminDataDidChange {

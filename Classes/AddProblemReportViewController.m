@@ -46,8 +46,16 @@
 }
 
 - (void)dealloc {
+    for(id<NetworkOperationDelegate> delegate in _submitOperation.delegates) {
+        [_submitOperation removeDelegate:delegate];
+    }
+    [_submitOperation release];
+    
     [_problemTitle release];
     [_problemDesc release];
+    [_problemPhoto release];
+    [_problemPhotoDate release];
+    [_locationManager release];
     
     [super dealloc];
 }
@@ -80,8 +88,18 @@
     [self.settings setValue:photoSection forKey:@"Photo"];
     
     Setting * submitSetting = [[[Setting alloc] initWithTitle:@"Submit" target:self onValue:NULL onAction:@selector(submitProblemReport) onChange:NULL] autorelease];
+    submitSetting.enabled = NO;
     NSArray * submitSection = [[[NSArray alloc] initWithObjects:submitSetting, nil] autorelease];
     [self.settings setValue:submitSection forKey:@"Submit"];
+    
+    [self tryEnableSubmit];
+}
+
+- (void)tryEnableSubmit {
+    if(self.problemTitle != nil && self.problemDesc != nil && self.problemPhoto != nil &&
+       [[[ServiceAccountManager sharedManager] activeServiceAccount] username] != nil) {
+        [[[self.settings valueForKey:@"Submit"] objectAtIndex:0] setEnabled:YES];
+    }
 }
 
 #pragma mark - Setting values methods
@@ -133,9 +151,12 @@
     [requestData setValue:[[[ServiceAccountManager sharedManager] activeServiceAccount] username] forKey:@"user"];    
     [requestData setValue:[NSString stringWithFormat:@"%f", self.currentLocation.latitude] forKey:@"lat"];
     [requestData setValue:[NSString stringWithFormat:@"%f", self.currentLocation.longitude] forKey:@"long"];
+    operation.requestData = requestData;
     
     [operation addDelegate:self];
     [[NetworkOperationManager sharedManager] enqueueOperation:operation];
+    _submitOperation = operation;
+    [_submitOperation retain];
     
     [pool drain];
 }
@@ -145,11 +166,13 @@
 - (void)titleChanged:(NSString *)title {
     self.problemTitle = title;
     [self.tableView reloadData];
+    [self tryEnableSubmit];
 }
 
 - (void)descChanged:(NSString *)desc {
     self.problemDesc = desc;
     [self.tableView reloadData];
+    [self tryEnableSubmit];
 }
 
 #pragma mark - UIImagePickerControllerDelegate methods
@@ -166,10 +189,12 @@
     [self dismissModalViewControllerAnimated:YES];
     
     [self.tableView reloadData];
+    [self tryEnableSubmit];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [self dismissModalViewControllerAnimated:YES];
+    [self tryEnableSubmit];
 }
 
 #pragma mark - UITableViewDataSource method overrides
@@ -191,6 +216,7 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     NSLog(@"updating to location (%f,%f)", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
     self.currentLocation = [newLocation coordinate];
+    [self tryEnableSubmit];
 }
 
 #pragma mark - NetworkOperationDelegate methods

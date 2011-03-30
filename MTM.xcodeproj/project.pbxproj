@@ -11,6 +11,11 @@
 		220CD76812E92603000804E8 /* MTMLogo_iOS_iPhone_Retina.png in Resources */ = {isa = PBXBuildFile; fileRef = 220CD76712E92603000804E8 /* MTMLogo_iOS_iPhone_Retina.png */; };
 		22105F361342B2E200980B51 /* AddProblemReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22105F351342B2E200980B51 /* AddProblemReportViewController.m */; };
 		22105F381342C6CC00980B51 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22105F371342C6CC00980B51 /* MobileCoreServices.framework */; };
+		221060231342E97F00980B51 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 22105F431342E97F00980B51 /* Default.png */; };
+		221060241342E97F00980B51 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22105F441342E97F00980B51 /* Default@2x.png */; };
+		221060FF1342E98800980B51 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 22105F431342E97F00980B51 /* Default.png */; };
+		221061001342E9B400980B51 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22105F441342E97F00980B51 /* Default@2x.png */; };
+		221061021342E9D700980B51 /* Default-portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 221061011342E9D700980B51 /* Default-portrait~ipad.png */; };
 		221DFC1E130B8010006225DD /* Condition.m in Sources */ = {isa = PBXBuildFile; fileRef = 221DFC1D130B8010006225DD /* Condition.m */; };
 		221DFC1F130B8010006225DD /* Condition.m in Sources */ = {isa = PBXBuildFile; fileRef = 221DFC1D130B8010006225DD /* Condition.m */; };
 		2233DACD12E8FA0E0004A33A /* TrailOverlayPathView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2233DACC12E8FA0E0004A33A /* TrailOverlayPathView.m */; };
@@ -88,6 +93,9 @@
 		22105F341342B2E200980B51 /* AddProblemReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddProblemReportViewController.h; sourceTree = "<group>"; };
 		22105F351342B2E200980B51 /* AddProblemReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddProblemReportViewController.m; sourceTree = "<group>"; };
 		22105F371342C6CC00980B51 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		22105F431342E97F00980B51 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		22105F441342E97F00980B51 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		221061011342E9D700980B51 /* Default-portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-portrait~ipad.png"; sourceTree = "<group>"; };
 		221DFC1C130B8010006225DD /* Condition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Condition.h; sourceTree = "<group>"; };
 		221DFC1D130B8010006225DD /* Condition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Condition.m; sourceTree = "<group>"; };
 		2233DACB12E8FA0E0004A33A /* TrailOverlayPathView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailOverlayPathView.h; sourceTree = "<group>"; };
@@ -486,6 +494,9 @@
 		A7D94A4512ADC542003BDB1C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				221061011342E9D700980B51 /* Default-portrait~ipad.png */,
+				22105F431342E97F00980B51 /* Default.png */,
+				22105F441342E97F00980B51 /* Default@2x.png */,
 				22FD3326131F886F0087111F /* PropertyEditorView.xib */,
 				22FD3327131F886F0087111F /* PropertyPickerView.xib */,
 				22FD3328131F886F0087111F /* SettingsViewController.xib */,
@@ -591,6 +602,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				221060231342E97F00980B51 /* Default.png in Resources */,
+				221060241342E97F00980B51 /* Default@2x.png in Resources */,
+				221061021342E9D700980B51 /* Default-portrait~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -613,6 +627,8 @@
 				22FD3329131F886F0087111F /* PropertyEditorView.xib in Resources */,
 				22FD332A131F886F0087111F /* PropertyPickerView.xib in Resources */,
 				22FD332B131F886F0087111F /* SettingsViewController.xib in Resources */,
+				221060FF1342E98800980B51 /* Default.png in Resources */,
+				221061001342E9B400980B51 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

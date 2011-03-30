@@ -326,7 +326,7 @@ static ServiceAccountManager * sharedInstance = nil;
     
     if([operation.label isEqualToString:MTM_SAM_NETWORK_OPERATION_LABEL]) {
         NSString * authenticated = (NSString *)result;
-        if([authenticated isEqualToString:@"true"]) {
+        if([authenticated isEqualToString:@"admin"]) {
             _activeAccountAuthenticated = YES;
             
             NSLog(@"Authenticated successfully!");
