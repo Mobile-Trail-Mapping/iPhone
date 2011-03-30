@@ -275,6 +275,11 @@
         [owningTrail addTrailPoint:newPoint];
         
         [self redrawMapObjects];
+    } else if([operation.label isEqualToString:@"MTMAddTrailOperation"]) {
+        NSLog(@"Added trail!");
+        
+        Trail * newTrail = [[[Trail alloc] initWithName:[operation.requestData valueForKey:@"name"]] autorelease];
+        self.trails = [self.trails arrayByAddingObject:newTrail];
     }
     
     [self.delegate trailObjectsDidChange];
@@ -286,6 +291,8 @@
         [self.delegate trailObjectsDidChange];
     } else if([operation.label isEqualToString:@"MTMAddPointOperation"]) {
         NSLog(@"Warning: failed to add point.");
+    } else if([operation.label isEqualToString:@"MTMAddTrailOperation"]) {
+        NSLog(@"Warning: failed to add trail.");
     }
 }
 
