@@ -158,9 +158,7 @@
         span.latitudeDelta = 0.05;
         span.longitudeDelta = 0.05;
         
-        CLLocationCoordinate2D location = mapView.userLocation.coordinate;
-        
-        location = mapView.userLocation.location.coordinate;
+        CLLocationCoordinate2D location = mapView.userLocation.location.coordinate;
         
         region.span = span;
         region.center = location;
@@ -224,8 +222,8 @@
         
         NSArray * conditionElements = [doc nodesForXPath:@"/conditions/condition" error:nil];
         for(CXMLElement * conditionElement in conditionElements) {
-            NSUInteger newID;
-            NSString * newDesc;
+            NSUInteger newID = -1; // guaranteed to never be used
+            NSString * newDesc = @""; // guaranteed to never be used
             
             for(CXMLElement * conditionChild in [conditionElement children]) {
                 if([[conditionChild name] isEqualToString:@"condition"]) {

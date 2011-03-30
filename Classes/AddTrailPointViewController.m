@@ -174,7 +174,7 @@
             [options addObject:trail.name];
         }
     } else if([setting.title isEqualToString:@"Category"]) {
-        options = [[self.primaryViewController categories] copy];
+        options = [[[self.primaryViewController categories] copy] autorelease]; // TODO test
     } else if([setting.title isEqualToString:@"Condition"]) {
         NSArray * conditions = [self.primaryViewController conditions];
         for(Condition * condition in conditions) {
