@@ -8,9 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+#import "MTMSettingsViewController.h"
+
 
 @interface AddProblemReportViewController : MTMSettingsViewController {
-    
+@private
+    NSString * _problemTitle;
+    NSString * _problemDesc;
 }
+
+@property (nonatomic, retain) NSString * problemTitle;
+@property (nonatomic, retain) NSString * problemDesc;
 
 @end

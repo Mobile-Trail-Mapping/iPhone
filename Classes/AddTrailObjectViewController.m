@@ -11,6 +11,7 @@
 #import "Setting.h"
 
 #import "AddTrailPointViewController.h"
+#import "AddProblemReportViewController.h"
 
 @implementation AddTrailObjectViewController
 
@@ -28,14 +29,26 @@
 - (void)buildSettings {
     self.settings = [[[MutableOrderedDictionary alloc] initWithCapacity:10] autorelease];
     
-    Setting * addTrailSetting = [[[Setting alloc] initWithTitle:@"Trail" target:self onValue:NULL onAction:NULL onChange:NULL] autorelease];
-    Setting * addTrailPointSetting = [[[Setting alloc] initWithTitle:@"Trail point" target:self onValue:NULL onAction:@selector(showAddTrailPoint) onChange:NULL] autorelease];
+    Setting * addTrailSetting = [[[Setting alloc] initWithTitle:@"Trail" 
+                                                         target:self 
+                                                        onValue:NULL 
+                                                       onAction:NULL 
+                                                       onChange:NULL] autorelease];
+    Setting * addTrailPointSetting = [[[Setting alloc] initWithTitle:@"Trail point" 
+                                                              target:self 
+                                                             onValue:NULL 
+                                                            onAction:@selector(showAddTrailPoint) 
+                                                            onChange:NULL] autorelease];
     addTrailSetting.enabled = NO;
     NSArray * trailSettings = [[[NSArray alloc] initWithObjects:addTrailSetting, addTrailPointSetting, nil] autorelease];
     [self.settings setValue:trailSettings forKey:@"Trail objects"];
     
-    Setting * addProblemReportSetting = [[[Setting alloc] initWithTitle:@"Problem report" target:self onValue:NULL onAction:NULL onChange:NULL] autorelease];
-    addProblemReportSetting.enabled = NO;
+    Setting * addProblemReportSetting = [[[Setting alloc] initWithTitle:@"Problem report" 
+                                                                 target:self 
+                                                                onValue:NULL 
+                                                               onAction:@selector(showAddProblemReport) 
+                                                               onChange:NULL] autorelease];
+    //addProblemReportSetting.enabled = NO;
     NSArray * problemSettings = [[[NSArray alloc] initWithObjects:addProblemReportSetting, nil] autorelease];
     [self.settings setValue:problemSettings forKey:@"Problems"];
 }
@@ -50,6 +63,12 @@
 
 - (void)showAddTrailPoint {
     AddTrailPointViewController * addController = [[[AddTrailPointViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil] autorelease];
+    addController.primaryViewController = self.primaryViewController;
+    [self.navigationController pushViewController:addController animated:YES];
+}
+
+- (void)showAddProblemReport {
+    AddProblemReportViewController * addController = [[[AddProblemReportViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil] autorelease];
     addController.primaryViewController = self.primaryViewController;
     [self.navigationController pushViewController:addController animated:YES];
 }

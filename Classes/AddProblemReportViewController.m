@@ -8,59 +8,66 @@
 
 #import "AddProblemReportViewController.h"
 
+#import "PropertyEditorViewController.h"
 
 @implementation AddProblemReportViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+@synthesize problemTitle = _problemTitle;
+@synthesize problemDesc = _problemDesc;
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.navigationItem.title = @"Problem";
     }
     return self;
 }
 
-- (void)dealloc
-{
+- (void)dealloc {
+    [_problemTitle release];
+    [_problemDesc release];
+    
     [super dealloc];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
+#pragma mark - Settings methods
+
+- (void)buildSettings {
+    self.settings = [[[MutableOrderedDictionary alloc] initWithCapacity:2] autorelease];
     
-    // Release any cached data, images, etc that aren't in use.
+    Setting * titleSetting = [[[Setting alloc] initWithTitle:@"Title" 
+                                                      target:self 
+                                                     onValue:@selector(problemTitle) 
+                                                    onAction:@selector(editSetting:) 
+                                                    onChange:@selector(titleChanged:)] autorelease];
+    Setting * descSetting = [[[Setting alloc] initWithTitle:@"Description" 
+                                                     target:self 
+                                                    onValue:@selector(problemDesc) 
+                                                   onAction:@selector(editSetting:) 
+                                                   onChange:@selector(descChanged:)] autorelease];
+    NSArray * infoSection = [[[NSArray alloc] initWithObjects:titleSetting, descSetting, nil] autorelease];
+    [self.settings setValue:infoSection forKey:@"Info"];
+    
+    Setting * photoSetting = [[[Setting alloc] initWithTitle:@"Photo" target:self onValue:NULL onAction:NULL onChange:NULL] autorelease];
+    photoSetting.enabled = NO;
+    NSArray * photoSection = [[[NSArray alloc] initWithObjects:photoSetting, nil] autorelease];
+    [self.settings setValue:photoSection forKey:@"Photo"];
 }
 
-#pragma mark - View lifecycle
-
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-}
-*/
-
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-*/
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+- (void)editSetting:(id)sender {
+    PropertyEditorViewController * editController = [[[PropertyEditorViewController alloc] initWithSetting:sender] autorelease];
+    [self.navigationController pushViewController:editController animated:YES];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+- (void)titleChanged:(NSString *)title {
+    self.problemTitle = title;
+    [self.tableView reloadData];
+}
+
+- (void)descChanged:(NSString *)desc {
+    self.problemDesc = desc;
+    [self.tableView reloadData];
 }
 
 @end
