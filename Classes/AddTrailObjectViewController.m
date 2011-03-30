@@ -10,6 +10,7 @@
 
 #import "Setting.h"
 
+#import "AddTrailViewController.h"
 #import "AddTrailPointViewController.h"
 #import "AddProblemReportViewController.h"
 
@@ -32,14 +33,13 @@
     Setting * addTrailSetting = [[[Setting alloc] initWithTitle:@"Trail" 
                                                          target:self 
                                                         onValue:NULL 
-                                                       onAction:NULL 
+                                                       onAction:@selector(showAddTrail) 
                                                        onChange:NULL] autorelease];
     Setting * addTrailPointSetting = [[[Setting alloc] initWithTitle:@"Trail point" 
                                                               target:self 
                                                              onValue:NULL 
                                                             onAction:@selector(showAddTrailPoint) 
                                                             onChange:NULL] autorelease];
-    addTrailSetting.enabled = NO;
     NSArray * trailSettings = [[[NSArray alloc] initWithObjects:addTrailSetting, addTrailPointSetting, nil] autorelease];
     [self.settings setValue:trailSettings forKey:@"Trail objects"];
     
@@ -60,6 +60,12 @@
 }
                                                                                                                                 
 #pragma mark - Action callback methods
+
+- (void)showAddTrail {
+    AddTrailViewController * addController = [[[AddTrailViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil] autorelease];
+    addController.primaryViewController = self.primaryViewController;
+    [self.navigationController pushViewController:addController animated:YES];
+}
 
 - (void)showAddTrailPoint {
     AddTrailPointViewController * addController = [[[AddTrailPointViewController alloc] initWithNibName:@"SettingsViewController" bundle:nil] autorelease];

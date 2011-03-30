@@ -16,6 +16,7 @@
 		221060FF1342E98800980B51 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 22105F431342E97F00980B51 /* Default.png */; };
 		221061001342E9B400980B51 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22105F441342E97F00980B51 /* Default@2x.png */; };
 		221061021342E9D700980B51 /* Default-portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 221061011342E9D700980B51 /* Default-portrait~ipad.png */; };
+		22106107134300CA00980B51 /* AddTrailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22106106134300C900980B51 /* AddTrailViewController.m */; };
 		221DFC1E130B8010006225DD /* Condition.m in Sources */ = {isa = PBXBuildFile; fileRef = 221DFC1D130B8010006225DD /* Condition.m */; };
 		221DFC1F130B8010006225DD /* Condition.m in Sources */ = {isa = PBXBuildFile; fileRef = 221DFC1D130B8010006225DD /* Condition.m */; };
 		2233DACD12E8FA0E0004A33A /* TrailOverlayPathView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2233DACC12E8FA0E0004A33A /* TrailOverlayPathView.m */; };
@@ -96,6 +97,8 @@
 		22105F431342E97F00980B51 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		22105F441342E97F00980B51 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		221061011342E9D700980B51 /* Default-portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-portrait~ipad.png"; sourceTree = "<group>"; };
+		22106105134300C900980B51 /* AddTrailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTrailViewController.h; sourceTree = "<group>"; };
+		22106106134300C900980B51 /* AddTrailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTrailViewController.m; sourceTree = "<group>"; };
 		221DFC1C130B8010006225DD /* Condition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Condition.h; sourceTree = "<group>"; };
 		221DFC1D130B8010006225DD /* Condition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Condition.m; sourceTree = "<group>"; };
 		2233DACB12E8FA0E0004A33A /* TrailOverlayPathView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailOverlayPathView.h; sourceTree = "<group>"; };
@@ -374,6 +377,8 @@
 				22DEE79D130A37C90026CC2C /* AddTrailPointViewController.m */,
 				22105F341342B2E200980B51 /* AddProblemReportViewController.h */,
 				22105F351342B2E200980B51 /* AddProblemReportViewController.m */,
+				22106105134300C900980B51 /* AddTrailViewController.h */,
+				22106106134300C900980B51 /* AddTrailViewController.m */,
 			);
 			name = Editing;
 			sourceTree = "<group>";
@@ -713,6 +718,7 @@
 				22FD3324131F88600087111F /* Setting.m in Sources */,
 				22FD3325131F88600087111F /* SettingsViewController.m in Sources */,
 				22105F361342B2E200980B51 /* AddProblemReportViewController.m in Sources */,
+				22106107134300CA00980B51 /* AddTrailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
