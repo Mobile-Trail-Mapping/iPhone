@@ -30,6 +30,8 @@
 		229CA369130060CC001E338E /* TrailPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = A7306D6E12B6F8AA0099C0C2 /* TrailPoint.m */; };
 		229CA36A130060D6001E338E /* PrimarySettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 229CA36213005FDB001E338E /* PrimarySettingsViewController.m */; };
 		22A39B05131F73E200D4F115 /* MTMSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A39B04131F73E100D4F115 /* MTMSettingsViewController.m */; };
+		22A632101349012C0067D4F3 /* TrailPointInfoEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A6320E1349012C0067D4F3 /* TrailPointInfoEditorViewController.m */; };
+		22A632111349012C0067D4F3 /* TrailPointInfoEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A6320F1349012C0067D4F3 /* TrailPointInfoEditorView.xib */; };
 		22C011A512EF659D000D5C9F /* MTMLogo_iOS_iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 22C011A412EF659D000D5C9F /* MTMLogo_iOS_iPad.png */; };
 		22C011AF12EF851C000D5C9F /* TrailPointInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C011AE12EF851C000D5C9F /* TrailPointInfoViewController.m */; };
 		22C011B312EF85B5000D5C9F /* TrailPointInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22C011B212EF85B5000D5C9F /* TrailPointInfoView.xib */; };
@@ -118,6 +120,9 @@
 		229CA36213005FDB001E338E /* PrimarySettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrimarySettingsViewController.m; sourceTree = "<group>"; };
 		22A39B03131F73E100D4F115 /* MTMSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMSettingsViewController.h; sourceTree = "<group>"; };
 		22A39B04131F73E100D4F115 /* MTMSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMSettingsViewController.m; sourceTree = "<group>"; };
+		22A6320D1349012C0067D4F3 /* TrailPointInfoEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailPointInfoEditorViewController.h; sourceTree = "<group>"; };
+		22A6320E1349012C0067D4F3 /* TrailPointInfoEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrailPointInfoEditorViewController.m; sourceTree = "<group>"; };
+		22A6320F1349012C0067D4F3 /* TrailPointInfoEditorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TrailPointInfoEditorView.xib; path = Classes/TrailPointInfoEditorView.xib; sourceTree = "<group>"; };
 		22C011A412EF659D000D5C9F /* MTMLogo_iOS_iPad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MTMLogo_iOS_iPad.png; sourceTree = "<group>"; };
 		22C011A912EF7D18000D5C9F /* TrailActionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailActionDelegate.h; sourceTree = "<group>"; };
 		22C011AD12EF851C000D5C9F /* TrailPointInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailPointInfoViewController.h; sourceTree = "<group>"; };
@@ -326,6 +331,8 @@
 				A7D94A6212ADC542003BDB1C /* MainViewController.m */,
 				22C011AD12EF851C000D5C9F /* TrailPointInfoViewController.h */,
 				22C011AE12EF851C000D5C9F /* TrailPointInfoViewController.m */,
+				22A6320D1349012C0067D4F3 /* TrailPointInfoEditorViewController.h */,
+				22A6320E1349012C0067D4F3 /* TrailPointInfoEditorViewController.m */,
 				2237895B12EA0BDA00BAF18A /* DataParser.h */,
 				2237895C12EA0BDA00BAF18A /* DataParser.m */,
 				22E3C66612F0CD8000044FB7 /* TrailPointInfoModalDelegate.h */,
@@ -514,6 +521,7 @@
 				A7D94A5E12ADC542003BDB1C /* MainWindow.xib */,
 				A7D94A6412ADC542003BDB1C /* MainViewController.xib */,
 				22C011B212EF85B5000D5C9F /* TrailPointInfoView.xib */,
+				22A6320F1349012C0067D4F3 /* TrailPointInfoEditorView.xib */,
 				22DC0FFB1307567A00D99F22 /* Settings.plist */,
 				22CC0C11130D8DDD00370B1B /* AboutView.xib */,
 			);
@@ -634,6 +642,7 @@
 				22FD332B131F886F0087111F /* SettingsViewController.xib in Resources */,
 				221060FF1342E98800980B51 /* Default.png in Resources */,
 				221061001342E9B400980B51 /* Default@2x.png in Resources */,
+				22A632111349012C0067D4F3 /* TrailPointInfoEditorView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -719,6 +728,7 @@
 				22FD3325131F88600087111F /* SettingsViewController.m in Sources */,
 				22105F361342B2E200980B51 /* AddProblemReportViewController.m in Sources */,
 				22106107134300CA00980B51 /* AddTrailViewController.m in Sources */,
+				22A632101349012C0067D4F3 /* TrailPointInfoEditorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

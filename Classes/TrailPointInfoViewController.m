@@ -1,6 +1,8 @@
 #import "TrailPointInfoViewController.h"
 #import "TrailPoint.h"
 
+#import "TrailPointInfoEditorViewController.h"
+
 #import "ServiceAccountManager.h"
 #import "ServiceAccount.h"
 
@@ -111,6 +113,10 @@
 
 - (void)editButtonPressed:(id)sender {
     NSLog(@"edit button pressed");
+    
+    TrailPointInfoEditorViewController * editorController = [[[TrailPointInfoEditorViewController alloc] initWithNibName:@"TrailPointInfoEditorView" bundle:nil] autorelease];
+    editorController.trailPoint = self.trailPoint;
+    [self.navigationController pushViewController:editorController animated:YES];
 }
 
 #pragma mark -

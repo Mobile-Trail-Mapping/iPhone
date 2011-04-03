@@ -69,6 +69,7 @@
     NSURL * serviceBase = [[[ServiceAccountManager sharedManager] activeServiceAccount] serviceURL];
     NSURL * URL = [serviceBase URLByAppendingPathComponent:self.endpoint];
     
+    self.requestData = [[self.requestData mutableCopy] autorelease];
     _request = [[NSMutableURLRequest alloc] initWithURL:URL];
     if(self.requestType == kNetworkOperationRequestTypeGet) {
         [_request setHTTPMethod:@"GET"];
