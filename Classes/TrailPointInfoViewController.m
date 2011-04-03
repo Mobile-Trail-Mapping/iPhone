@@ -177,10 +177,13 @@
 #pragma mark Image animation methods
 
 - (void)startImageAnimations {
-    if([self.trailPoint.images count] > 0) {
+    if([self.trailPoint.images count] > 1) {
         self.imageView.image = [self.trailPoint.images objectAtIndex:0];
         _imageAnimationTimer = [[NSTimer timerWithTimeInterval:IMAGE_DISPLAY_DURATION target:self selector:@selector(cycleImage) userInfo:nil repeats:YES] retain];
         [[NSRunLoop mainRunLoop] addTimer:_imageAnimationTimer forMode:NSDefaultRunLoopMode];
+    } else if([self.trailPoint.images count] == 1) {
+        self.imageView.image = [self.trailPoint.images objectAtIndex:0];
+        // Only one image - don't start timer
     } else {
         [self showFailureImage];
     }
