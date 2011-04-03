@@ -42,8 +42,7 @@
 #ifdef _MTM_DEBUG_REALLY_FORCE_IT
     NSMutableDictionary * keychainQuery = [[[NSMutableDictionary alloc] initWithCapacity:1] autorelease];
     [keychainQuery setValue:(id)kSecClassInternetPassword forKey:(id)kSecClass];
-    OSStatus deleteStatus = SecItemDelete((CFDictionaryRef)keychainQuery);
-    NSAssert(deleteStatus == noErr, @"Really forcing it, but still couldn't remove existing keychain accounts");
+    NSAssert(SecItemDelete((CFDictionaryRef)keychainQuery) == noErr, @"Really forcing it, but still couldn't remove existing keychain accounts");
 #endif
     
     // Add default service account

@@ -35,6 +35,20 @@
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     
     _performedFailAnimation = NO;
+    
+    if([self canShowAdminUI]) {
+        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit 
+                                                                                                target:self 
+                                                                                                action:@selector(editButtonPressed:)] autorelease];
+    }
+}
+
+- (BOOL)canShowAdminUI {
+#if _MTM_DEBUG_ALWAYS_ALLOW_ADMIN
+    return YES;
+#else
+    return [[ServiceAccountManager sharedManager] activeAccountAuthenticated];
+#endif
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -89,10 +103,14 @@
 }
 
 #pragma mark -
-#pragma mark IBActions
+#pragma mark IBActions and response methods
 
 - (IBAction)dismiss:(id)sender {
     [self.delegate dismissModalController];
+}
+
+- (void)editButtonPressed:(id)sender {
+    NSLog(@"edit button pressed");
 }
 
 #pragma mark -
@@ -110,6 +128,11 @@
         [self.imageView removeFromSuperview];
         [self.bgView removeFromSuperview];
         
+        self.descLabel.numberOfLines = 0;
+        CGSize maxSize = CGSizeMake(self.descLabel.frame.size.width, 1.75 * height);
+        CGSize constrainedSize = [self.descLabel.text sizeWithFont:self.descLabel.font constrainedToSize:maxSize lineBreakMode:self.descLabel.lineBreakMode];
+        NSLog(@"Found height of %fpx for text: %@", constrainedSize.height, self.descLabel.text);
+        
         [UIView beginAnimations:@"UILabel transitions" context:NULL];
         [UIView setAnimationDuration:0.5f];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
@@ -119,7 +142,7 @@
         
         CGRect descFrame = self.descLabel.frame;
         descFrame.origin.y -= height;
-        descFrame.size.height += height;
+        descFrame.size.height = constrainedSize.height;
         self.descLabel.frame = descFrame;
         [UIView commitAnimations];
         

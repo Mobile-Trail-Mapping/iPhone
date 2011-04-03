@@ -80,6 +80,12 @@
 - (IBAction)dismiss:(id)sender;
 
 /**
+ * Whether or not this controller can present administrative UI items,
+ * including the Edit button for trail point information.
+ */
+- (BOOL)canShowAdminUI;
+
+/**
  * Load remote images for this controller's TrailPoint. This method is
  * intended for use as the launching point of a background thread; it
  * establishes an autorelease pool and dispatches calls to the main thread

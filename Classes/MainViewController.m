@@ -85,7 +85,7 @@
 }
         
 - (BOOL)canShowAdminUI {
-#if _MTM_DEBUG_ALWAYS_ALLOW_ADD
+#if _MTM_DEBUG_ALWAYS_ALLOW_ADMIN
     return YES;
 #else
     BOOL authenticated = [[ServiceAccountManager sharedManager] activeAccountAuthenticated];
