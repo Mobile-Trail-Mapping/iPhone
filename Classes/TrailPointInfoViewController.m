@@ -206,6 +206,7 @@
 #pragma mark Image animation methods
 
 - (void)startImageAnimations {
+    NSLog(@"starting image animations with %d images", self.trailPoint.images.count);
     if([self.trailPoint.images count] > 1) {
         self.imageView.image = [self.trailPoint.images objectAtIndex:0];
         _imageAnimationTimer = [[NSTimer timerWithTimeInterval:IMAGE_DISPLAY_DURATION target:self selector:@selector(cycleImage) userInfo:nil repeats:YES] retain];
@@ -222,6 +223,8 @@
     NSLog(@"%@ cycling image", self);
     
     NSInteger currentIndex = [self.trailPoint.images indexOfObject:self.imageView.image];
+    NSLog(@"    currently have %d images; on image %d", self.trailPoint.images.count, currentIndex);
+    
     NSInteger nextIndex = (currentIndex + 1) % self.trailPoint.images.count;
     
     _transitionImageView = [[[UIImageView alloc] initWithFrame:self.imageView.frame] retain];

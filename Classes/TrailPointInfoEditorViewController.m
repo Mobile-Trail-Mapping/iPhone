@@ -7,10 +7,13 @@
 //
 
 #import "TrailPointInfoEditorViewController.h"
+#import "TrailPointInfoViewController.h"
 #import "TrailPoint.h"
 
 #import "NetworkOperation.h"
 #import "NetworkOperationManager.h"
+
+#import <MobileCoreServices/MobileCoreServices.h>
 
 
 @implementation TrailPointInfoEditorViewController
@@ -20,8 +23,9 @@
 @synthesize conditionField = _conditionField;
 @synthesize descriptionView = _descriptionView;
 @synthesize addPhotoButton = _addPhotoButton;
-@synthesize deletePointButton = _deletePointButton;
 @synthesize saveChangesButton = _saveChangesButton;
+
+@synthesize infoController = _infoController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -40,7 +44,9 @@
     [_conditionField release];
     [_descriptionView release];
     [_addPhotoButton release];
-    [_deletePointButton release];
+    [_newImage release];
+    
+    [_infoController release];
     
     [super dealloc];
 }
@@ -52,6 +58,11 @@
     
     [self.conditionField setText:self.trailPoint.condition];
     [self.descriptionView setText:self.trailPoint.desc];
+    
+    if(![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] && 
+       ![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        self.addPhotoButton.enabled = NO;
+    }
 }
 
 #pragma mark - Touch response
@@ -80,6 +91,14 @@
     return YES;
 }
 
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if(range.length == 0 && [text isEqualToString:@"\n"]) {
+        [self.descriptionView resignFirstResponder];
+        return NO;
+    }
+    return YES;
+}
+
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if(textField == self.conditionField) {
         self.trailPoint.condition = self.conditionField.text;
@@ -95,11 +114,16 @@
 #pragma mark - IBActions
 
 - (IBAction)addPhoto:(id)sender {
-    
-}
-
-- (IBAction)deletePoint:(id)sender {
-    
+    if(_newImage == nil) {
+        UIImagePickerController * pickerController = [[[UIImagePickerController alloc] init] autorelease];
+        pickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        pickerController.delegate = self;
+        [self presentModalViewController:pickerController animated:YES];
+    } else {
+        [_newImage release];
+        _newImage = nil;
+        [self.addPhotoButton setTitle:@"Add photo" forState:UIControlStateNormal];
+    }
 }
 
 - (IBAction)save:(id)sender {
@@ -111,7 +135,42 @@
     editOperation.returnType = kNetworkOperationReturnTypeString;
     editOperation.requestData = [NSDictionary dictionaryWithObjectsAndKeys:self.conditionField.text, @"condition", self.descriptionView.text, @"desc", nil];
     [[NetworkOperationManager sharedManager] enqueueOperation:editOperation];
+    
+    NetworkOperation * photoOperation = [[[NetworkOperation alloc] init] autorelease];
+    photoOperation.authenticate = YES;
+    photoOperation.endpoint = @"image/add";
+    photoOperation.requestType = kNetworkOperationRequestTypePost;
+    photoOperation.returnType = kNetworkOperationReturnTypeData;
+    photoOperation.label = @"MTMAddPhotoOperation";
+    photoOperation.requestData = [NSDictionary dictionaryWithObjectsAndKeys:UIImageJPEGRepresentation(_newImage, 1.0), @"file", 
+                                  [NSString stringWithFormat:@"%d", self.trailPoint.pointID], @"id", 
+                                  nil];
+    [[NetworkOperationManager sharedManager] enqueueOperation:photoOperation];
+    
+    [self.infoController registerImage:_newImage];
+    
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - UIImagePickerControllerDelegate methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    if([[info valueForKey:UIImagePickerControllerMediaType] isEqualToString:(NSString *)kUTTypeImage]) {
+        _newImage = [info valueForKey:UIImagePickerControllerEditedImage];
+        if(_newImage == nil) {
+            _newImage = [info valueForKey:UIImagePickerControllerOriginalImage];
+        }
+        [_newImage retain];
+        NSLog(@"got photo %@", _newImage);
+        [self.addPhotoButton setTitle:@"Clear new image" forState:UIControlStateNormal];
+    } else {
+        NSLog(@"returned media type was not image; failing...");
+    }
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end

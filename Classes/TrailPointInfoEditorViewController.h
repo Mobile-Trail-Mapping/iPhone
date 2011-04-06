@@ -9,20 +9,24 @@
 #import <UIKit/UIKit.h>
 
 @class TrailPoint;
+@class TrailPointInfoViewController;
 
 /**
  * Allows administrative users to edit information about a given trail point
  * from the device.
  */
-@interface TrailPointInfoEditorViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate> {
+@interface TrailPointInfoEditorViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate> {
 @private
     TrailPoint * _trailPoint;
     
     UITextField * _conditionField;
     UITextView * _descriptionView;
     UIButton * _addPhotoButton;
-    UIButton * _deletePointButton;
     UIButton * _saveChangesButton;
+    
+    UIImage * _newImage;
+    
+    TrailPointInfoViewController * _infoController;
 }
 
 /**
@@ -46,24 +50,19 @@
 @property (nonatomic, retain) IBOutlet UIButton * addPhotoButton;
 
 /**
- * Action button for deleting this TrailPoint.
- */
-@property (nonatomic, retain) IBOutlet UIButton * deletePointButton;
-
-/**
  * Action button for saving changes to this TrailPoint.
  */
 @property (nonatomic, retain) IBOutlet UIButton * saveChangesButton;
 
 /**
+ * The TrailPointInfoViewController displaying this TrailPoint's info.
+ */
+@property (nonatomic, retain) TrailPointInfoViewController * infoController;
+
+/**
  * Action response method for adding a photo.
  */
 - (IBAction)addPhoto:(id)sender;
-
-/**
- * Action response method for deleting a point.
- */
-- (IBAction)deletePoint:(id)sender;
 
 /**
  * Action response method for saving changes.
