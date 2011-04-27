@@ -51,6 +51,7 @@
 		22DEE796130942D60026CC2C /* NetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DEE795130942D60026CC2C /* NetworkOperation.m */; };
 		22DEE79B130A2D390026CC2C /* AddTrailObjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DEE79A130A2D390026CC2C /* AddTrailObjectViewController.m */; };
 		22DEE79E130A37C90026CC2C /* AddTrailPointViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DEE79D130A37C90026CC2C /* AddTrailPointViewController.m */; };
+		22E551DE13686A0800F2B46F /* ImageUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E551DD13686A0800F2B46F /* ImageUtils.m */; };
 		22E80B8A12FA9CC4009CF69F /* TrailTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E80ACE12FA9771009CF69F /* TrailTest.m */; };
 		22E80B9D12FA9D42009CF69F /* Trail.m in Sources */ = {isa = PBXBuildFile; fileRef = A739508812D6AD850079EA7F /* Trail.m */; };
 		22FD3312131F883F0087111F /* PropertyEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FD330F131F883F0087111F /* PropertyEditorViewController.m */; };
@@ -157,6 +158,8 @@
 		22DEE79C130A37C90026CC2C /* AddTrailPointViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTrailPointViewController.h; sourceTree = "<group>"; };
 		22DEE79D130A37C90026CC2C /* AddTrailPointViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTrailPointViewController.m; sourceTree = "<group>"; };
 		22E3C66612F0CD8000044FB7 /* TrailPointInfoModalDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailPointInfoModalDelegate.h; sourceTree = "<group>"; };
+		22E551DC13686A0800F2B46F /* ImageUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageUtils.h; sourceTree = "<group>"; };
+		22E551DD13686A0800F2B46F /* ImageUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageUtils.m; sourceTree = "<group>"; };
 		22E80AC712FA9744009CF69F /* MTMTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MTMTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		22E80AC812FA9744009CF69F /* MTMTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MTMTest-Info.plist"; sourceTree = "<group>"; };
 		22E80ACD12FA9771009CF69F /* TrailTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrailTest.h; sourceTree = "<group>"; };
@@ -337,6 +340,8 @@
 				2237895C12EA0BDA00BAF18A /* DataParser.m */,
 				22E3C66612F0CD8000044FB7 /* TrailPointInfoModalDelegate.h */,
 				22C011A912EF7D18000D5C9F /* TrailActionDelegate.h */,
+				22E551DC13686A0800F2B46F /* ImageUtils.h */,
+				22E551DD13686A0800F2B46F /* ImageUtils.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -729,6 +734,7 @@
 				22105F361342B2E200980B51 /* AddProblemReportViewController.m in Sources */,
 				22106107134300CA00980B51 /* AddTrailViewController.m in Sources */,
 				22A632101349012C0067D4F3 /* TrailPointInfoEditorViewController.m in Sources */,
+				22E551DE13686A0800F2B46F /* ImageUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

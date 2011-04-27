@@ -15,6 +15,7 @@
 
 #import <MobileCoreServices/MobileCoreServices.h>
 
+#import "ImageUtils.h"
 
 @implementation TrailPointInfoEditorViewController
 
@@ -135,6 +136,8 @@
     editOperation.returnType = kNetworkOperationReturnTypeString;
     editOperation.requestData = [NSDictionary dictionaryWithObjectsAndKeys:self.conditionField.text, @"condition", self.descriptionView.text, @"desc", nil];
     [[NetworkOperationManager sharedManager] enqueueOperation:editOperation];
+    
+    _newImage = scaleAndRotateImage(_newImage);
     
     NetworkOperation * photoOperation = [[[NetworkOperation alloc] init] autorelease];
     photoOperation.authenticate = YES;

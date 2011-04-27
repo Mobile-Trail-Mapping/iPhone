@@ -19,6 +19,8 @@
 #import "ServiceAccountManager.h"
 #import "ServiceAccount.h"
 
+#import "ImageUtils.h"
+
 @implementation AddProblemReportViewController
 
 @synthesize currentLocation = _currentLocation;
@@ -183,6 +185,7 @@
         if(self.problemPhoto == nil) {
             self.problemPhoto = [info valueForKey:UIImagePickerControllerOriginalImage];
         }
+        self.problemPhoto = scaleAndRotateImage(self.problemPhoto);
         _problemPhotoDate = [NSDate date];
         NSLog(@"got photo %@ with date %@", self.problemPhoto, _problemPhotoDate);
     }
@@ -190,6 +193,8 @@
     
     [self.tableView reloadData];
     [self tryEnableSubmit];
+    
+    NSLog(@"UIImage has orientation %d", self.problemPhoto.imageOrientation);
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
